@@ -85,7 +85,7 @@ class App extends Component {
     camera.rotation.x = deg(store.camera.rotX);
     camera.rotation.y = deg(store.camera.rotY);
     camera.rotation.z = deg(store.camera.rotZ);
-    camera.lookAt = store.camera.lookAt;
+    // camera.lookAt(scene.position);
 
     // Lights
     var ambientLight = new THREE.AmbientLight(store.ambLight.color);
@@ -158,10 +158,6 @@ class App extends Component {
     group.rotation.y = deg(store.grp.rotY);
     group.rotation.z = deg(store.grp.rotZ);
 
-    group.add(bgPlaneMesh);
-    group.add(cupMesh);
-    scene.add(group);
-
     var overlayGeometry = new THREE.PlaneBufferGeometry(
       store.bg.width,
       store.bg.height
@@ -177,7 +173,11 @@ class App extends Component {
     });
     var overlayPlaneMesh = new THREE.Mesh( overlayGeometry, overlayMaterial );
     overlayPlaneMesh.position.z = 0;
-    scene.add(overlayPlaneMesh);
+
+    group.add(bgPlaneMesh);
+    group.add(cupMesh);
+    group.add(overlayPlaneMesh);
+    scene.add(group);
 
     renderer.render(scene, camera);
   }
