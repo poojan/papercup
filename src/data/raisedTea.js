@@ -15,6 +15,10 @@ export default {
     overlay: overlayImage,
   },
 
+  grp: {
+    // rotX: 63,
+  },
+
   dirLight1: {
     posX: 150,
     posY: 0,
@@ -26,23 +30,23 @@ export default {
   },
 
   camera: {
-    posZ: 1460,
+    posZ: 4460,
     projection: 'perspective',
-    fov: 47,
+    fov: 17,
     // projection: 'orthographic',
   },
 
   cup: {
-    "radiusTop": 250,
+    "radiusTop": 257.3,
     "radiusBottom": 200,
-    "height": 500,
+    "height": 570,
     "posX": -189,
-    "posY": 80,
+    "posY": 68.5,
     "posZ": -7,
     "rotX": 6.37,
-    "rotY": 70,
+    "rotY": 0,
     "rotZ": 8.6,
-    "opacity": 1,
+    "opacity": 0.6,
     "openEnded": 1,
     image: cupImage,
   },

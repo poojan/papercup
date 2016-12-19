@@ -46,10 +46,10 @@ class App extends Component {
     this.renderImage(this.renderer, this.props.store);
   }
 
-  processTexture(texture) {
+  processTexture(texture, repeatU, repeatV) {
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.set(1, 1);
+    texture.repeat.set(repeatU || 1, repeatV || 1);
     texture.anisotropy = 16;
     return texture;
   };
@@ -77,15 +77,19 @@ class App extends Component {
       store.camera.fov,
       store.scene.width / store.scene.height,
       0.1,
-      3000
+      10000
     );
-    console.log(store.camera.posZ);
+    camera.position.x = store.camera.posX;
+    camera.position.y = store.camera.posY;
     camera.position.z = store.camera.posZ;
-    // camera.position.z = 100;
+    camera.rotation.x = deg(store.camera.rotX);
+    camera.rotation.y = deg(store.camera.rotY);
+    camera.rotation.z = deg(store.camera.rotZ);
+    camera.lookAt = store.camera.lookAt;
 
     // Lights
     var ambientLight = new THREE.AmbientLight(store.ambLight.color);
-    scene.add( ambientLight );
+    scene.add(ambientLight);
 
     var lights = [];
     // DirectionalLight( hex, intensity )
@@ -107,7 +111,7 @@ class App extends Component {
     scene.add(lights[0]);
     scene.add(lights[1]);
 
-    var cupGeometry = new THREE.CylinderGeometry(
+    var cupGeometry = new THREE.CylinderBufferGeometry(
       store.cup.radiusTop,
       store.cup.radiusBottom,
       store.cup.height,
@@ -126,14 +130,15 @@ class App extends Component {
       side: THREE.DoubleSide,
       map: this.bgTexture,
     });
-    var bgPlaneMesh = new THREE.Mesh( bgGeometry, bgMaterial );
+    var bgPlaneMesh = new THREE.Mesh(bgGeometry, bgMaterial);
 
     var cupMaterial = new THREE.MeshPhongMaterial({
       color: 0xffffff,
       side: THREE.FrontSide,
       map: this.cupTexture,
       transparent: true,
-      depthWrite  : false
+      depthWrite: false,
+      opacity: store.cup.opacity,
     });
 
     var cupMesh = new THREE.Mesh( cupGeometry );
@@ -144,8 +149,18 @@ class App extends Component {
     cupMesh.rotation.x = deg(store.cup.rotX);
     cupMesh.rotation.y = deg(store.cup.rotY);
     cupMesh.rotation.z = deg(store.cup.rotZ);
-    scene.add(bgPlaneMesh);
-    scene.add( cupMesh );
+
+    var group = new THREE.Group();
+    group.position.x = store.grp.posX;
+    group.position.y = store.grp.posY;
+    group.position.z = store.grp.posZ;
+    group.rotation.x = deg(store.grp.rotX);
+    group.rotation.y = deg(store.grp.rotY);
+    group.rotation.z = deg(store.grp.rotZ);
+
+    group.add(bgPlaneMesh);
+    group.add(cupMesh);
+    scene.add(group);
 
     var overlayGeometry = new THREE.PlaneBufferGeometry(
       store.bg.width,
