@@ -37,7 +37,7 @@ export default {
   },
 
   cup: {
-    "radiusTop": 257.3,
+    "radiusTop": 268.1,
     "radiusBottom": 200,
     "height": 570,
     "posX": -189,
