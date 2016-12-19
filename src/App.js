@@ -2,8 +2,31 @@ import React, { Component } from 'react';
 import './App.css';
 import * as THREE from 'three';
 import { observer } from 'mobx-react';
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 const loader = new THREE.TextureLoader();
+
+const loadTexture = (img) => new Promise((resolve, reject) => {
+  loader.load(
+    img,
+    function onLoad(texture) {
+      resolve(texture);
+      // const bgTexture = texture;
+      // bgTexture.wrapS = THREE.RepeatWrapping;
+      // bgTexture.wrapT = THREE.RepeatWrapping;
+      // bgTexture.repeat.set(1, 1);
+      // bgTexture.anisotropy = 16;
+      // this.bgTexture = bgTexture;
+      // this.renderImage(this.renderer, this.props.store);
+    },
+    function onProgress(xhr) {
+      console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    },
+    function onError(xhr) {
+      console.log('Error: ', xhr);
+      reject();
+    }
+  )
+});
 
 const bgImage = 'img/bg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.jpg';
 const cupImage = 'img/user/cuplogo.png';
@@ -16,6 +39,9 @@ const deg = rad => rad * Math.PI / 180;
 @observer
 class App extends Component {
   @observable renderer;
+  @observable bgTexture;
+  @observable cupTexture;
+  @observable bg2Texture;
 
   componentDidMount() {
     // const { store } = this.props;
@@ -24,11 +50,60 @@ class App extends Component {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(this.renderer.domElement);
 
-    this.renderImage(this.renderer, this.props.store);
+    this.load();
+    // this.renderImage(this.renderer, this.props.store);
   }
 
   componentWillReact() {
     this.renderImage(this.renderer, this.props.store);
+  }
+
+  @action load() {
+    Promise.all([
+      loadTexture(bgImage),
+      loadTexture(cupImage),
+      loadTexture(overlayImage)
+    ])
+      .then(values => {
+        console.log(values);
+        const bgTexture = values[0];
+        bgTexture.wrapS = THREE.RepeatWrapping;
+        bgTexture.wrapT = THREE.RepeatWrapping;
+        bgTexture.repeat.set(1, 1);
+        bgTexture.anisotropy = 16;
+        this.bgTexture = bgTexture;
+
+        var cupTexture = values[1];
+        cupTexture.wrapS = THREE.RepeatWrapping;
+        cupTexture.wrapT = THREE.RepeatWrapping;
+        cupTexture.repeat.set(1, 1);
+        cupTexture.anisotropy = 16;
+        this.cupTexture = cupTexture
+
+        var bg2Texture = values[2];
+        bg2Texture.wrapS = THREE.RepeatWrapping;
+        bg2Texture.wrapT = THREE.RepeatWrapping;
+        bg2Texture.repeat.set(1, 1);
+        bg2Texture.anisotropy = 16;
+        this.bg2Texture = bg2Texture;
+      })
+      .then(() => {
+        this.renderImage(this.renderer, this.props.store);
+      })
+
+    // loader.load(
+      // bgImage,
+      // texture => {
+        // const bgTexture = texture;
+        // bgTexture.wrapS = THREE.RepeatWrapping;
+        // bgTexture.wrapT = THREE.RepeatWrapping;
+        // bgTexture.repeat.set(1, 1);
+        // bgTexture.anisotropy = 16;
+        // this.bgTexture = bgTexture;
+        // this.renderImage(this.renderer, this.props.store);
+      // }
+    // )
+
   }
 
   renderImage(renderer, store) {
@@ -81,11 +156,13 @@ class App extends Component {
       store.bg.height
     );
 
-    var bgTexture = loader.load(bgImage);
-    bgTexture.wrapS = THREE.RepeatWrapping;
-    bgTexture.wrapT = THREE.RepeatWrapping;
-    bgTexture.repeat.set(1, 1);
-    bgTexture.anisotropy = 16;
+    // var bgTexture = loader.load(bgImage);
+    // bgTexture.wrapS = THREE.RepeatWrapping;
+    // bgTexture.wrapT = THREE.RepeatWrapping;
+    // bgTexture.repeat.set(1, 1);
+    // bgTexture.anisotropy = 16;
+
+    const bgTexture = this.bgTexture;
 
     var bgMaterial = new THREE.MeshBasicMaterial({
       color: 0xffffff,
@@ -95,18 +172,18 @@ class App extends Component {
     var bgPlaneMesh = new THREE.Mesh( bgGeometry, bgMaterial );
 
 
-    var cupTexture = loader.load(cupImage);
-    cupTexture.wrapS = THREE.RepeatWrapping;
-    cupTexture.wrapT = THREE.RepeatWrapping;
-    cupTexture.repeat.set(1, 1);
-    cupTexture.anisotropy = 16;
+    // var cupTexture = loader.load(cupImage);
+    // cupTexture.wrapS = THREE.RepeatWrapping;
+    // cupTexture.wrapT = THREE.RepeatWrapping;
+    // cupTexture.repeat.set(1, 1);
+    // cupTexture.anisotropy = 16;
 
 
     var cupMaterial = new THREE.MeshPhongMaterial({
       color: 0xffffff,
       // side: THREE.DoubleSide,
       side: THREE.FrontSide,
-      map: cupTexture,
+      map: this.cupTexture,
       // alphaMap: cupAlphaTexture,
       // alphaMap: cupTexture,
       // alphaMap: bg2Texture,
@@ -130,18 +207,18 @@ class App extends Component {
       store.bg.height
     );
 
-    var bg2Texture = loader.load(overlayImage);
-    bg2Texture.wrapS = THREE.RepeatWrapping;
-    bg2Texture.wrapT = THREE.RepeatWrapping;
-    bg2Texture.repeat.set(1, 1);
-    bg2Texture.anisotropy = 16;
+    // var bg2Texture = loader.load(overlayImage);
+    // bg2Texture.wrapS = THREE.RepeatWrapping;
+    // bg2Texture.wrapT = THREE.RepeatWrapping;
+    // bg2Texture.repeat.set(1, 1);
+    // bg2Texture.anisotropy = 16;
 
     var bg2Material = new THREE.MeshBasicMaterial({
       transparent: true,
       color: 0xffffff,
       // side: THREE.DoubleSide,
       side: THREE.FrontSide,
-      map: bg2Texture,
+      map: this.bg2Texture,
       // alphaMap: bg2Texture,
       // depthWrite  : false
     });
@@ -166,7 +243,7 @@ class App extends Component {
     var geometry = new THREE.BoxGeometry(1, 1, 1);
     var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     var cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    // scene.add(cube);
 
     camera.position.z = 5;
 
