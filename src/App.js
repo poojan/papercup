@@ -63,7 +63,6 @@ class App extends Component {
       loadTexture(store.bg.overlay)
     ])
       .then(values => {
-        console.log(values);
         this.bgTexture = this.processTexture(values[0]);
         this.cupTexture = this.processTexture(values[1]);
         this.overlayTexture = this.processTexture(values[2]);
@@ -122,37 +121,17 @@ class App extends Component {
       store.bg.height
     );
 
-    // var bgTexture = loader.load(bgImage);
-    // bgTexture.wrapS = THREE.RepeatWrapping;
-    // bgTexture.wrapT = THREE.RepeatWrapping;
-    // bgTexture.repeat.set(1, 1);
-    // bgTexture.anisotropy = 16;
-
-    const bgTexture = this.bgTexture;
-
     var bgMaterial = new THREE.MeshBasicMaterial({
       color: 0xffffff,
       side: THREE.DoubleSide,
-      map: bgTexture,
+      map: this.bgTexture,
     });
     var bgPlaneMesh = new THREE.Mesh( bgGeometry, bgMaterial );
 
-
-    // var cupTexture = loader.load(cupImage);
-    // cupTexture.wrapS = THREE.RepeatWrapping;
-    // cupTexture.wrapT = THREE.RepeatWrapping;
-    // cupTexture.repeat.set(1, 1);
-    // cupTexture.anisotropy = 16;
-
-
     var cupMaterial = new THREE.MeshPhongMaterial({
       color: 0xffffff,
-      // side: THREE.DoubleSide,
       side: THREE.FrontSide,
       map: this.cupTexture,
-      // alphaMap: cupAlphaTexture,
-      // alphaMap: cupTexture,
-      // alphaMap: overlayTexture,
       transparent: true,
       depthWrite  : false
     });
@@ -173,48 +152,17 @@ class App extends Component {
       store.bg.height
     );
 
-    // var overlayTexture = loader.load(overlayImage);
-    // overlayTexture.wrapS = THREE.RepeatWrapping;
-    // overlayTexture.wrapT = THREE.RepeatWrapping;
-    // overlayTexture.repeat.set(1, 1);
-    // overlayTexture.anisotropy = 16;
-
     var overlayMaterial = new THREE.MeshBasicMaterial({
       transparent: true,
       color: 0xffffff,
       // side: THREE.DoubleSide,
       side: THREE.FrontSide,
       map: this.overlayTexture,
-      // alphaMap: overlayTexture,
       // depthWrite  : false
     });
-    // var overlayPlaneMesh = new THREE.Mesh( overlayGeometry, overlayMaterial );
     var overlayPlaneMesh = new THREE.Mesh( overlayGeometry, overlayMaterial );
     overlayPlaneMesh.position.z = 0;
     scene.add(overlayPlaneMesh);
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // ----------
-    // var geometry = new THREE.BoxGeometry(1, 1, 1);
-    // var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    // var cube = new THREE.Mesh(geometry, material);
-    // scene.add(cube);
-
-    // camera.position.z = 5;
-
-    // cube.rotation.x = store.cup.rotX;
-    // cube.rotation.y = store.cup.rotY;
 
     renderer.render(scene, camera);
   }
