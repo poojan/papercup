@@ -3,6 +3,7 @@ import './App.css';
 import * as THREE from 'three';
 import { observer } from 'mobx-react';
 import { observable } from 'mobx';
+const loader = new THREE.TextureLoader();
 
 const bgImage = 'img/bg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.jpg';
 const cupImage = 'img/user/cuplogo.png';
@@ -80,7 +81,7 @@ class App extends Component {
       store.bg.height
     );
 
-    var bgTexture = new THREE.TextureLoader().load(bgImage);
+    var bgTexture = loader.load(bgImage);
     bgTexture.wrapS = THREE.RepeatWrapping;
     bgTexture.wrapT = THREE.RepeatWrapping;
     bgTexture.repeat.set(1, 1);
@@ -94,7 +95,7 @@ class App extends Component {
     var bgPlaneMesh = new THREE.Mesh( bgGeometry, bgMaterial );
 
 
-    var cupTexture = new THREE.TextureLoader().load(cupImage);
+    var cupTexture = loader.load(cupImage);
     cupTexture.wrapS = THREE.RepeatWrapping;
     cupTexture.wrapT = THREE.RepeatWrapping;
     cupTexture.repeat.set(1, 1);
@@ -129,7 +130,7 @@ class App extends Component {
       store.bg.height
     );
 
-    var bg2Texture = new THREE.TextureLoader().load(overlayImage);
+    var bg2Texture = loader.load(overlayImage);
     bg2Texture.wrapS = THREE.RepeatWrapping;
     bg2Texture.wrapT = THREE.RepeatWrapping;
     bg2Texture.repeat.set(1, 1);
