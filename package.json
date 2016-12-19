@@ -6,6 +6,9 @@
     "react-scripts": "0.8.4"
   },
   "dependencies": {
+    "dat.gui": "^0.6.1",
+    "mobx": "^2.7.0",
+    "mobx-react": "^4.0.3",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "three": "^0.83.0"
