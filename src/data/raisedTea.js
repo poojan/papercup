@@ -1,5 +1,6 @@
-const bgImage = 'bg/528364288-paper-cup-offering-raised-tea.jpg';
-const cupImage = 'cuplogo.png';
+const bgImage = 'img/bg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.jpg';
+const cupImage = 'img/user/cuplogo.png';
+const overlayImage = 'img/fg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.png';
 
 export default {
   scene: {
@@ -11,6 +12,7 @@ export default {
     width: 1500,
     height: 1100,
     image: bgImage,
+    overlay: overlayImage,
   },
 
   dirLight1: {

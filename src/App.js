@@ -21,9 +21,6 @@ const loadTexture = (img) => new Promise((resolve, reject) => {
   )
 });
 
-const bgImage = 'img/bg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.jpg';
-const cupImage = 'img/user/cuplogo.png';
-const overlayImage = 'img/fg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.png';
 const deg = rad => rad * Math.PI / 180;
 
 @observer
@@ -34,52 +31,43 @@ class App extends Component {
   @observable overlayTexture;
 
   componentDidMount() {
-    // const { store } = this.props;
-
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(this.renderer.domElement);
 
-    this.load();
-    // this.renderImage(this.renderer, this.props.store);
+    this
+      .load()
+      .then(() => {
+        this.renderImage(this.renderer, this.props.store);
+      });
   }
 
   componentWillReact() {
     this.renderImage(this.renderer, this.props.store);
   }
 
+  processTexture(texture) {
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set(1, 1);
+    texture.anisotropy = 16;
+    return texture;
+  };
+
   @action load() {
-    Promise.all([
-      loadTexture(bgImage),
-      loadTexture(cupImage),
-      loadTexture(overlayImage)
+    const { store } = this.props;
+
+    return Promise.all([
+      loadTexture(store.bg.image),
+      loadTexture(store.cup.image),
+      loadTexture(store.bg.overlay)
     ])
       .then(values => {
         console.log(values);
-        const bgTexture = values[0];
-        bgTexture.wrapS = THREE.RepeatWrapping;
-        bgTexture.wrapT = THREE.RepeatWrapping;
-        bgTexture.repeat.set(1, 1);
-        bgTexture.anisotropy = 16;
-        this.bgTexture = bgTexture;
-
-        var cupTexture = values[1];
-        cupTexture.wrapS = THREE.RepeatWrapping;
-        cupTexture.wrapT = THREE.RepeatWrapping;
-        cupTexture.repeat.set(1, 1);
-        cupTexture.anisotropy = 16;
-        this.cupTexture = cupTexture
-
-        var overlayTexture = values[2];
-        overlayTexture.wrapS = THREE.RepeatWrapping;
-        overlayTexture.wrapT = THREE.RepeatWrapping;
-        overlayTexture.repeat.set(1, 1);
-        overlayTexture.anisotropy = 16;
-        this.overlayTexture = overlayTexture;
-      })
-      .then(() => {
-        this.renderImage(this.renderer, this.props.store);
-      })
+        this.bgTexture = this.processTexture(values[0]);
+        this.cupTexture = this.processTexture(values[1]);
+        this.overlayTexture = this.processTexture(values[2]);
+      });
   }
 
   renderImage(renderer, store) {
