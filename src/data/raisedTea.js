@@ -28,7 +28,7 @@ export default {
   camera: {
     posZ: 1460,
     projection: 'perspective',
-    fov: 97,
+    fov: 47,
     // projection: 'orthographic',
   },
 
@@ -36,7 +36,7 @@ export default {
     "radiusTop": 65.6,
     "radiusBottom": 51.6,
     "height": 148.6,
-    "posX": 17,
+    "posX": -200,
     "posY": -16.400000000000002,
     "posZ": -7,
     "rotX": 6.37,

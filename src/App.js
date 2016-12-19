@@ -91,8 +91,8 @@ class App extends Component {
     var lights = [];
     // DirectionalLight( hex, intensity )
     // PointLight( color, intensity, distance, decay )
-    lights[0] = new THREE.DirectionalLight(store.dirLight1.color, 1);
-    lights[1] = new THREE.DirectionalLight(store.dirLight2.color, 1);
+    lights[0] = new THREE.DirectionalLight(store.dirLight1.color, store.dirLight1.intensity);
+    lights[1] = new THREE.DirectionalLight(store.dirLight2.color, store.dirLight2.intensity);
 
     lights[0].position.set(
       store.dirLight1.posX,
