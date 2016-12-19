@@ -10,13 +10,6 @@ const loadTexture = (img) => new Promise((resolve, reject) => {
     img,
     function onLoad(texture) {
       resolve(texture);
-      // const bgTexture = texture;
-      // bgTexture.wrapS = THREE.RepeatWrapping;
-      // bgTexture.wrapT = THREE.RepeatWrapping;
-      // bgTexture.repeat.set(1, 1);
-      // bgTexture.anisotropy = 16;
-      // this.bgTexture = bgTexture;
-      // this.renderImage(this.renderer, this.props.store);
     },
     function onProgress(xhr) {
       console.log((xhr.loaded / xhr.total * 100) + '% loaded');
@@ -31,9 +24,6 @@ const loadTexture = (img) => new Promise((resolve, reject) => {
 const bgImage = 'img/bg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.jpg';
 const cupImage = 'img/user/cuplogo.png';
 const overlayImage = 'img/fg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.png';
-// const overlayImage = 'bg/fingers.gif';
-// const overlayImage = 'bg/fingers1.gif';
-// const overlayImage = 'bg/fingers2.png';
 const deg = rad => rad * Math.PI / 180;
 
 @observer
@@ -41,7 +31,7 @@ class App extends Component {
   @observable renderer;
   @observable bgTexture;
   @observable cupTexture;
-  @observable bg2Texture;
+  @observable overlayTexture;
 
   componentDidMount() {
     // const { store } = this.props;
@@ -80,30 +70,16 @@ class App extends Component {
         cupTexture.anisotropy = 16;
         this.cupTexture = cupTexture
 
-        var bg2Texture = values[2];
-        bg2Texture.wrapS = THREE.RepeatWrapping;
-        bg2Texture.wrapT = THREE.RepeatWrapping;
-        bg2Texture.repeat.set(1, 1);
-        bg2Texture.anisotropy = 16;
-        this.bg2Texture = bg2Texture;
+        var overlayTexture = values[2];
+        overlayTexture.wrapS = THREE.RepeatWrapping;
+        overlayTexture.wrapT = THREE.RepeatWrapping;
+        overlayTexture.repeat.set(1, 1);
+        overlayTexture.anisotropy = 16;
+        this.overlayTexture = overlayTexture;
       })
       .then(() => {
         this.renderImage(this.renderer, this.props.store);
       })
-
-    // loader.load(
-      // bgImage,
-      // texture => {
-        // const bgTexture = texture;
-        // bgTexture.wrapS = THREE.RepeatWrapping;
-        // bgTexture.wrapT = THREE.RepeatWrapping;
-        // bgTexture.repeat.set(1, 1);
-        // bgTexture.anisotropy = 16;
-        // this.bgTexture = bgTexture;
-        // this.renderImage(this.renderer, this.props.store);
-      // }
-    // )
-
   }
 
   renderImage(renderer, store) {
@@ -188,7 +164,7 @@ class App extends Component {
       map: this.cupTexture,
       // alphaMap: cupAlphaTexture,
       // alphaMap: cupTexture,
-      // alphaMap: bg2Texture,
+      // alphaMap: overlayTexture,
       transparent: true,
       depthWrite  : false
     });
@@ -204,30 +180,30 @@ class App extends Component {
     scene.add(bgPlaneMesh);
     scene.add( cupMesh );
 
-    var bg2Geometry = new THREE.PlaneBufferGeometry(
+    var overlayGeometry = new THREE.PlaneBufferGeometry(
       store.bg.width,
       store.bg.height
     );
 
-    // var bg2Texture = loader.load(overlayImage);
-    // bg2Texture.wrapS = THREE.RepeatWrapping;
-    // bg2Texture.wrapT = THREE.RepeatWrapping;
-    // bg2Texture.repeat.set(1, 1);
-    // bg2Texture.anisotropy = 16;
+    // var overlayTexture = loader.load(overlayImage);
+    // overlayTexture.wrapS = THREE.RepeatWrapping;
+    // overlayTexture.wrapT = THREE.RepeatWrapping;
+    // overlayTexture.repeat.set(1, 1);
+    // overlayTexture.anisotropy = 16;
 
-    var bg2Material = new THREE.MeshBasicMaterial({
+    var overlayMaterial = new THREE.MeshBasicMaterial({
       transparent: true,
       color: 0xffffff,
       // side: THREE.DoubleSide,
       side: THREE.FrontSide,
-      map: this.bg2Texture,
-      // alphaMap: bg2Texture,
+      map: this.overlayTexture,
+      // alphaMap: overlayTexture,
       // depthWrite  : false
     });
-    // var bg2PlaneMesh = new THREE.Mesh( bg2Geometry, bg2Material );
-    var bg2PlaneMesh = new THREE.Mesh( bg2Geometry, bg2Material );
-    bg2PlaneMesh.position.z = 0;
-    scene.add(bg2PlaneMesh);
+    // var overlayPlaneMesh = new THREE.Mesh( overlayGeometry, overlayMaterial );
+    var overlayPlaneMesh = new THREE.Mesh( overlayGeometry, overlayMaterial );
+    overlayPlaneMesh.position.z = 0;
+    scene.add(overlayPlaneMesh);
 
 
 
