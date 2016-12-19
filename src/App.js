@@ -116,7 +116,9 @@ class App extends Component {
       0.1,
       3000
     );
+    console.log(store.camera.posZ);
     camera.position.z = store.camera.posZ;
+    // camera.position.z = 100;
 
     // Lights
     var ambientLight = new THREE.AmbientLight(store.ambLight.color);
@@ -240,15 +242,15 @@ class App extends Component {
 
 
     // ----------
-    var geometry = new THREE.BoxGeometry(1, 1, 1);
-    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    var cube = new THREE.Mesh(geometry, material);
+    // var geometry = new THREE.BoxGeometry(1, 1, 1);
+    // var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    // var cube = new THREE.Mesh(geometry, material);
     // scene.add(cube);
 
-    camera.position.z = 5;
+    // camera.position.z = 5;
 
-    cube.rotation.x = store.cup.rotX;
-    cube.rotation.y = store.cup.rotY;
+    // cube.rotation.x = store.cup.rotX;
+    // cube.rotation.y = store.cup.rotY;
 
     renderer.render(scene, camera);
   }

@@ -3,13 +3,13 @@ const cupImage = 'cuplogo.png';
 
 export default {
   scene: {
-    width: 800,
-    height: 800,
+    width: window.innerWidth,
+    height: window.innerHeight,
   },
 
   bg: {
-    width: 480,
-    height: 270,
+    width: 1500,
+    height: 1100,
     image: bgImage,
   },
 
@@ -26,7 +26,7 @@ export default {
   camera: {
     posZ: 1460,
     projection: 'perspective',
-    fov: 17,
+    fov: 97,
     // projection: 'orthographic',
   },
 
