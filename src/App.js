@@ -163,27 +163,29 @@ class App extends Component {
     group.rotation.y = deg(store.grp.rotY);
     group.rotation.z = deg(store.grp.rotZ);
 
-    var overlayGeometry = new THREE.PlaneBufferGeometry(
-      store.bg.width,
-      store.bg.height
-    );
-
-    var overlayMaterial = new THREE.MeshBasicMaterial({
-      transparent: true,
-      color: 0xffffff,
-      // side: THREE.DoubleSide,
-      side: THREE.FrontSide,
-      map: this.overlayTexture,
-      // depthWrite  : false
-    });
-    var overlayPlaneMesh = new THREE.Mesh( overlayGeometry, overlayMaterial );
-    overlayPlaneMesh.position.z = 0;
-
     group.add(bgPlaneMesh);
     group.add(cupMesh);
+
     if (store.bg.overlay) {
+      var overlayGeometry = new THREE.PlaneBufferGeometry(
+        store.bg.width,
+        store.bg.height
+      );
+
+      var overlayMaterial = new THREE.MeshBasicMaterial({
+        transparent: true,
+        color: 0xffffff,
+        // side: THREE.DoubleSide,
+        side: THREE.FrontSide,
+        map: this.overlayTexture,
+        // depthWrite  : false
+      });
+      var overlayPlaneMesh = new THREE.Mesh( overlayGeometry, overlayMaterial );
+      overlayPlaneMesh.position.z = 0;
+
       group.add(overlayPlaneMesh);
     }
+
     scene.add(group);
 
     renderer.render(scene, camera);
