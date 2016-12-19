@@ -3,7 +3,15 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 
+import data from './data/raisedTea';
+import CupStore from './stores/CupStore';
+const cupStore = new CupStore(data);
+import DatGui from './components/DatGui';
+
 ReactDOM.render(
-  <App />,
+  <div>
+    <App store={cupStore} />
+    <DatGui store={cupStore} />
+  </div>,
   document.getElementById('root')
 );

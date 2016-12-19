@@ -3,7 +3,8 @@ import { observer } from 'mobx-react';
 
 const DAT = require('dat.gui/build/dat.gui.js');
 
-class DatGui extends Component {
+@observer
+export default class DatGui extends Component {
   constructor(props) {
     super(props);
 
@@ -94,5 +95,3 @@ class DatGui extends Component {
     );
   }
 }
-
-export default observer(DatGui);
