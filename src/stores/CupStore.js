@@ -56,7 +56,7 @@ class CupStore {
   };
 
   @observable ambLight = {
-    color: '0xffffff',
+    color: 0xffffff,
   };
 
   @observable dirLight1 = {
@@ -68,7 +68,7 @@ class CupStore {
     lookAtZ: 0,
 
     intensity: 0,
-    color: '0xffffff',
+    color: 0xffffff,
 
     position: computed(() => new THREE.Vector3(
       this.dirLight1.posX,
@@ -92,7 +92,7 @@ class CupStore {
     lookAtZ: 0,
 
     intensity: 0,
-    color: '0xffffff',
+    color: 0xffffff,
 
     position: computed(() => new THREE.Vector3(
       this.dirLight2.posX,
