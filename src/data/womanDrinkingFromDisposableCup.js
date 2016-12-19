@@ -46,7 +46,7 @@ export default {
     "rotX": 6.37,
     "rotY": -3.93,
     "rotZ": 10.6,
-    "opacity": 0.6,
+    "opacity": 1,
     "openEnded": 1,
     image: cupImage,
   },
