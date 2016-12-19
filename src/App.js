@@ -60,12 +60,17 @@ class App extends Component {
     return Promise.all([
       loadTexture(store.bg.image),
       loadTexture(store.cup.image),
-      loadTexture(store.bg.overlay)
     ])
       .then(values => {
         this.bgTexture = this.processTexture(values[0]);
         this.cupTexture = this.processTexture(values[1]);
-        this.overlayTexture = this.processTexture(values[2]);
+
+        if (store.bg.overlay) {
+          return loadTexture(store.bg.overlay)
+            .then(texture => {
+              this.overlayTexture = texture;
+            });
+        }
       });
   }
 
@@ -176,7 +181,9 @@ class App extends Component {
 
     group.add(bgPlaneMesh);
     group.add(cupMesh);
-    group.add(overlayPlaneMesh);
+    if (store.bg.overlay) {
+      group.add(overlayPlaneMesh);
+    }
     scene.add(group);
 
     renderer.render(scene, camera);

@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 
-import data from './data/womanDrinkingFromDisposableCup';
+// import data from './data/womanDrinkingFromDisposableCup';
+import data from './data/8oz';
 import CupStore from './stores/CupStore';
 const cupStore = new CupStore(data);
 import DatGui from './components/DatGui';
