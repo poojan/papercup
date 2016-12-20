@@ -1,7 +1,7 @@
 // const bgImage = 'img/bg/stock-photo-take-away-paper-cup-with-the-hand-of-man-play-smart-phone-456359746.jpg';
 const bgImage = 'img/bg/shutterstock_456359746.jpg';
-const cupImage = 'img/user/cuplogo.png';
-// const cupImage = 'img/user/Spotify_variante_\(logo\).png';
+// const cupImage = 'img/user/cuplogo.png';
+const cupImage = 'img/user/Spotify_variante_\(logo\).png';
 const overlayImage = null;
 const scaling = 1;
 
@@ -22,6 +22,10 @@ export default {
     // rotX: 63,
   },
 
+  ambLight: {
+    color: '#b7b2ae',
+  },
+
   dirLight1: {
     posX: 150,
     posY: 0,
@@ -29,7 +33,7 @@ export default {
     lookAtX: 40,
     lookAtY: 0,
     lookAtZ: 0,
-    intensity: 0.4,
+    intensity: 0.2,
   },
 
   camera: {
@@ -40,13 +44,13 @@ export default {
   },
 
   cup: {
-    "radiusTop": 225.10000000000002,
-    "radiusBottom": 198.60000000000002,
-    "height": 481.20000000000005,
+    "radiusTop": 221.9,
+    "radiusBottom": 200.9,
+    "height": 464.3,
     "posX": 133.1,
-    "posY": -97.9,
+    "posY": -102,
     "posZ": 0,
-    "rotX": 18.86,
+    "rotX": 17.25,
     "rotY": 0,
     "rotZ": 1.1,
     "opacity": 1,
