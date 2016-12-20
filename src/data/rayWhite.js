@@ -11,8 +11,8 @@ const bgScaledHeight = bgActualHeight * scaling;
 
 export default {
   scene: {
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: 800,
+    height: 600,
   },
 
   bg: {
@@ -37,23 +37,23 @@ export default {
   },
 
   camera: {
-    posZ: 5760,
+    posZ: 1000,
     projection: 'perspective',
-    fov: 7,
+    fov: 25,
     // projection: 'orthographic',
   },
 
   cup: {
-    "radiusTop": 69.10000000000001,
-    "radiusBottom": 54,
-    "height": 153.3,
+    "radiusTop": 73.7,
+    "radiusBottom": 56.5,
+    "height": 163.9,
     "posX": -9.4,
     "posY": -21.1,
     "posZ": -7,
     "rotX": 4.22,
     "rotY": -3.93,
     "rotZ": 0,
-    "opacity": 0.6,
+    "opacity": 1,
     "openEnded": 1,
     image: cupImage,
   },
