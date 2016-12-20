@@ -120,7 +120,6 @@ class CupStore {
     opacity: 0.4,
     openEnded: 1,
     image: cupImage,
-    overlayImage: '',
     position: computed(() => new THREE.Vector3(this.cup.posX, this.cup.posY, this.cup.posZ)),
     rotation: computed(() => new THREE.Euler(deg(this.cup.rotX), deg(this.cup.rotY), deg(this.cup.rotZ))),
   };
