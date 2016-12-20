@@ -1,4 +1,5 @@
-const bgImage = 'img/bg/stock-photo-paper-cup-of-coffee-on-wooden-table-closeup-465827084.jpg';
+// const bgImage = 'img/bg/stock-photo-paper-cup-of-coffee-on-wooden-table-closeup-465827084.jpg';
+const bgImage = 'img/bg/shutterstock_465827084.jpg';
 // const cupImage = 'img/user/cuplogo.png';
 const cupImage = 'img/user/Spotify_variante_\(logo\).png';
 const overlayImage = null;
@@ -21,29 +22,33 @@ export default {
     // rotX: 63,
   },
 
+  ambLight: {
+    color: 0xd5cac6,
+  },
+
   dirLight1: {
-    posX: 150,
+    posX: 350,
     posY: 0,
-    posZ: 146,
+    posZ: 0,
     lookAtX: 40,
     lookAtY: 0,
     lookAtZ: 0,
-    intensity: 0,
+    intensity: 0.2,
   },
 
   camera: {
     posZ: 890,
     projection: 'perspective',
-    fov: 22,
+    fov: 24,
     // projection: 'orthographic',
   },
 
   cup: {
     "radiusTop": 77.9,
     "radiusBottom": 60.300000000000004,
-    "height": 179.3,
+    "height": 197.4,
     "posX": 11,
-    "posY": -16.900000000000002,
+    "posY": -37.4,
     "posZ": -7,
     "rotX": 8.87,
     "rotY": 0,
