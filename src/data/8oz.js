@@ -4,8 +4,8 @@ const overlayImage = null;
 
 export default {
   scene: {
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: 800,
+    height: 600,
   },
 
   bg: {
@@ -30,15 +30,15 @@ export default {
   },
 
   camera: {
-    posZ: 5760,
+    posZ: 2000,
     projection: 'perspective',
-    fov: 7,
+    fov: 17,
     // projection: 'orthographic',
   },
 
   cup: {
-    "radiusTop": 161.5,
-    "radiusBottom": 122.7,
+    "radiusTop": 163.60000000000002,
+    "radiusBottom": 125.5,
     "height": 307.20000000000005,
     "posX": 2.1,
     "posY": -12.5,
