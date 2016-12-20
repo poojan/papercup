@@ -86,7 +86,7 @@ class App extends Component {
       store.camera.fov,
       store.scene.width / store.scene.height,
       0.1,
-      3000
+      10000
     );
     camera.position.x = store.camera.posX;
     camera.position.y = store.camera.posY;
