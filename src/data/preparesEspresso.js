@@ -1,10 +1,14 @@
-const bgImage = 'img/bg/stock-photo-prepares-espresso-147372080.jpg';
-// const cupImage = 'img/user/cuplogo.png';
-const cupImage = 'img/user/Spotify_variante_\(logo\).png';
+// const bgImage = 'img/bg/stock-photo-prepares-espresso-147372080.jpg';
+const bgImage = 'img/bg/shutterstock_147372080.jpg';
+const cupImage = 'img/user/cuplogo.png';
+// const cupImage = 'img/user/Spotify_variante_\(logo\).png';
 const overlayImage = null;
 
-const bgActualWidth = 1500;
-const bgActualHeight = 1300;
+// const bgActualWidth = 1500;
+// const bgActualHeight = 1300;
+
+const bgActualWidth = 1000;
+const bgActualHeight = 800;
 
 const scaling = 600 / bgActualWidth;
 const bgScaledWidth = bgActualWidth * scaling;
@@ -49,7 +53,7 @@ export default {
     "radiusBottom": 53.800000000000004,
     "height": 143.9,
     "posX": -135,
-    "posY": -94.30000000000001,
+    "posY": -112.8,
     "posZ": -7,
     "rotX": 10.34,
     "rotY": -3.93,
