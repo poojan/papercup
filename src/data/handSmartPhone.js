@@ -1,6 +1,7 @@
-const bgImage = 'img/bg/stock-photo-take-away-paper-cup-with-the-hand-of-man-play-smart-phone-456359746.jpg';
-// const cupImage = 'img/user/cuplogo.png';
-const cupImage = 'img/user/Spotify_variante_\(logo\).png';
+// const bgImage = 'img/bg/stock-photo-take-away-paper-cup-with-the-hand-of-man-play-smart-phone-456359746.jpg';
+const bgImage = 'img/bg/shutterstock_456359746.jpg';
+const cupImage = 'img/user/cuplogo.png';
+// const cupImage = 'img/user/Spotify_variante_\(logo\).png';
 const overlayImage = null;
 const scaling = 1;
 
@@ -41,9 +42,9 @@ export default {
   cup: {
     "radiusTop": 225.10000000000002,
     "radiusBottom": 198.60000000000002,
-    "height": 427.90000000000003,
+    "height": 481.20000000000005,
     "posX": 133.1,
-    "posY": -36.4,
+    "posY": -97.9,
     "posZ": 0,
     "rotX": 18.86,
     "rotY": 0,
