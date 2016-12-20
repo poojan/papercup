@@ -31,8 +31,11 @@ class App extends Component {
   @observable overlayTexture;
 
   componentDidMount() {
+    const { store } = this.props;
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    // this.renderer.setSize(window.innerWidth, window.innerHeight);
+    // const height = store.scene.width * window.innerHeight/window.innerWidth;
+    this.renderer.setSize(store.scene.width, store.scene.height);
     document.body.appendChild(this.renderer.domElement);
 
     this
@@ -77,12 +80,13 @@ class App extends Component {
   renderImage(renderer, store) {
     var scene = new THREE.Scene();
 
+    console.log(window.innerWidth, window.innerHeight);
     // Camera
     var camera = new THREE.PerspectiveCamera(
       store.camera.fov,
       store.scene.width / store.scene.height,
       0.1,
-      10000
+      3000
     );
     camera.position.x = store.camera.posX;
     camera.position.y = store.camera.posY;
