@@ -31,6 +31,10 @@ export default {
     // rotX: 63,
   },
 
+  ambLight: {
+    color: '#e8dfd3',
+  },
+
   dirLight1: {
     posX: 150,
     posY: 0,
@@ -53,9 +57,9 @@ export default {
     "radiusBottom": 53.800000000000004,
     "height": 143.9,
     "posX": -135,
-    "posY": -112.8,
+    "posY": -115.2,
     "posZ": -7,
-    "rotX": 10.34,
+    "rotX": 7.99,
     "rotY": -3.93,
     "rotZ": -4.04,
     "opacity": 1,
