@@ -149,8 +149,16 @@ class App extends Component {
       depthWrite: false,
       opacity: store.cup.opacity,
     });
+    var cupBgMaterial = new THREE.MeshPhongMaterial({
+      color: 0xffffff,
+      side: THREE.FrontSide,
+      transparent: true,
+      depthWrite: false,
+      opacity: store.cup.opacity,
+    });
 
-    var cupMesh = new THREE.Mesh( cupGeometry );
+    const cupRotationOrder = 'XZY';
+    var cupMesh = new THREE.Mesh(cupGeometry);
     cupMesh.material = cupMaterial;
     cupMesh.position.x = store.cup.posX;
     cupMesh.position.y = store.cup.posY;
@@ -158,6 +166,17 @@ class App extends Component {
     cupMesh.rotation.x = deg(store.cup.rotX);
     cupMesh.rotation.y = deg(store.cup.rotY);
     cupMesh.rotation.z = deg(store.cup.rotZ);
+    cupMesh.rotation.order = cupRotationOrder;
+
+    var cupBgMesh = new THREE.Mesh(cupGeometry);
+    cupBgMesh.material = cupBgMaterial;
+    cupBgMesh.position.x = store.cup.posX;
+    cupBgMesh.position.y = store.cup.posY;
+    cupBgMesh.position.z = store.cup.posZ - 1;
+    cupBgMesh.rotation.x = deg(store.cup.rotX);
+    cupBgMesh.rotation.y = deg(store.cup.rotY);
+    cupBgMesh.rotation.z = deg(store.cup.rotZ);
+    cupBgMesh.rotation.order = cupRotationOrder;
 
     var group = new THREE.Group();
     group.position.x = store.grp.posX;
@@ -168,6 +187,7 @@ class App extends Component {
     group.rotation.z = deg(store.grp.rotZ);
 
     group.add(bgPlaneMesh);
+    group.add(cupBgMesh);
     group.add(cupMesh);
 
     if (store.bg.overlay) {

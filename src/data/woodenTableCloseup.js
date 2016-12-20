@@ -32,7 +32,7 @@ export default {
   },
 
   camera: {
-    posZ: 1000,
+    posZ: 890,
     projection: 'perspective',
     fov: 22,
     // projection: 'orthographic',
@@ -41,13 +41,13 @@ export default {
   cup: {
     "radiusTop": 77.9,
     "radiusBottom": 60.300000000000004,
-    "height": 177.3,
+    "height": 179.3,
     "posX": 11,
-    "posY": -16,
+    "posY": -16.900000000000002,
     "posZ": -7,
-    "rotX": 8.91,
+    "rotX": 8.87,
     "rotY": 0,
-    "rotZ": 1,
+    "rotZ": 1.43,
     "opacity": 1,
     "openEnded": 1,
     image: cupImage,
