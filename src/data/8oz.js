@@ -1,5 +1,6 @@
 const bgImage = 'img/bg/8oz.jpg';
-const cupImage = 'img/user/cuplogo.png';
+// const cupImage = 'img/user/cuplogo.png';
+const cupImage = 'img/user/Spotify_variante_\(logo\).png';
 const overlayImage = null;
 
 export default {
@@ -26,7 +27,7 @@ export default {
     lookAtX: 40,
     lookAtY: 0,
     lookAtZ: 0,
-    intensity: 1.4,
+    intensity: 0,
   },
 
   camera: {

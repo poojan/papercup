@@ -1,5 +1,6 @@
 const bgImage = 'img/bg/stock-photo-paper-cup-of-coffee-on-wooden-table-closeup-465827084.jpg';
-const cupImage = 'img/user/cuplogo.png';
+// const cupImage = 'img/user/cuplogo.png';
+const cupImage = 'img/user/Spotify_variante_\(logo\).png';
 const overlayImage = null;
 const scaling = 0.35;
 
@@ -27,13 +28,13 @@ export default {
     lookAtX: 40,
     lookAtY: 0,
     lookAtZ: 0,
-    intensity: 1.4,
+    intensity: 0,
   },
 
   camera: {
     posZ: 1000,
     projection: 'perspective',
-    fov: 25,
+    fov: 22,
     // projection: 'orthographic',
   },
 

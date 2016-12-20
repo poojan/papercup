@@ -73,7 +73,7 @@ export default class DatGui extends Component {
     cupGui.add(store.cup, 'posY').step(0.1);
     cupGui.add(store.cup, 'posZ').step(0.1);
     cupGui.add(store.cup, 'rotX').step(0.01)
-    cupGui.add(store.cup, 'rotY').step(0.01);
+    cupGui.add(store.cup, 'rotY').step(0.5);
     cupGui.add(store.cup, 'rotZ').step(0.01);
     cupGui.add(store.cup, 'opacity').min(0).max(1).step(0.01);
     cupGui.add(store.cup, 'openEnded').min(0).max(1).step(1);

@@ -1,5 +1,6 @@
 const bgImage = 'img/bg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.jpg';
-const cupImage = 'img/user/cuplogo.png';
+// const cupImage = 'img/user/cuplogo.png';
+const cupImage = 'img/user/Spotify_variante_\(logo\).png';
 const overlayImage = 'img/fg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.png';
 
 const bgActualWidth = 1500;
@@ -36,7 +37,7 @@ export default {
     lookAtX: 40,
     lookAtY: 0,
     lookAtZ: 0,
-    intensity: 1.4,
+    intensity: 0,
   },
 
   camera: {
