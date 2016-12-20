@@ -1,11 +1,13 @@
-const bgImage = 'img/bg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.jpg';
-// const cupImage = 'img/user/cuplogo.png';
-const cupImage = 'img/user/Spotify_variante_\(logo\).png';
-const overlayImage = 'img/fg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.png';
+// const bgImage = 'img/bg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.jpg';
+const bgImage = 'img/bg/shutterstock_218754565.jpg';
+const cupImage = 'img/user/cuplogo.png';
+// const cupImage = 'img/user/Spotify_variante_\(logo\).png';
+// const overlayImage = 'img/fg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.png';
+const overlayImage = 'img/fg/fingers3.png';
 // const overlayImage = null;
 
-const bgActualWidth = 1500;
-const bgActualHeight = 1100;
+const bgActualWidth = 1000;
+const bgActualHeight = 667;
 
 // const scaling = 600 / bgActualWidth;
 const scaling = 0.8;
@@ -49,23 +51,23 @@ export default {
   camera: {
     posZ: 3100,
     projection: 'perspective',
-    fov: 17,
+    fov: 11.3,
     // fov: 32,
     // projection: 'orthographic',
   },
 
   cup: {
-    "radiusTop": 211.9,
-    "radiusBottom": 164.20000000000002,
-    "height": 427.90000000000003,
-    "posX": -152,
-    "posY": 66.5,
+    "radiusTop": 140.3,
+    "radiusBottom": 106.4,
+    "height": 284.90000000000003,
+    "posX": -98.5,
+    "posY": 16.7,
     "posZ": -5.6000000000000005,
-    "rotX": 8.9,
+    "rotX": 5.39,
     "rotY": -3.93,
-    "rotZ": 10.700000000000001,
+    "rotZ": 10.91,
     "opacity": 1,
-    "openEnded": 0,
+    "openEnded": 1,
     image: cupImage,
   },
 }
