@@ -20,14 +20,18 @@ export default {
     // rotX: 63,
   },
 
+  ambLight: {
+    color: 0xe1dad8,
+  },
+
   dirLight1: {
-    posX: 150,
-    posY: 0,
-    posZ: 146,
-    lookAtX: 40,
+    posX: 0,
+    posY: 1500,
+    posZ: 1946,
+    lookAtX: 0,
     lookAtY: 0,
     lookAtZ: 0,
-    intensity: 0,
+    intensity: 0.2,
   },
 
   camera: {
@@ -38,8 +42,8 @@ export default {
   },
 
   cup: {
-    "radiusTop": 163.60000000000002,
-    "radiusBottom": 125.5,
+    "radiusTop": 165.4,
+    "radiusBottom": 125.2,
     "height": 307.20000000000005,
     "posX": 2.1,
     "posY": -12.5,
