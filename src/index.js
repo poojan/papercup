@@ -4,8 +4,8 @@ import App from './App';
 import './index.css';
 
 // import data from './data/womanDrinkingFromDisposableCup';
-import data from './data/8oz';
-// import data from './data/woodenTableCloseup';
+// import data from './data/8oz';
+import data from './data/woodenTableCloseup';
 // import data from './data/handSmartPhone';
 // import data from './data/rayWhite';
 // import data from './data/preparesEspresso';

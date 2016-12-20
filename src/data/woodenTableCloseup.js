@@ -5,8 +5,8 @@ const scaling = 0.35;
 
 export default {
   scene: {
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: 800,
+    height: 600,
   },
 
   bg: {
@@ -38,16 +38,16 @@ export default {
   },
 
   cup: {
-    "radiusTop": 75.9,
-    "radiusBottom": 58.800000000000004,
+    "radiusTop": 77.9,
+    "radiusBottom": 60.300000000000004,
     "height": 177.3,
     "posX": 11,
-    "posY": -16.5,
+    "posY": -16,
     "posZ": -7,
     "rotX": 8.91,
     "rotY": 0,
     "rotZ": 1,
-    "opacity": 0.8,
+    "opacity": 1,
     "openEnded": 1,
     image: cupImage,
   },
