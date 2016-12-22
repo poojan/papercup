@@ -55,9 +55,9 @@ export default {
   cup: {
     "radiusTop": 67.7,
     "radiusBottom": 53.800000000000004,
-    "height": 143.9,
+    "height": 131,
     "posX": -135,
-    "posY": -115.2,
+    "posY": -109.30000000000001,
     "posZ": -7,
     "rotX": 7.99,
     "rotY": -3.93,
