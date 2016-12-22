@@ -52,7 +52,10 @@
     "mobx": "^2.7.0",
     "mobx-react": "^4.0.3",
     "react": "^15.4.1",
+    "react-cropper": "^0.10.0",
     "react-dom": "^15.4.1",
+    "react-dropzone": "^3.7.3",
+    "superagent": "^3.3.1",
     "three": "^0.83.0"
   },
   "scripts": {

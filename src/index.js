@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
+import ImageDrop from './components/ImageDrop';
 
 // import data from './data/womanDrinkingFromDisposableCup';
 // import data from './data/8oz';
@@ -15,9 +16,11 @@ const cupStore = new CupStore(data);
 import DatGui from './components/DatGui';
 
 ReactDOM.render(
-  <div>
-    <App store={cupStore} />
-    <DatGui store={cupStore} />
+  <div className="root">
+    <ImageDrop />
   </div>,
   document.getElementById('root')
 );
+
+    // <App store={cupStore} />
+    // <DatGui store={cupStore} />
