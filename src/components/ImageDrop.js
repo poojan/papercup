@@ -22,6 +22,7 @@ export default class ImageDrop extends Component {
       // console.log('done', res);
       // this.uploadPath = `${BASE_URL}/${res.body.path}`;
       uiStore.imagePath = `${BASE_URL}/${res.body.path}`;
+      uiStore.activeScreen = 'IMAGE_CROP';
     });
   }
 

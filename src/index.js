@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Cup from './components/Cup';
+import Cups from './components/Cups';
 import './index.css';
 import ImageDrop from './components/ImageDrop';
 import ImageCrop from './components/ImageCrop';
-import { Provider } from 'mobx-react';
+import { Provider, inject, observer } from 'mobx-react';
 
 // import data from './data/womanDrinkingFromDisposableCup';
 // import data from './data/8oz';
@@ -21,16 +22,20 @@ const uiStore = new UiStore();
 
 import DatGui from './components/DatGui';
 
+const Router = observer(({ uiStore }) => (
+  <div className="root">
+    {uiStore.activeScreen === 'IMAGE_DROP' && <ImageDrop />}
+    {uiStore.activeScreen === 'IMAGE_CROP' && <ImageCrop />}
+    {uiStore.activeScreen === 'CUPS' && <Cups />}
+  </div>
+));
+
 ReactDOM.render(
   <Provider
     cupStore={cupStore}
     uiStore={uiStore}
   >
-    <div className="root">
-      <ImageDrop />
-      <ImageCrop />
-      <Cup />
-    </div>
+    <Router uiStore={uiStore} />
   </Provider>,
   document.getElementById('root')
 );

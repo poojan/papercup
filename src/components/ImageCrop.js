@@ -21,23 +21,42 @@ const customStyles = {
 @inject('uiStore')
 @observer
 export default class ImageCrop extends Component {
-  @observable uploadPath = '';
-  @observable cropped = '';
+  constructor(props) {
+    super(props);
+    this.onCropClick = this.onCropClick.bind(this);
+  }
 
   @action _crop = () => {
     const { uiStore } = this.props;
     console.log('_crop');
-    this.cropped = this.refs.cropper.getCroppedCanvas().toDataURL();
     uiStore.cropped = this.refs.cropper.getCroppedCanvas().toDataURL();
-    // console.log('cropped', this.cropped);
+  }
+
+  onCropClick() {
+    const { uiStore } = this.props;
+    uiStore.activeScreen = 'CUPS';
   }
 
   render() {
     const { uiStore } = this.props;
     console.log('uiStore.imagePath', uiStore.imagePath);
 
-    if (!uiStore.imagePath) { return <div />; }
+    // if (!uiStore.imagePath) { return <div />; }
 
+    return (
+      <div>
+        <button onClick={this.closeModal}>close</button>
+        <Cropper
+          ref={'cropper'}
+          src={uiStore.imagePath}
+          guides={false}
+          crop={this._crop}
+        />
+        <button className="BlueButton" type="button" onClick={this.onCropClick}>
+          Crop
+        </button>
+      </div>
+    );
     return (
       <Modal
         isOpen={true}
