@@ -39,6 +39,13 @@ export default class ImageCrop extends Component {
     if (!uiStore.imagePath) { return <div />; }
 
     return (
+      <Modal
+        isOpen={true}
+        onAfterOpen={this.afterOpenModal}
+        onRequestClose={this.closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
       <div>
         <button onClick={this.closeModal}>close</button>
         <Cropper
@@ -49,26 +56,6 @@ export default class ImageCrop extends Component {
           crop={this._crop}
         />
       </div>
-    );
-    return (
-      <Modal
-        isOpen={true}
-        onAfterOpen={this.afterOpenModal}
-        onRequestClose={this.closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-
-      <button onClick={this.closeModal}>close</button>
-        <Cropper
-          ref={'cropper'}
-          src={uiStore.imagePath}
-          style={{height: 400, width: '100%'}}
-          aspectRatio={16 / 9}
-          guides={false}
-          crop={this._crop}
-        />
-
       </Modal>
     );
   }
