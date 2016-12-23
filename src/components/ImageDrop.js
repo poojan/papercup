@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import { observable, action } from 'mobx';
 import { BASE_URL } from '../config';
 
+@inject('uiStore')
 @observer
 export default class ImageDrop extends Component {
   @action onDrop = (acceptedFiles) => {
+    const { uiStore } = this.props;
     this.files = acceptedFiles;
 
     const req = request.post(`${BASE_URL}/upload`);
@@ -18,7 +20,8 @@ export default class ImageDrop extends Component {
 
     req.end((err, res) => {
       // console.log('done', res);
-      this.uploadPath = `${BASE_URL}/${res.body.path}`;
+      // this.uploadPath = `${BASE_URL}/${res.body.path}`;
+      uiStore.imagePath = `${BASE_URL}/${res.body.path}`;
     });
   }
 
@@ -37,7 +40,7 @@ export default class ImageDrop extends Component {
         >
           <img src="img/bg/Ray white 3D Mockup.jpg" width="800" />
         </Dropzone>
-        <button type="button" onClick={this.onOpenClick}>
+        <button className="BlueButton" type="button" onClick={this.onOpenClick}>
           Upload Image
         </button>
       </div>

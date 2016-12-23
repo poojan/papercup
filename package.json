@@ -55,6 +55,7 @@
     "react-cropper": "^0.10.0",
     "react-dom": "^15.4.1",
     "react-dropzone": "^3.7.3",
+    "react-modal": "^1.6.4",
     "superagent": "^3.3.1",
     "three": "^0.83.0"
   },

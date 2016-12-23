@@ -4,7 +4,7 @@ body {
   font-family: sans-serif;
 }
 
-button {
+.BlueButton {
   background: #5e9cd3;
   color: white;
   padding: 10px 40px;

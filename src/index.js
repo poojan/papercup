@@ -3,22 +3,35 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import ImageDrop from './components/ImageDrop';
+import ImageCrop from './components/ImageCrop';
+import { Provider } from 'mobx-react';
 
 // import data from './data/womanDrinkingFromDisposableCup';
 // import data from './data/8oz';
 // import data from './data/woodenTableCloseup';
 // import data from './data/handSmartPhone';
-// import data from './data/rayWhite';
-import data from './data/preparesEspresso';
+import data from './data/rayWhite';
+// import data from './data/preparesEspresso';
 
 import CupStore from './stores/CupStore';
+import UiStore from './stores/UiStore';
+
 const cupStore = new CupStore(data);
+const uiStore = new UiStore();
+
 import DatGui from './components/DatGui';
 
 ReactDOM.render(
-  <div className="root">
-    <ImageDrop />
-  </div>,
+  <Provider
+    cupStore={cupStore}
+    uiStore={uiStore}
+  >
+    <div className="root">
+      <ImageDrop />
+      <ImageCrop />
+      <App />
+    </div>
+  </Provider>,
   document.getElementById('root')
 );
 
