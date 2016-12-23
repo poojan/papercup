@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
 import { observer, inject } from 'mobx-react';
-import { observable, action } from 'mobx';
+import { action } from 'mobx';
 import { BASE_URL } from '../config';
 
 @inject('uiStore')
@@ -39,7 +39,7 @@ export default class ImageDrop extends Component {
           multiple={false}
           style={{}}
         >
-          <img src="img/bg/Ray white 3D Mockup.jpg" width="800" />
+          <img src="img/bg/Ray white 3D Mockup.jpg" width="800" alt="cup" />
         </Dropzone>
         <button className="BlueButton" type="button" onClick={this.onOpenClick}>
           Upload Image

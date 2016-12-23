@@ -1,6 +1,6 @@
 const bgImage = 'img/bg/8oz.jpg';
 // const cupImage = 'img/user/cuplogo.png';
-const cupImage = 'img/user/Spotify_variante_\(logo\).png';
+const cupImage = 'img/user/Spotify_variante_(logo).png';
 const overlayImage = null;
 
 export default {

@@ -1,22 +1,8 @@
 import React, { Component } from 'react';
-import Modal from 'react-modal';
-import request from 'superagent';
 import { observer, inject } from 'mobx-react';
-import { observable, action } from 'mobx';
-import { BASE_URL } from '../config';
+import { action } from 'mobx';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
-
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
 
 @inject('uiStore')
 @observer
@@ -57,26 +43,6 @@ export default class ImageCrop extends Component {
           Crop
         </button>
       </div>
-    );
-    return (
-      <Modal
-        isOpen={true}
-        onAfterOpen={this.afterOpenModal}
-        onRequestClose={this.closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-      <div>
-        <button onClick={this.closeModal}>close</button>
-        <Cropper
-          ref={'cropper'}
-          src={uiStore.imagePath}
-          style={{height: 400, width: '100%'}}
-          guides={false}
-          crop={this._crop}
-        />
-      </div>
-      </Modal>
     );
   }
 }

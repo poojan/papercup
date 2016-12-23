@@ -1,7 +1,7 @@
 // const bgImage = 'img/bg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.jpg';
 const bgImage = 'img/bg/shutterstock_218754565.jpg';
 // const cupImage = 'img/user/cuplogo.png';
-const cupImage = 'img/user/Spotify_variante_\(logo\).png';
+const cupImage = 'img/user/Spotify_variante_(logo).png';
 // const overlayImage = 'img/fg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.png';
 const overlayImage = 'img/fg/fingers3.png';
 // const overlayImage = null;
@@ -13,7 +13,6 @@ const bgActualHeight = 667;
 const scaling = 0.8;
 const bgScaledWidth = bgActualWidth * scaling;
 const bgScaledHeight = bgActualHeight * scaling;
-console.log(bgScaledWidth, bgScaledHeight);
 
 export default {
   scene: {
