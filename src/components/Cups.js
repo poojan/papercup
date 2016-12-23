@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { observable, action } from 'mobx';
 import Cup from './Cup';
+import DatGui from './DatGui';
 
 const deg = rad => rad * Math.PI / 180;
 
@@ -63,6 +64,7 @@ export default class Cups extends Component {
       <div>
         <div className="MainImage">
           <Cup width={800} height={600} cupStore={this.cupStore} rotate={true} />
+          <DatGui store={this.cupStore} />
         </div>
         <div className="Thumbnails">
           <Cup cupStore={this.cupStore1} onClickCup={this.onClickCup} />

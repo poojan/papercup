@@ -9,8 +9,12 @@ export default class DatGui extends Component {
     super(props);
 
     const { store } = props;
-
     const gui = new DAT.GUI();
+    this.init(store, gui);
+  }
+
+  init(store, gui) {
+    // const gui = this.gui;
 
     const sceneGui = gui.addFolder('Scene');
     sceneGui.add(store.scene, 'width');
@@ -87,6 +91,13 @@ export default class DatGui extends Component {
     // cameraGui.open();
 
     gui.add(store, 'log');
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps');
+    if (nextProps.store !== this.props.store) {
+      this.init(nextProps.store);
+    }
   }
 
   render() {
