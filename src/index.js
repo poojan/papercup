@@ -32,7 +32,6 @@ const Router = observer(({ uiStore }) => (
 
 ReactDOM.render(
   <Provider
-    cupStore={cupStore}
     uiStore={uiStore}
   >
     <Router uiStore={uiStore} />

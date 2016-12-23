@@ -33,7 +33,7 @@ const processTexture = (texture, repeatU, repeatV) => {
 
 const deg = rad => rad * Math.PI / 180;
 
-@inject('uiStore', 'cupStore')
+@inject('uiStore')
 @observer
 class Cup extends Component {
   @observable renderer;
