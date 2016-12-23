@@ -6,11 +6,6 @@ const overlayImage = null;
 const scaling = 1;
 
 export default {
-  scene: {
-    width: 800,
-    height: 600,
-  },
-
   bg: {
     width: 1500 * scaling,
     height: 1101 * scaling,

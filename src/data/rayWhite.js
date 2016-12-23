@@ -11,11 +11,6 @@ const bgScaledWidth = bgActualWidth * scaling;
 const bgScaledHeight = bgActualHeight * scaling;
 
 export default {
-  scene: {
-    width: 800,
-    height: 600,
-  },
-
   bg: {
     width: bgScaledWidth,
     height: bgScaledHeight,

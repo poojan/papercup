@@ -5,7 +5,7 @@ import { observable, action } from 'mobx';
 const loader = new THREE.TextureLoader();
 
 const loadTexture = (img) => new Promise((resolve, reject) => {
-  console.log('loadTexture', img, typeof img);
+  // console.log('loadTexture', img, typeof img);
   loader.load(
     img,
     function onLoad(texture) {
@@ -22,7 +22,7 @@ const loadTexture = (img) => new Promise((resolve, reject) => {
 });
 
 const processTexture = (texture, repeatU, repeatV) => {
-  console.log('processTexture', texture);
+  // console.log('processTexture', texture);
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
   texture.repeat.set(repeatU || 1, repeatV || 1);
@@ -41,50 +41,65 @@ class Cup extends Component {
   @observable cupTexture;
   @observable overlayTexture;
 
+  constructor(props) {
+    super(props);
+
+    this.onClickCup = this.onClickCup.bind(this);
+  }
+
   componentDidMount() {
-    console.log('POOJAN: Cup componentDidMount');
-    const { cupStore, uiStore } = this.props;
+    // console.log('POOJAN: Cup componentDidMount');
+    const { cupStore, uiStore, width, height, onClickCup } = this.props;
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     // this.renderer.setSize(window.innerWidth, window.innerHeight);
     // const height = cupStore.scene.width * window.innerHeight/window.innerWidth;
-    this.renderer.setSize(cupStore.scene.width, cupStore.scene.height);
+    this.renderer.setSize(width || cupStore.scene.width, height || cupStore.scene.height);
+
+    this.renderer.domElement.addEventListener('mousedown', this.onClickCup, false);
+
     document.body.appendChild(this.renderer.domElement);
 
     if (!uiStore.cropped) {
       return;
     }
-    console.log('POOJAN: cropped');
+    // console.log('POOJAN: cropped');
     this
       .load()
       .then(() => {
-        console.log('POOJAN: loaded');
+        // console.log('POOJAN: loaded');
         this.renderImage(this.renderer, this.props.cupStore);
       });
   }
 
+  componentWillUnmount() {
+    this.renderer.domElement.removeEventListener('mousedown', this.onClickCup);
+  }
+
   componentWillReact() {
-    console.log('POOJAN: Cup componentWillReact');
+    // console.log('POOJAN: Cup componentWillReact');
     const { uiStore } = this.props;
 
     this.renderImage(this.renderer, this.props.cupStore);
 
-    console.log('POOJAN: componentWillReact');
+    // console.log('POOJAN: componentWillReact');
     if (!uiStore.cropped) {
       return;
     }
-    console.log('POOJAN: cropped');
+    // console.log('POOJAN: cropped');
     this
       .load()
       .then(() => {
-        console.log('POOJAN: componentWillReact loaded');
+        // console.log('POOJAN: componentWillReact loaded');
         this.renderImage(this.renderer, this.props.cupStore);
       });
   }
 
   @action load() {
-    console.log('POOJAN: load');
+    // console.log('POOJAN: load');
     const { cupStore, uiStore } = this.props;
     // console.log('uiStore.cropped', uiStore.cropped);
+
+    // if (this.cupTexture) { return Promise.resolve(); }
 
     return Promise.all([
       loadTexture(cupStore.bg.image),
@@ -108,13 +123,18 @@ class Cup extends Component {
   }
 
   renderImage(renderer, cupStore) {
+    const { width, height } = this.props;
+
     var scene = new THREE.Scene();
 
-    console.log(window.innerWidth, window.innerHeight);
+    const sceneWidth = width || cupStore.scene.width;
+    const sceneHeight = height || cupStore.scene.height;
+
+    // console.log(window.innerWidth, window.innerHeight);
     // Camera
     var camera = new THREE.PerspectiveCamera(
       cupStore.camera.fov,
-      cupStore.scene.width / cupStore.scene.height,
+      sceneWidth / sceneHeight,
       0.1,
       10000
     );
@@ -245,11 +265,23 @@ class Cup extends Component {
     renderer.render(scene, camera);
   }
 
+  @action onClickCup() {
+    const { cupStore, onClickCup } = this.props;
+
+    // const anim = action(() => {
+      // cupStore.cup.rotY += deg(30);
+      // requestAnimationFrame(anim);
+    // });
+    // requestAnimationFrame(anim);
+    onClickCup(cupStore);
+  }
+
   render() {
-    console.log('this.props.uiStore.cropped');
-    console.log(this.props.uiStore.cropped);
+    // console.log('onClickCup', this.onClickCup);
     return (
       <div
+        onClick={this.onClickCup}
+        className="Cup"
         ref={container => this.container = container}
         data-cupStore={JSON.stringify(this.props.cupStore)}
         data-uiStore={this.props.uiStore.cropped}
