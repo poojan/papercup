@@ -27,13 +27,14 @@ export default class ImageCrop extends Component {
   }
 
   @action _crop = () => {
-    const { uiStore } = this.props;
-    console.log('_crop');
-    uiStore.cropped = this.refs.cropper.getCroppedCanvas().toDataURL();
+    // const { uiStore } = this.props;
+    // console.log('_crop');
+    // uiStore.cropped = this.refs.cropper.getCroppedCanvas().toDataURL();
   }
 
   onCropClick() {
     const { uiStore } = this.props;
+    uiStore.cropped = this.refs.cropper.getCroppedCanvas().toDataURL();
     uiStore.activeScreen = 'CUPS';
   }
 
