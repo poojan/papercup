@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import * as THREE from 'three';
 import { observer, inject } from 'mobx-react';
 import { observable, action } from 'mobx';
@@ -36,14 +35,14 @@ const deg = rad => rad * Math.PI / 180;
 
 @inject('uiStore', 'cupStore')
 @observer
-class App extends Component {
+class Cup extends Component {
   @observable renderer;
   @observable bgTexture;
   @observable cupTexture;
   @observable overlayTexture;
 
   componentDidMount() {
-    console.log('POOJAN: App componentDidMount');
+    console.log('POOJAN: Cup componentDidMount');
     const { cupStore, uiStore } = this.props;
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     // this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -64,7 +63,7 @@ class App extends Component {
   }
 
   componentWillReact() {
-    console.log('POOJAN: App componentWillReact');
+    console.log('POOJAN: Cup componentWillReact');
     const { uiStore } = this.props;
 
     this.renderImage(this.renderer, this.props.cupStore);
@@ -259,4 +258,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Cup;

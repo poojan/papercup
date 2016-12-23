@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Cup from './components/Cup';
 import './index.css';
 import ImageDrop from './components/ImageDrop';
 import ImageCrop from './components/ImageCrop';
@@ -29,7 +29,7 @@ ReactDOM.render(
     <div className="root">
       <ImageDrop />
       <ImageCrop />
-      <App />
+      <Cup />
     </div>
   </Provider>,
   document.getElementById('root')
