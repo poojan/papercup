@@ -33,7 +33,7 @@ const processTexture = (texture, repeatU, repeatV) => {
 
 const deg = rad => rad * Math.PI / 180;
 
-@inject('uiStore', 'cupStore')
+@inject('uiStore', 'cupsStore')
 @observer
 class Cup extends Component {
   @observable renderer;
@@ -45,12 +45,15 @@ class Cup extends Component {
     super(props);
 
     this.onClickCup = this.onClickCup.bind(this);
+    console.log('CUP CONSTRUCTOR');
   }
 
   componentDidMount() {
+    console.log('CUP DID_MOUNT');
     // console.log('POOJAN: Cup componentDidMount');
-    const { cupStore, uiStore, width, height, onClickCup, data } = this.props;
-    cupStore.setData(data);
+    const { cupsStore, uiStore, width, height, onClickCup, keyId } = this.props;
+    const cupStore = cupsStore.getData(keyId);
+    // cupStore.setData(data);
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     // this.renderer.setSize(window.innerWidth, window.innerHeight);
     // const height = cupStore.scene.width * window.innerHeight/window.innerWidth;
@@ -68,7 +71,7 @@ class Cup extends Component {
       .load()
       .then(() => {
         // console.log('POOJAN: loaded');
-        this.renderImage(this.renderer, this.props.cupStore);
+        this.renderImage(this.renderer, cupStore);
       });
   }
 
@@ -78,10 +81,11 @@ class Cup extends Component {
 
   componentWillReact() {
     // console.log('POOJAN: Cup componentWillReact');
-    const { uiStore } = this.props;
+    const { uiStore, cupsStore, keyId } = this.props;
+    const cupStore = cupsStore.getData(keyId);
 
     if (!this.renderer) { return; }
-    this.renderImage(this.renderer, this.props.cupStore);
+    this.renderImage(this.renderer, cupStore);
 
     // console.log('POOJAN: componentWillReact');
     if (!uiStore.cropped) {
@@ -97,11 +101,14 @@ class Cup extends Component {
   }
 
   @action load() {
-    // console.log('POOJAN: load');
-    const { cupStore, uiStore } = this.props;
+    console.log('CUP load');
+    const { cupsStore, uiStore, keyId } = this.props;
+    const cupStore = cupsStore.getData(keyId);
     // console.log('uiStore.cropped', uiStore.cropped);
 
     // if (this.cupTexture) { return Promise.resolve(); }
+
+    console.log('cupStore', cupStore.bg.image);
 
     return Promise.all([
       loadTexture(cupStore.bg.image),
@@ -268,14 +275,14 @@ class Cup extends Component {
   }
 
   @action onClickCup() {
-    const { cupStore, onClickCup, data } = this.props;
+    const { onClickCup, keyId } = this.props;
 
     // const anim = action(() => {
       // cupStore.cup.rotY += deg(30);
       // requestAnimationFrame(anim);
     // });
     // requestAnimationFrame(anim);
-    onClickCup(data);
+    onClickCup(keyId);
   }
 
   render() {

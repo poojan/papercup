@@ -15,22 +15,15 @@ import data6 from '../data/preparesEspresso';
 
 import CupStore from '../stores/CupStore';
 
-@inject('uiStore', 'cupStore')
+@inject('uiStore', 'cupsStore')
 @observer
 export default class Cups extends Component {
-  @observable cupStore;
-  @observable cupStore1;
-  @observable cupStore2;
-  @observable cupStore3;
-  @observable cupStore4;
-  @observable cupStore5;
-  @observable cupStore6;
-  @observable data = {};
+  @observable keyId;
 
   constructor(props) {
     super(props);
 
-    this.data = data3;
+    this.keyId = "rayWhite";
 
     // this.cupStore1 = new CupStore(data1);
     // this.cupStore2 = new CupStore(data2);
@@ -49,8 +42,8 @@ export default class Cups extends Component {
   }
 
   @observable interval;
-  @action onClickCup(data) {
-    this.data = data;
+  @action onClickCup(keyId) {
+    this.keyId = keyId;
     // const { cupStore } = this.props;
     // cupStore.setData(data);
     // this.cupStore = a;
@@ -61,24 +54,25 @@ export default class Cups extends Component {
     // this.cupStore = this.props.cupStore;
   }
 
+
   render() {
-    const { uiStore, cupStore } = this.props;
+    const { uiStore, cupsStore } = this.props;
 
     if (uiStore.activeScreen !== 'CUPS') { return <div />; }
 
+          // <DatGui store={cupStore} />
     return (
       <div>
         <div className="MainImage">
-          <Cup width={800} height={600} data={this.data} rotate={true} />
-          <DatGui store={cupStore} />
+          <Cup width={800} height={600} keyId={this.keyId} rotate={true} />
         </div>
         <div className="Thumbnails">
-          <Cup data={data1} onClickCup={this.onClickCup} />
-          <Cup data={data2} onClickCup={this.onClickCup} />
-          <Cup data={data3} onClickCup={this.onClickCup} />
-          <Cup data={data4} onClickCup={this.onClickCup} />
-          <Cup data={data5} onClickCup={this.onClickCup} />
-          <Cup data={data6} onClickCup={this.onClickCup} />
+          <Cup keyId="rayWhite" onClickCup={this.onClickCup} />
+          <Cup keyId="disposable" onClickCup={this.onClickCup} />
+          <Cup keyId="8oz" onClickCup={this.onClickCup} />
+          <Cup keyId="wooden" onClickCup={this.onClickCup} />
+          <Cup keyId="phone" onClickCup={this.onClickCup} />
+          <Cup keyId="espresso" onClickCup={this.onClickCup} />
         </div>
       </div>
     );

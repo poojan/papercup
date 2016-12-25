@@ -124,6 +124,10 @@ class CupStore {
     rotation: computed(() => new THREE.Euler(deg(this.cup.rotX), deg(this.cup.rotY), deg(this.cup.rotZ))),
   };
 
+  constructor(data) {
+    this.setData(data);
+  }
+
   @action setData(obsData) {
     const data = toJS(obsData);
     if (data.scene) {
