@@ -51,7 +51,7 @@ class Cup extends Component {
   componentDidMount() {
     console.log('CUP DID_MOUNT');
     // console.log('POOJAN: Cup componentDidMount');
-    const { cupsStore, uiStore, width, height, onClickCup, keyId } = this.props;
+    const { cupsStore, uiStore, width, height, keyId } = this.props;
     const cupStore = cupsStore.getData(keyId);
     // cupStore.setData(data);
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
