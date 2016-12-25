@@ -9,6 +9,9 @@ import { Provider, observer } from 'mobx-react';
 import UiStore from './stores/UiStore';
 const uiStore = new UiStore();
 
+import CupStore from './stores/CupStore';
+const cupStore = new CupStore();
+
 const Router = observer(({ uiStore }) => (
   <div className="root">
     {uiStore.activeScreen === 'IMAGE_DROP' && <ImageDrop />}
@@ -18,7 +21,7 @@ const Router = observer(({ uiStore }) => (
 ));
 
 ReactDOM.render(
-  <Provider uiStore={uiStore}>
+  <Provider cupStore={cupStore} uiStore={uiStore}>
     <Router uiStore={uiStore} />
   </Provider>,
   document.getElementById('root')

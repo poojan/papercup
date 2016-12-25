@@ -1,4 +1,4 @@
-import { observable, computed, extendObservable } from 'mobx';
+import { observable, computed, extendObservable, action, toJS } from 'mobx';
 import * as THREE from 'three';
 
 const bgImage = '';
@@ -124,7 +124,8 @@ class CupStore {
     rotation: computed(() => new THREE.Euler(deg(this.cup.rotX), deg(this.cup.rotY), deg(this.cup.rotZ))),
   };
 
-  constructor(data) {
+  @action setData(obsData) {
+    const data = toJS(obsData);
     if (data.scene) {
       this.scene = extendObservable(this.scene, data.scene);
     }

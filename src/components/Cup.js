@@ -33,7 +33,7 @@ const processTexture = (texture, repeatU, repeatV) => {
 
 const deg = rad => rad * Math.PI / 180;
 
-@inject('uiStore')
+@inject('uiStore', 'cupStore')
 @observer
 class Cup extends Component {
   @observable renderer;
@@ -49,7 +49,8 @@ class Cup extends Component {
 
   componentDidMount() {
     // console.log('POOJAN: Cup componentDidMount');
-    const { cupStore, uiStore, width, height, onClickCup } = this.props;
+    const { cupStore, uiStore, width, height, onClickCup, data } = this.props;
+    cupStore.setData(data);
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     // this.renderer.setSize(window.innerWidth, window.innerHeight);
     // const height = cupStore.scene.width * window.innerHeight/window.innerWidth;
@@ -79,6 +80,7 @@ class Cup extends Component {
     // console.log('POOJAN: Cup componentWillReact');
     const { uiStore } = this.props;
 
+    if (!this.renderer) { return; }
     this.renderImage(this.renderer, this.props.cupStore);
 
     // console.log('POOJAN: componentWillReact');
@@ -266,14 +268,14 @@ class Cup extends Component {
   }
 
   @action onClickCup() {
-    const { cupStore, onClickCup } = this.props;
+    const { cupStore, onClickCup, data } = this.props;
 
     // const anim = action(() => {
       // cupStore.cup.rotY += deg(30);
       // requestAnimationFrame(anim);
     // });
     // requestAnimationFrame(anim);
-    onClickCup(cupStore);
+    onClickCup(data);
   }
 
   render() {

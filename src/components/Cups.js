@@ -15,7 +15,7 @@ import data6 from '../data/preparesEspresso';
 
 import CupStore from '../stores/CupStore';
 
-@inject('uiStore')
+@inject('uiStore', 'cupStore')
 @observer
 export default class Cups extends Component {
   @observable cupStore;
@@ -25,17 +25,20 @@ export default class Cups extends Component {
   @observable cupStore4;
   @observable cupStore5;
   @observable cupStore6;
+  @observable data = {};
 
   constructor(props) {
     super(props);
 
-    this.cupStore1 = new CupStore(data1);
-    this.cupStore2 = new CupStore(data2);
-    this.cupStore3 = new CupStore(data3);
-    this.cupStore4 = new CupStore(data4);
-    this.cupStore5 = new CupStore(data5);
-    this.cupStore6 = new CupStore(data6);
-    this.cupStore = this.cupStore3;
+    this.data = data3;
+
+    // this.cupStore1 = new CupStore(data1);
+    // this.cupStore2 = new CupStore(data2);
+    // this.cupStore3 = new CupStore(data3);
+    // this.cupStore4 = new CupStore(data4);
+    // this.cupStore5 = new CupStore(data5);
+    // this.cupStore6 = new CupStore(data6);
+    // this.cupStore = this.cupStore3;
 
     this.onClickCup = this.onClickCup.bind(this);
   }
@@ -46,9 +49,12 @@ export default class Cups extends Component {
   }
 
   @observable interval;
-  @action onClickCup(a, b) {
-    this.cupStore = a;
-    console.log('onClickCup');
+  @action onClickCup(data) {
+    this.data = data;
+    // const { cupStore } = this.props;
+    // cupStore.setData(data);
+    // this.cupStore = a;
+    // console.log('onClickCup');
     // console.log('onClickCup', a, b);
 
     // console.log('onClickCup', evt.target);
@@ -56,23 +62,23 @@ export default class Cups extends Component {
   }
 
   render() {
-    const { uiStore } = this.props;
+    const { uiStore, cupStore } = this.props;
 
     if (uiStore.activeScreen !== 'CUPS') { return <div />; }
 
     return (
       <div>
         <div className="MainImage">
-          <Cup width={800} height={600} cupStore={this.cupStore} rotate={true} />
-          <DatGui store={this.cupStore} />
+          <Cup width={800} height={600} data={this.data} rotate={true} />
+          <DatGui store={cupStore} />
         </div>
         <div className="Thumbnails">
-          <Cup cupStore={this.cupStore1} onClickCup={this.onClickCup} />
-          <Cup cupStore={this.cupStore2} onClickCup={this.onClickCup} />
-          <Cup cupStore={this.cupStore3} onClickCup={this.onClickCup} />
-          <Cup cupStore={this.cupStore4} onClickCup={this.onClickCup} />
-          <Cup cupStore={this.cupStore5} onClickCup={this.onClickCup} />
-          <Cup cupStore={this.cupStore6} onClickCup={this.onClickCup} />
+          <Cup data={data1} onClickCup={this.onClickCup} />
+          <Cup data={data2} onClickCup={this.onClickCup} />
+          <Cup data={data3} onClickCup={this.onClickCup} />
+          <Cup data={data4} onClickCup={this.onClickCup} />
+          <Cup data={data5} onClickCup={this.onClickCup} />
+          <Cup data={data6} onClickCup={this.onClickCup} />
         </div>
       </div>
     );
