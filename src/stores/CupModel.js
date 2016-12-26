@@ -42,8 +42,8 @@ class CupModel {
   @observable overlayTexture;
 
   @observable scene = {
-    width: 200,
-    height: 150,
+    width: 200 * 0.7,
+    height: 150 * 0.7,
   };
 
   @observable grp = {

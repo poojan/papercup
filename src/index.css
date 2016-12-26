@@ -30,3 +30,25 @@ body {
 .Thumbnails .Cup {
   /* width: 100px; */
 }
+
+.Row {
+}
+
+.MainImage {
+  padding: 10px;
+  /* lost-column: 3/4; */
+  display: inline-block;
+  vertical-align: top;
+}
+.MainImage canvas {
+  width: 100%;
+  display: inline-block;
+}
+
+.Thumbnails {
+  display: inline-block;
+  /* lost-column: 1/4; */
+}
+.Thumbnails canvas {
+  display: inline-block;
+}

@@ -25,7 +25,7 @@ class Cup extends Component {
   componentDidMount() {
     console.log('CUP DID_MOUNT');
     // console.log('POOJAN: Cup componentDidMount');
-    const { cupStore, uiStore, width, height, keyId } = this.props;
+    const { cupStore, uiStore, width, height, keyId, containerId } = this.props;
     const cupData = cupStore.findById(keyId);
     console.log('cupData', keyId, cupData);
     if (!cupData) { return; }
@@ -37,7 +37,7 @@ class Cup extends Component {
 
     this.renderer.domElement.addEventListener('mousedown', this.onClickCup, false);
 
-    document.body.appendChild(this.renderer.domElement);
+    document.getElementById(containerId).appendChild(this.renderer.domElement);
 
     if (!uiStore.cropped) {
       return;
@@ -240,6 +240,7 @@ class Cup extends Component {
       <div
         onClick={this.onClickCup}
         className="Cup"
+        id={this.props.containerId}
         ref={container => this.container = container}
         data-cupData={JSON.stringify(this.props.cupData)}
         data-uiStore={this.props.uiStore.cropped}
