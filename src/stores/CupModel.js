@@ -160,6 +160,8 @@ class CupModel {
   constructor(data) {
     this.setData(data);
     console.log('cons', this.id);
+
+    this.rotate = this.rotate.bind(this);
   }
 
   @action updateData(id, obsData) {
@@ -259,6 +261,25 @@ class CupModel {
       cup: this.cup,
     };
     console.log(JSON.stringify(data, null, 2));
+  }
+
+  @observable isPlaying = false;
+  req;
+
+  @action rotate() {
+    // console.log('this.cup', this.cup.rotY);
+    this.cup.rotY += deg(10);
+    this.req = requestAnimationFrame(this.rotate);
+  }
+  @action play() {
+    if (this.isPlaying) { return; }
+    // this.cup.rotY += deg(1);
+    this.isPlaying = true;
+    this.req = requestAnimationFrame(this.rotate);
+  }
+  @action pause() {
+    window.cancelAnimationFrame(this.req);
+    this.isPlaying = false;
   }
 }
 

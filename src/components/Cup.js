@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
 import { observer, inject } from 'mobx-react';
-import { observable, action } from 'mobx';
+import { observable, action, toJS } from 'mobx';
 
 
 
@@ -14,6 +14,7 @@ class Cup extends Component {
   @observable bgTexture;
   @observable cupTexture;
   @observable overlayTexture;
+  @observable cupData;
 
   constructor(props) {
     super(props);
@@ -26,31 +27,29 @@ class Cup extends Component {
     console.log('CUP DID_MOUNT');
     // console.log('POOJAN: Cup componentDidMount');
     const { cupStore, uiStore, width, height, keyId, containerId } = this.props;
-    const cupData = cupStore.findById(keyId);
-    console.log('cupData', keyId, cupData);
-    if (!cupData) { return; }
+    this.cupData = cupStore.findById(keyId);
+    console.log('cupData', keyId, this.cupData);
+    if (!this.cupData) { return; }
     // cupData.setData(data);
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     // this.renderer.setSize(window.innerWidth, window.innerHeight);
     // const height = cupData.scene.width * window.innerHeight/window.innerWidth;
-    this.renderer.setSize(width || cupData.scene.width, height || cupData.scene.height);
+    this.renderer.setSize(width || this.cupData.scene.width, height || this.cupData.scene.height);
 
     this.renderer.domElement.addEventListener('mousedown', this.onClickCup, false);
 
     document.getElementById(containerId).appendChild(this.renderer.domElement);
 
-    if (!uiStore.cropped) {
-      return;
-    }
+    // if (!uiStore.cropped) { return; }
     // console.log('POOJAN: cropped');
-    cupData.load()
-      .then(() => cupData.loadCupTexture(uiStore.cropped))
+    this.cupData.load()
+      .then(() => this.cupData.loadCupTexture(uiStore.cropped))
     // this
       // .load()
       // .then(cupData.loadCupTexture)
       .then(() => {
         // console.log('POOJAN: loaded');
-        this.renderImage(this.renderer, cupData);
+        this.renderImage(this.renderer, this.cupData);
       });
   }
 
@@ -61,22 +60,23 @@ class Cup extends Component {
   componentWillReact() {
     // console.log('POOJAN: Cup componentWillReact');
     const { uiStore, cupStore, keyId } = this.props;
-    const cupData = cupStore.findById(keyId);
+    this.cupData = cupStore.findById(keyId);
+    // console.log('willReact', this.cupData.cup.rotY);
 
     if (!this.renderer) { return; }
-    this.renderImage(this.renderer, cupData);
+    this.renderImage(this.renderer, this.cupData);
 
     // console.log('POOJAN: componentWillReact');
     if (!uiStore.cropped) {
       return;
     }
     // console.log('POOJAN: cropped');
-    cupData
+    this.cupData
       .load()
       // .then(() => cupData.loadCupTexture(uiStore.cropped))
       .then(() => {
         // console.log('POOJAN: componentWillReact loaded');
-        this.renderImage(this.renderer, cupData);
+        this.renderImage(this.renderer, this.cupData);
       });
   }
 
@@ -225,6 +225,7 @@ class Cup extends Component {
 
   @action onClickCup() {
     const { onClickCup, keyId } = this.props;
+    // console.log('onClickCup', keyId);
 
     // const anim = action(() => {
       // cupData.cup.rotY += deg(30);
@@ -235,6 +236,8 @@ class Cup extends Component {
   }
 
   render() {
+    // console.log('xx', this.cupData);
+    // console.log('xx', JSON.stringify(this.cupData));
     // console.log('onClickCup', this.onClickCup);
     return (
       <div
@@ -242,7 +245,7 @@ class Cup extends Component {
         className="Cup"
         id={this.props.containerId}
         ref={container => this.container = container}
-        data-cupData={JSON.stringify(this.props.cupData)}
+        data-cupData={toJS(this.cupData)}
         data-uiStore={this.props.uiStore.cropped}
       />
     );
