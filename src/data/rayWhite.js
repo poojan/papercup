@@ -37,7 +37,7 @@ export default {
   camera: {
     posZ: 1000,
     projection: 'perspective',
-    fov: 25,
+    fov: 22,
     // projection: 'orthographic',
   },
 
