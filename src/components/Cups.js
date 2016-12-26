@@ -22,7 +22,7 @@ export default class Cups extends Component {
 
   render() {
     const { uiStore, cupStore } = this.props;
-    const scale = 0.8;
+    const scale = 1;
     const width = 800 * scale;
     const height = 600 * scale;
 
@@ -33,6 +33,15 @@ export default class Cups extends Component {
       <div className="Row" style={{ width: "1000px" }}>
         <div className="MainImage">
           <Cup width={width} height={height} containerId="main" keyId={this.keyId} rotate={true} />
+          <button className="BlueButton" type="button" onClick={this.onSelectClick}>
+            Select New Image
+          </button>
+          <button className="BlueButton" type="button" onClick={this.onEditClick}>
+            Edit Current Image
+          </button>
+          <button className="BlueButton" type="button" onClick={this.onEmailClick}>
+            Email Me Mockups
+          </button>
         </div>
         <div className="Thumbnails">
           {cupStore.items.map(item => (
