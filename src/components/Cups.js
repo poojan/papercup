@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react';
 import { observable, action } from 'mobx';
 import Cup from './Cup';
 
-@inject('uiStore', 'cupsStore')
+@inject('uiStore', 'cupStore')
 @observer
 export default class Cups extends Component {
   @observable keyId;

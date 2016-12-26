@@ -11,6 +11,8 @@ const bgScaledWidth = bgActualWidth * scaling;
 const bgScaledHeight = bgActualHeight * scaling;
 
 export default {
+  id: 'rayWhite',
+
   bg: {
     width: bgScaledWidth,
     height: bgScaledHeight,

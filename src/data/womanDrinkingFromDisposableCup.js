@@ -15,6 +15,8 @@ const bgScaledWidth = bgActualWidth * scaling;
 const bgScaledHeight = bgActualHeight * scaling;
 
 export default {
+  id: 'disposableCup',
+
   bg: {
     width: bgScaledWidth,
     height: bgScaledHeight,

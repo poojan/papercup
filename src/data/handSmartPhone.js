@@ -6,6 +6,8 @@ const overlayImage = null;
 const scaling = 1;
 
 export default {
+  id: 'phone',
+
   bg: {
     width: 1500 * scaling,
     height: 1101 * scaling,

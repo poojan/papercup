@@ -16,18 +16,18 @@ import data4 from './data/woodenTableCloseup';
 import data5 from './data/handSmartPhone';
 import data6 from './data/preparesEspresso';
 
+import CupModel from './stores/CupModel';
 import CupStore from './stores/CupStore';
-// const cupStore = new CupStore();
+// const cupStore = new CupModel();
 
-import CupsStore from './stores/CupsStore';
-const cupsStore = new CupsStore({
-  rayWhite: new CupStore(data1),
-  disposable: new CupStore(data2),
-  '8oz': new CupStore(data3),
-  wooden: new CupStore(data4),
-  phone: new CupStore(data5),
-  espresso: new CupStore(data6),
-});
+const cupStore = new CupStore([
+  data1,
+  data2,
+  data3,
+  data4,
+  data5,
+  data6,
+]);
 
 const Router = observer(({ uiStore }) => (
   <div className="root">
@@ -39,7 +39,7 @@ const Router = observer(({ uiStore }) => (
 
 ReactDOM.render(
   <Provider
-    cupsStore={cupsStore}
+    cupStore={cupStore}
     // cupStore={cupStore}
     uiStore={uiStore}
   >

@@ -6,6 +6,8 @@ const overlayImage = null;
 const scaling = 0.35;
 
 export default {
+  id: 'wooden',
+
   bg: {
     width: 1500 * scaling,
     height: 1101 * scaling,
