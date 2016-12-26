@@ -200,6 +200,17 @@ class CupModel {
     }
   }
 
+  @action loadCupTexture(cupImage) {
+    console.log('loadCupTexture');
+    // if (this.cupTexture) { return Promise.resolve(); }
+    return loadTexture(cupImage || this.cup.image)
+      .then(texture => {
+        console.log('texture', texture);
+        this.cupTexture = processTexture(texture);
+      });
+  }
+
+
   @action load() {
     console.log('CUP load');
     // const { cupStore, uiStore, keyId } = this.props;
@@ -217,13 +228,13 @@ class CupModel {
 
     return Promise.all([
       loadTexture(this.bg.image),
-      loadTexture(this.cup.image),
+      // loadTexture(this.cup.image),
       // loadTexture(uiStore.cropped),
     ])
       .then(values => {
         this.bgTexture = processTexture(values[0]);
         // console.log('bgTexture', this.bgTexture.slice && this.bgTexture.slice(0, 200));
-        this.cupTexture = processTexture(values[1]);
+        // this.cupTexture = processTexture(values[1]);
         // this.cupTexture = this.processTexture(uiStore.cropped);
         // console.log('cupTexture', this.cupTexture.slice && this.cupTexture.slice(0, 200));
 

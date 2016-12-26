@@ -44,8 +44,10 @@ class Cup extends Component {
     }
     // console.log('POOJAN: cropped');
     cupData.load()
+      .then(() => cupData.loadCupTexture(uiStore.cropped))
     // this
       // .load()
+      // .then(cupData.loadCupTexture)
       .then(() => {
         // console.log('POOJAN: loaded');
         this.renderImage(this.renderer, cupData);
@@ -71,6 +73,7 @@ class Cup extends Component {
     // console.log('POOJAN: cropped');
     cupData
       .load()
+      // .then(() => cupData.loadCupTexture(uiStore.cropped))
       .then(() => {
         // console.log('POOJAN: componentWillReact loaded');
         this.renderImage(this.renderer, cupData);
