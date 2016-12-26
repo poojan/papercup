@@ -1,6 +1,34 @@
 import { observable, computed, extendObservable, action, toJS } from 'mobx';
 import * as THREE from 'three';
 
+const loader = new THREE.TextureLoader();
+
+const loadTexture = (img) => new Promise((resolve, reject) => {
+  // console.log('loadTexture', img, typeof img);
+  loader.load(
+    img,
+    function onLoad(texture) {
+      resolve(texture);
+    },
+    function onProgress(xhr) {
+      console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    },
+    function onError(xhr) {
+      console.log('Error: ', xhr);
+      reject();
+    }
+  )
+});
+
+const processTexture = (texture, repeatU, repeatV) => {
+  // console.log('processTexture', texture);
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(repeatU || 1, repeatV || 1);
+  texture.anisotropy = 16;
+  return texture;
+};
+
 const bgImage = '';
 const cupImage = '';
 
@@ -9,6 +37,9 @@ const deg = rad => rad * Math.PI / 180;
 
 class CupModel {
   id;
+  @observable bgTexture;
+  @observable cupTexture;
+  @observable overlayTexture;
 
   @observable scene = {
     width: 200,
@@ -167,6 +198,42 @@ class CupModel {
     if (data.cup) {
       this.cup = extendObservable(this.cup, data.cup);
     }
+  }
+
+  @action load() {
+    console.log('CUP load');
+    // const { cupStore, uiStore, keyId } = this.props;
+    // const this = cupStore.findById(keyId);
+    // this.load();
+    // console.log('uiStore.cropped', uiStore.cropped);
+
+    // if (this.cupTexture) { return Promise.resolve(); }
+
+    // console.log('this', keyId, this);
+
+    if (this.bgTexture) {
+      return Promise.resolve();
+    }
+
+    return Promise.all([
+      loadTexture(this.bg.image),
+      loadTexture(this.cup.image),
+      // loadTexture(uiStore.cropped),
+    ])
+      .then(values => {
+        this.bgTexture = processTexture(values[0]);
+        // console.log('bgTexture', this.bgTexture.slice && this.bgTexture.slice(0, 200));
+        this.cupTexture = processTexture(values[1]);
+        // this.cupTexture = this.processTexture(uiStore.cropped);
+        // console.log('cupTexture', this.cupTexture.slice && this.cupTexture.slice(0, 200));
+
+        if (this.bg.overlay) {
+          return loadTexture(this.bg.overlay)
+            .then(texture => {
+              this.overlayTexture = texture;
+            });
+        }
+      });
   }
 
   log = () => {
