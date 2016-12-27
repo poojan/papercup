@@ -40,7 +40,7 @@ class Cup extends Component {
 
     document.getElementById(containerId).appendChild(this.renderer.domElement);
 
-    // if (!uiStore.cropped) { return; }
+    if (!uiStore.devMode && !uiStore.cropped) { return; }
     // console.log('POOJAN: cropped');
     this.cupData.load()
       .then(() => this.cupData.loadCupTexture(uiStore.cropped))
@@ -64,10 +64,10 @@ class Cup extends Component {
     // console.log('willReact', this.cupData.cup.rotY);
 
     if (!this.renderer) { return; }
-    this.renderImage(this.renderer, this.cupData);
+    // this.renderImage(this.renderer, this.cupData);
 
     // console.log('POOJAN: componentWillReact');
-    if (!uiStore.cropped) {
+    if (!uiStore.devMode && !uiStore.cropped) {
       return;
     }
     // console.log('POOJAN: cropped');
@@ -221,6 +221,17 @@ class Cup extends Component {
     scene.add(group);
 
     renderer.render(scene, camera);
+
+    // cupGeometry.dispose();
+    // bgGeometry.dispose();
+    // bgMaterial.dispose();
+    // cupMaterial.dispose();
+    // cupBgMaterial.dispose();
+
+    // bgPlaneMesh.dispose();
+    // cupMesh.dispose();
+    // cupBgMesh.dispose();
+    // group.dispose();
   }
 
   @action onClickCup() {
