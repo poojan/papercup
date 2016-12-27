@@ -43,6 +43,7 @@ export default class ImageCrop extends Component {
           src={uiStore.imagePath}
           guides={false}
           crop={this._crop}
+          aspectRatio={3}
           style={{
             height: '500px',
           }}
