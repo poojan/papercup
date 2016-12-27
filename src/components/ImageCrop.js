@@ -31,13 +31,17 @@ export default class ImageCrop extends Component {
     // if (!uiStore.imagePath) { return <div />; }
 
     return (
-      <div>
-        <button onClick={this.closeModal}>close</button>
+      <div style={{ width: '1000px' }}>
         <Cropper
+          className="Cropper"
           ref={'cropper'}
           src={uiStore.imagePath}
           guides={false}
           crop={this._crop}
+          style={{
+            width: '800px',
+            // height: '100%'
+          }}
         />
         <button className="BlueButton" type="button" onClick={this.onCropClick}>
           Crop

@@ -268,7 +268,7 @@ class CupModel {
 
   @action rotate() {
     // console.log('this.cup', this.cup.rotY);
-    this.cup.rotY += deg(10);
+    this.cup.rotY += deg(20);
     this.req = requestAnimationFrame(this.rotate);
   }
   @action play() {
