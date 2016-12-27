@@ -1,57 +1,62 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import Cup from './Cup';
 
 @inject('uiStore', 'cupStore')
 @observer
 export default class Cups extends Component {
   @observable keyId;
+  @observable currentCup;
 
   constructor(props) {
     super(props);
 
     // this.keyId = "rayWhite";
 
+    const { cupStore, uiStore } = props;
     this.onClickCup = this.onClickCup.bind(this);
+    this.currentCup = cupStore.findById(uiStore.activeKeyId);
   }
 
-  @observable isPlaying = false;
+  // @observable isPlaying = false;
 
   @action onClickCup(keyId) {
-    const { uiStore } = this.props;
-    uiStore.activeKeyId = keyId;
-    console.log(uiStore.keyId);
+    this.pause();
+    setTimeout(() => {
+      const { cupStore, uiStore } = this.props;
+      this.currentCup = cupStore.findById(uiStore.activeKeyId);
+      uiStore.activeKeyId = keyId;
+      console.log(uiStore.keyId);
+    }, 200);
+  }
+
+  @computed get isPlaying() {
+    // const { cupStore, uiStore } = this.props;
+    // const currentCup = cupStore.findById(uiStore.activeKeyId);
+    return this.currentCup.isPlaying;
   }
 
   @action play = () => {
-    const { cupStore, uiStore } = this.props;
-    const foundCup = cupStore.findById(uiStore.activeKeyId);
-    foundCup.play();
-    this.isPlaying = true;
+    this.currentCup.play();
   }
 
   @action pause = () => {
-    const { cupStore, uiStore } = this.props;
-    const foundCup = cupStore.findById(uiStore.activeKeyId);
-    foundCup.pause();
-    this.isPlaying = false;
+    // const { cupStore, uiStore } = this.props;
+    // const currentCup = cupStore.findById(uiStore.activeKeyId);
+    this.currentCup.pause();
+    // this.isPlaying = false;
   }
 
   @action togglePlayPause = () => {
-    const { cupStore, uiStore } = this.props;
-    const foundCup = cupStore.findById(uiStore.activeKeyId);
-
-    if (this.isPlaying) {
-      foundCup.pause();
+    if (this.currentCup.isPlaying) {
       setTimeout(() => {
-        this.isPlaying = false;
-      }, 100);
+        this.currentCup.pause();
+      }, 200);
     } else {
-      foundCup.play();
       setTimeout(() => {
-        this.isPlaying = true;
-      }, 100);
+        this.currentCup.play();
+      }, 200);
     }
   }
 
