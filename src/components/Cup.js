@@ -80,55 +80,70 @@ class Cup extends Component {
       });
   }
 
+  scene;
+  camera;
+  ambientLight;
+  lights = [];
+  cupGeometry;
+  bgGeometry;
+  bgMaterial;
+  cupMaterial;
+  cupBgMaterial;
+  cupBgMesh;
+  group
+  overlayGeometry
+  overlayMaterial
+  overlayPlaneMesh
+
   renderImage(renderer, cupData) {
     const { width, height } = this.props;
 
-    var scene = new THREE.Scene();
+    this.scene = new THREE.Scene();
 
     const sceneWidth = width || cupData.scene.width;
     const sceneHeight = height || cupData.scene.height;
 
     // console.log(window.innerWidth, window.innerHeight);
     // Camera
-    var camera = new THREE.PerspectiveCamera(
+    this.camera = new THREE.PerspectiveCamera(
       cupData.camera.fov,
       sceneWidth / sceneHeight,
       0.1,
       10000
     );
-    camera.position.x = cupData.camera.posX;
-    camera.position.y = cupData.camera.posY;
-    camera.position.z = cupData.camera.posZ;
-    camera.rotation.x = deg(cupData.camera.rotX);
-    camera.rotation.y = deg(cupData.camera.rotY);
-    camera.rotation.z = deg(cupData.camera.rotZ);
+    this.camera.position.x = cupData.camera.posX;
+    this.camera.position.y = cupData.camera.posY;
+    this.camera.position.z = cupData.camera.posZ;
+    this.camera.rotation.x = deg(cupData.camera.rotX);
+    this.camera.rotation.y = deg(cupData.camera.rotY);
+    this.camera.rotation.z = deg(cupData.camera.rotZ);
     // camera.lookAt(scene.position);
 
     // Lights
-    var ambientLight = new THREE.AmbientLight(cupData.ambLight.color);
-    scene.add(ambientLight);
+    this.ambientLight = new THREE.AmbientLight(cupData.ambLight.color);
+    this.scene.add(this.ambientLight);
 
-    var lights = [];
+    // var lights = [];
     // DirectionalLight( hex, intensity )
     // PointLight( color, intensity, distance, decay )
-    lights[0] = new THREE.DirectionalLight(cupData.dirLight1.color, cupData.dirLight1.intensity);
-    lights[1] = new THREE.DirectionalLight(cupData.dirLight2.color, cupData.dirLight2.intensity);
+    this.lights[0] = new THREE.DirectionalLight(cupData.dirLight1.color, cupData.dirLight1.intensity);
+    this.lights[1] = new THREE.DirectionalLight(cupData.dirLight2.color, cupData.dirLight2.intensity);
 
-    lights[0].position.set(
+    this.lights[0].position.set(
       cupData.dirLight1.posX,
       cupData.dirLight1.posY,
       cupData.dirLight1.posZ
     );
-    lights[1].position.set(
+    this.lights[1].position.set(
       cupData.dirLight2.posX,
       cupData.dirLight2.posY,
       cupData.dirLight2.posZ
     );
 
-    scene.add(lights[0]);
-    scene.add(lights[1]);
+    this.scene.add(this.lights[0]);
+    this.scene.add(this.lights[1]);
 
-    var cupGeometry = new THREE.CylinderBufferGeometry(
+    this.cupGeometry = new THREE.CylinderBufferGeometry(
       cupData.cup.radiusTop,
       cupData.cup.radiusBottom,
       cupData.cup.height,
@@ -137,19 +152,19 @@ class Cup extends Component {
       cupData.cup.openEnded // openEnded
     );
 
-    var bgGeometry = new THREE.PlaneBufferGeometry(
+    this.bgGeometry = new THREE.PlaneBufferGeometry(
       cupData.bg.width,
       cupData.bg.height
     );
 
-    var bgMaterial = new THREE.MeshBasicMaterial({
+    this.bgMaterial = new THREE.MeshBasicMaterial({
       color: 0xffffff,
       side: THREE.DoubleSide,
       map: cupData.bgTexture,
     });
-    var bgPlaneMesh = new THREE.Mesh(bgGeometry, bgMaterial);
+    this.bgPlaneMesh = new THREE.Mesh(this.bgGeometry, this.bgMaterial);
 
-    var cupMaterial = new THREE.MeshPhongMaterial({
+    this.cupMaterial = new THREE.MeshPhongMaterial({
       color: 0xffffff,
       side: THREE.FrontSide,
       map: cupData.cupTexture,
@@ -157,7 +172,7 @@ class Cup extends Component {
       depthWrite: false,
       opacity: cupData.cup.opacity,
     });
-    var cupBgMaterial = new THREE.MeshPhongMaterial({
+    this.cupBgMaterial = new THREE.MeshPhongMaterial({
       color: 0xffffff,
       side: THREE.FrontSide,
       transparent: true,
@@ -166,45 +181,45 @@ class Cup extends Component {
     });
 
     const cupRotationOrder = 'XZY';
-    var cupMesh = new THREE.Mesh(cupGeometry);
-    cupMesh.material = cupMaterial;
-    cupMesh.position.x = cupData.cup.posX;
-    cupMesh.position.y = cupData.cup.posY;
-    cupMesh.position.z = cupData.cup.posZ;
-    cupMesh.rotation.x = deg(cupData.cup.rotX);
-    cupMesh.rotation.y = deg(cupData.cup.rotY);
-    cupMesh.rotation.z = deg(cupData.cup.rotZ);
-    cupMesh.rotation.order = cupRotationOrder;
+    this.cupMesh = new THREE.Mesh(this.cupGeometry);
+    this.cupMesh.material = this.cupMaterial;
+    this.cupMesh.position.x = cupData.cup.posX;
+    this.cupMesh.position.y = cupData.cup.posY;
+    this.cupMesh.position.z = cupData.cup.posZ;
+    this.cupMesh.rotation.x = deg(cupData.cup.rotX);
+    this.cupMesh.rotation.y = deg(cupData.cup.rotY);
+    this.cupMesh.rotation.z = deg(cupData.cup.rotZ);
+    this.cupMesh.rotation.order = cupRotationOrder;
 
-    var cupBgMesh = new THREE.Mesh(cupGeometry);
-    cupBgMesh.material = cupBgMaterial;
-    cupBgMesh.position.x = cupData.cup.posX;
-    cupBgMesh.position.y = cupData.cup.posY;
-    cupBgMesh.position.z = cupData.cup.posZ - 1;
-    cupBgMesh.rotation.x = deg(cupData.cup.rotX);
-    cupBgMesh.rotation.y = deg(cupData.cup.rotY);
-    cupBgMesh.rotation.z = deg(cupData.cup.rotZ);
-    cupBgMesh.rotation.order = cupRotationOrder;
+    this.cupBgMesh = new THREE.Mesh(this.cupGeometry);
+    this.cupBgMesh.material = this.cupBgMaterial;
+    this.cupBgMesh.position.x = cupData.cup.posX;
+    this.cupBgMesh.position.y = cupData.cup.posY;
+    this.cupBgMesh.position.z = cupData.cup.posZ - 1;
+    this.cupBgMesh.rotation.x = deg(cupData.cup.rotX);
+    this.cupBgMesh.rotation.y = deg(cupData.cup.rotY);
+    this.cupBgMesh.rotation.z = deg(cupData.cup.rotZ);
+    this.cupBgMesh.rotation.order = cupRotationOrder;
 
-    var group = new THREE.Group();
-    group.position.x = cupData.grp.posX;
-    group.position.y = cupData.grp.posY;
-    group.position.z = cupData.grp.posZ;
-    group.rotation.x = deg(cupData.grp.rotX);
-    group.rotation.y = deg(cupData.grp.rotY);
-    group.rotation.z = deg(cupData.grp.rotZ);
+    this.group = new THREE.Group();
+    this.group.position.x = cupData.grp.posX;
+    this.group.position.y = cupData.grp.posY;
+    this.group.position.z = cupData.grp.posZ;
+    this.group.rotation.x = deg(cupData.grp.rotX);
+    this.group.rotation.y = deg(cupData.grp.rotY);
+    this.group.rotation.z = deg(cupData.grp.rotZ);
 
-    group.add(bgPlaneMesh);
-    group.add(cupBgMesh);
-    group.add(cupMesh);
+    this.group.add(this.bgPlaneMesh);
+    this.group.add(this.cupBgMesh);
+    this.group.add(this.cupMesh);
 
     if (cupData.bg.overlay) {
-      var overlayGeometry = new THREE.PlaneBufferGeometry(
+      this.overlayGeometry = new THREE.PlaneBufferGeometry(
         cupData.bg.width,
         cupData.bg.height
       );
 
-      var overlayMaterial = new THREE.MeshBasicMaterial({
+      this.overlayMaterial = new THREE.MeshBasicMaterial({
         transparent: true,
         color: 0xffffff,
         // side: THREE.DoubleSide,
@@ -212,15 +227,15 @@ class Cup extends Component {
         map: cupData.overlayTexture,
         // depthWrite  : false
       });
-      var overlayPlaneMesh = new THREE.Mesh( overlayGeometry, overlayMaterial );
-      overlayPlaneMesh.position.z = 0;
+      this.overlayPlaneMesh = new THREE.Mesh(this.overlayGeometry, this.overlayMaterial);
+      this.overlayPlaneMesh.position.z = 0;
 
-      group.add(overlayPlaneMesh);
+      this.group.add(this.overlayPlaneMesh);
     }
 
-    scene.add(group);
+    this.scene.add(this.group);
 
-    renderer.render(scene, camera);
+    renderer.render(this.scene, this.camera);
 
     // cupGeometry.dispose();
     // bgGeometry.dispose();
