@@ -16,6 +16,8 @@ export default class Cups extends Component {
     this.onClickCup = this.onClickCup.bind(this);
   }
 
+  @observable isPlaying = false;
+
   @action onClickCup(keyId) {
     const { uiStore } = this.props;
     uiStore.activeKeyId = keyId;
@@ -26,12 +28,31 @@ export default class Cups extends Component {
     const { cupStore, uiStore } = this.props;
     const foundCup = cupStore.findById(uiStore.activeKeyId);
     foundCup.play();
+    this.isPlaying = true;
   }
 
   @action pause = () => {
     const { cupStore, uiStore } = this.props;
     const foundCup = cupStore.findById(uiStore.activeKeyId);
     foundCup.pause();
+    this.isPlaying = false;
+  }
+
+  @action togglePlayPause = () => {
+    const { cupStore, uiStore } = this.props;
+    const foundCup = cupStore.findById(uiStore.activeKeyId);
+
+    if (this.isPlaying) {
+      foundCup.pause();
+      setTimeout(() => {
+        this.isPlaying = false;
+      }, 100);
+    } else {
+      foundCup.play();
+      setTimeout(() => {
+        this.isPlaying = true;
+      }, 100);
+    }
   }
 
   @action onSelectClick = () => {
@@ -57,15 +78,20 @@ export default class Cups extends Component {
         <div className="MainImage">
           <Cup width={width} height={height} containerId="main"
             keyId={uiStore.activeKeyId} rotate={true}
+            onClickCup={this.togglePlayPause}
           />
 
           <div>
-            <button className="BlueButton" type="button" onClick={this.play}>
-              Play
+          {!this.isPlaying && (
+            <button className="WhiteButton" type="button" onClick={this.play}>
+              <i className="fa fa-play" aria-hidden="true"></i>
             </button>
-            <button className="BlueButton" type="button" onClick={this.pause}>
-              Pause
+          )}
+          {this.isPlaying && (
+            <button className="WhiteButton" type="button" onClick={this.pause}>
+              <i className="fa fa-pause" aria-hidden="true"></i>
             </button>
+          )}
           </div>
           <div>
             <button className="BlueButton" type="button" onClick={this.onSelectClick}>
