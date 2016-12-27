@@ -24,7 +24,7 @@ export default class ImageCrop extends Component {
     uiStore.activeScreen = 'CUPS';
   }
 
-  onBackClick() {
+  @action onBackClick = () => {
     const { uiStore } = this.props;
     uiStore.activeScreen = 'IMAGE_DROP';
   }
@@ -44,8 +44,7 @@ export default class ImageCrop extends Component {
           guides={false}
           crop={this._crop}
           style={{
-            width: '800px',
-            // height: '100%'
+            height: '500px',
           }}
         />
         <button className="BlueButton" type="button" onClick={this.onCropClick}>
