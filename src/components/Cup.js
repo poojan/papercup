@@ -70,6 +70,10 @@ class Cup extends Component {
     if (!uiStore.devMode && !uiStore.cropped) {
       return;
     }
+
+    // if (this.cupData.isPlaying) {
+      // return;
+    // }
     // console.log('POOJAN: cropped');
     this.cupData
       .load()
@@ -80,37 +84,49 @@ class Cup extends Component {
       });
   }
 
-  scene;
-  camera;
-  ambientLight;
-  lights = [];
-  cupGeometry;
-  bgGeometry;
-  bgMaterial;
-  cupMaterial;
-  cupBgMaterial;
-  cupBgMesh;
-  group
-  overlayGeometry
-  overlayMaterial
-  overlayPlaneMesh
+  @observable scene;
+  @observable camera;
+  @observable ambientLight;
+  @observable lights = [];
+  @observable cupGeometry;
+  @observable bgGeometry;
+  @observable bgMaterial;
+  @observable cupMaterial;
+  @observable cupBgMaterial;
+  @observable cupBgMesh;
+  @observable group
+  @observable overlayGeometry
+  @observable overlayMaterial
+  @observable overlayPlaneMesh
+
 
   renderImage(renderer, cupData) {
     const { width, height } = this.props;
+    const isPlaying = cupData.isPlaying;
+    // const isPlaying = false;
 
-    this.scene = new THREE.Scene();
+    // if (!this.scene) {
+    if (!isPlaying) {
+      this.scene = new THREE.Scene();
+    }
+    // }
 
     const sceneWidth = width || cupData.scene.width;
     const sceneHeight = height || cupData.scene.height;
 
     // console.log(window.innerWidth, window.innerHeight);
     // Camera
-    this.camera = new THREE.PerspectiveCamera(
-      cupData.camera.fov,
-      sceneWidth / sceneHeight,
-      0.1,
-      10000
-    );
+    // if (!this.camera) {
+    if (!isPlaying) {
+      this.camera = new THREE.PerspectiveCamera(
+        cupData.camera.fov,
+        sceneWidth / sceneHeight,
+        0.1,
+        10000
+      );
+    }
+    // }
+
     this.camera.position.x = cupData.camera.posX;
     this.camera.position.y = cupData.camera.posY;
     this.camera.position.z = cupData.camera.posZ;
@@ -120,14 +136,29 @@ class Cup extends Component {
     // camera.lookAt(scene.position);
 
     // Lights
-    this.ambientLight = new THREE.AmbientLight(cupData.ambLight.color);
-    this.scene.add(this.ambientLight);
+    // if (!this.ambientLight) {
+    if (!isPlaying) {
+      this.ambientLight = new THREE.AmbientLight(cupData.ambLight.color);
+      this.scene.add(this.ambientLight);
+    }
+    // }
 
     // var lights = [];
+    if (!this.lights) {
+      this.lights = [];
+    }
     // DirectionalLight( hex, intensity )
     // PointLight( color, intensity, distance, decay )
-    this.lights[0] = new THREE.DirectionalLight(cupData.dirLight1.color, cupData.dirLight1.intensity);
-    this.lights[1] = new THREE.DirectionalLight(cupData.dirLight2.color, cupData.dirLight2.intensity);
+    // if (!this.lights[0]) {
+    if (!isPlaying) {
+      this.lights[0] = new THREE.DirectionalLight(cupData.dirLight1.color, cupData.dirLight1.intensity);
+    }
+    // }
+    // if (!this.lights[1]) {
+    if (!isPlaying) {
+      this.lights[1] = new THREE.DirectionalLight(cupData.dirLight2.color, cupData.dirLight2.intensity);
+    }
+    // }
 
     this.lights[0].position.set(
       cupData.dirLight1.posX,
@@ -143,45 +174,75 @@ class Cup extends Component {
     this.scene.add(this.lights[0]);
     this.scene.add(this.lights[1]);
 
-    this.cupGeometry = new THREE.CylinderBufferGeometry(
-      cupData.cup.radiusTop,
-      cupData.cup.radiusBottom,
-      cupData.cup.height,
-      40, // radialSegments={40}
-      5, // heightSegments={5}
-      cupData.cup.openEnded // openEnded
-    );
+    // if (!this.cupGeometry) {
+    if (!isPlaying) {
+      this.cupGeometry = new THREE.CylinderBufferGeometry(
+        cupData.cup.radiusTop,
+        cupData.cup.radiusBottom,
+        cupData.cup.height,
+        40, // radialSegments={40}
+        5, // heightSegments={5}
+        cupData.cup.openEnded // openEnded
+      );
+    }
+    // }
 
-    this.bgGeometry = new THREE.PlaneBufferGeometry(
-      cupData.bg.width,
-      cupData.bg.height
-    );
+    // if (!this.bgGeometry) {
+    if (!isPlaying) {
+      this.bgGeometry = new THREE.PlaneBufferGeometry(
+        cupData.bg.width,
+        cupData.bg.height
+      );
+    }
+    // }
 
-    this.bgMaterial = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      side: THREE.DoubleSide,
-      map: cupData.bgTexture,
-    });
-    this.bgPlaneMesh = new THREE.Mesh(this.bgGeometry, this.bgMaterial);
+    // if (!this.bgMaterial) {
+    if (!isPlaying) {
+      this.bgMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffffff,
+        side: THREE.DoubleSide,
+        map: cupData.bgTexture,
+      });
+    }
+    // }
 
-    this.cupMaterial = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
-      side: THREE.FrontSide,
-      map: cupData.cupTexture,
-      transparent: true,
-      depthWrite: false,
-      opacity: cupData.cup.opacity,
-    });
-    this.cupBgMaterial = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
-      side: THREE.FrontSide,
-      transparent: true,
-      depthWrite: false,
-      opacity: cupData.cup.opacity,
-    });
+    // if (!this.bgPlaneMesh) {
+    if (!isPlaying) {
+      this.bgPlaneMesh = new THREE.Mesh(this.bgGeometry, this.bgMaterial);
+    }
+    // }
+
+    // if (!this.cupMaterial) {
+    if (!isPlaying) {
+      this.cupMaterial = new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        side: THREE.FrontSide,
+        map: cupData.cupTexture,
+        transparent: true,
+        depthWrite: false,
+        opacity: cupData.cup.opacity,
+      });
+    }
+    // }
+
+    // if (!this.cupBgMaterial) {
+    if (!isPlaying) {
+      this.cupBgMaterial = new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        side: THREE.FrontSide,
+        transparent: true,
+        depthWrite: false,
+        opacity: cupData.cup.opacity,
+      });
+    }
+    // }
 
     const cupRotationOrder = 'XZY';
-    this.cupMesh = new THREE.Mesh(this.cupGeometry);
+    // if (!this.cupMesh) {
+    if (!isPlaying) {
+      this.cupMesh = new THREE.Mesh(this.cupGeometry);
+    }
+    // }
     this.cupMesh.material = this.cupMaterial;
     this.cupMesh.position.x = cupData.cup.posX;
     this.cupMesh.position.y = cupData.cup.posY;
@@ -191,7 +252,11 @@ class Cup extends Component {
     this.cupMesh.rotation.z = deg(cupData.cup.rotZ);
     this.cupMesh.rotation.order = cupRotationOrder;
 
-    this.cupBgMesh = new THREE.Mesh(this.cupGeometry);
+    // if (!this.cupBgMesh) {
+    if (!isPlaying) {
+      this.cupBgMesh = new THREE.Mesh(this.cupGeometry);
+    }
+    // }
     this.cupBgMesh.material = this.cupBgMaterial;
     this.cupBgMesh.position.x = cupData.cup.posX;
     this.cupBgMesh.position.y = cupData.cup.posY;
@@ -201,7 +266,11 @@ class Cup extends Component {
     this.cupBgMesh.rotation.z = deg(cupData.cup.rotZ);
     this.cupBgMesh.rotation.order = cupRotationOrder;
 
-    this.group = new THREE.Group();
+    // if (!this.group) {
+    if (!isPlaying) {
+      this.group = new THREE.Group();
+    }
+    // }
     this.group.position.x = cupData.grp.posX;
     this.group.position.y = cupData.grp.posY;
     this.group.position.z = cupData.grp.posZ;
@@ -214,20 +283,34 @@ class Cup extends Component {
     this.group.add(this.cupMesh);
 
     if (cupData.bg.overlay) {
-      this.overlayGeometry = new THREE.PlaneBufferGeometry(
-        cupData.bg.width,
-        cupData.bg.height
-      );
+      // if (!this.overlayGeometry) {
+    if (!isPlaying) {
+        this.overlayGeometry = new THREE.PlaneBufferGeometry(
+          cupData.bg.width,
+          cupData.bg.height
+        );
+    }
+      // }
 
-      this.overlayMaterial = new THREE.MeshBasicMaterial({
-        transparent: true,
-        color: 0xffffff,
-        // side: THREE.DoubleSide,
-        side: THREE.FrontSide,
-        map: cupData.overlayTexture,
-        // depthWrite  : false
-      });
-      this.overlayPlaneMesh = new THREE.Mesh(this.overlayGeometry, this.overlayMaterial);
+      // if (!this.overlayMaterial) {
+    //
+      if (!isPlaying) {
+        this.overlayMaterial = new THREE.MeshBasicMaterial({
+          transparent: true,
+          color: 0xffffff,
+          // side: THREE.DoubleSide,
+          side: THREE.FrontSide,
+          map: cupData.overlayTexture,
+          // depthWrite  : false
+        });
+      }
+      // }
+
+      // if (!this.overlayPlaneMesh) {
+      if (!isPlaying) {
+        this.overlayPlaneMesh = new THREE.Mesh(this.overlayGeometry, this.overlayMaterial);
+      }
+      // }
       this.overlayPlaneMesh.position.z = 0;
 
       this.group.add(this.overlayPlaneMesh);
@@ -237,11 +320,15 @@ class Cup extends Component {
 
     renderer.render(this.scene, this.camera);
 
-    // cupGeometry.dispose();
-    // bgGeometry.dispose();
-    // bgMaterial.dispose();
-    // cupMaterial.dispose();
-    // cupBgMaterial.dispose();
+    // renderer.update();
+    // this.scene.update();
+
+    // this.scene.remove(this.group);
+    // this.cupGeometry.dispose();
+    // this.bgGeometry.dispose();
+    // this.bgMaterial.dispose();
+    // this.cupMaterial.dispose();
+    // this.cupBgMaterial.dispose();
 
     // bgPlaneMesh.dispose();
     // cupMesh.dispose();
