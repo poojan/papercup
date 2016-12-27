@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Cups from './components/Cups';
 import './index.css';
 import ImageDrop from './components/ImageDrop';
+import ImageUploading from './components/ImageUploading';
 import ImageCrop from './components/ImageCrop';
 import { Provider, observer } from 'mobx-react';
 
@@ -32,6 +33,7 @@ const cupStore = new CupStore([
 const Router = observer(({ uiStore }) => (
   <div className="root">
     {uiStore.activeScreen === 'IMAGE_DROP' && <ImageDrop />}
+    {uiStore.activeScreen === 'IMAGE_UPLOADING' && <ImageUploading />}
     {uiStore.activeScreen === 'IMAGE_CROP' && <ImageCrop />}
     {uiStore.activeScreen === 'CUPS' && <Cups />}
   </div>

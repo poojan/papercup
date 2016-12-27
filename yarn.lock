@@ -4266,6 +4266,10 @@ react-modal@^1.6.4:
     exenv "1.2.0"
     lodash.assign "^4.2.0"
 
+react-spinner@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/react-spinner/-/react-spinner-0.2.6.tgz#3aec5ffd6b0bf477c6939930bd853f3f9bca3129"
+
 react@^15.0.0, react@^15.4.1:
   version "15.4.1"
   resolved "https://registry.yarnpkg.com/react/-/react-15.4.1.tgz#498e918602677a3983cd0fd206dfe700389a0dd6"

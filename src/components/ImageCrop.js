@@ -24,6 +24,11 @@ export default class ImageCrop extends Component {
     uiStore.activeScreen = 'CUPS';
   }
 
+  onBackClick() {
+    const { uiStore } = this.props;
+    uiStore.activeScreen = 'IMAGE_DROP';
+  }
+
   render() {
     const { uiStore } = this.props;
     console.log('uiStore.imagePath', uiStore.imagePath);
@@ -45,6 +50,9 @@ export default class ImageCrop extends Component {
         />
         <button className="BlueButton" type="button" onClick={this.onCropClick}>
           Crop
+        </button>
+        <button className="BlueButton" type="button" onClick={this.onBackClick}>
+          Back
         </button>
       </div>
     );

@@ -9,10 +9,9 @@ import 'react-spinner/react-spinner.css';
 
 @inject('uiStore')
 @observer
-export default class ImageDrop extends Component {
+export default class ImageUploading extends Component {
   @action onDrop = (acceptedFiles) => {
     const { uiStore } = this.props;
-    uiStore.activeScreen = 'IMAGE_UPLOADING';
     this.files = acceptedFiles;
 
     const req = request.post(`${BASE_URL}/upload`);
@@ -29,13 +28,18 @@ export default class ImageDrop extends Component {
     });
   }
 
-  onOpenClick = () => {
-    this.dropzone.open();
+  @action onBackClick = () => {
+    const { uiStore } = this.props;
+    uiStore.activeScreen = 'IMAGE_DROP';
+    console.log('onBackClick', uiStore.activeScreen);
   }
 
   render() {
     return (
-      <div className="ImageDrop">
+      <div className="ImageUploading">
+        <div className="uploading">
+          Your image <br />is being <br />uploaded ...
+        </div>
         <Dropzone
           ref={(node) => { this.dropzone = node; }}
           onDrop={this.onDrop}
@@ -44,8 +48,8 @@ export default class ImageDrop extends Component {
         >
           <img src="img/bg/Ray white 3D Mockup.jpg" width="800" alt="cup" />
         </Dropzone>
-        <button className="BlueButton" type="button" onClick={this.onOpenClick}>
-          Upload Image
+        <button className="BlueButton" type="button" onClick={this.onBackClick}>
+          Back
         </button>
       </div>
     );

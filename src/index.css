@@ -37,11 +37,41 @@ body {
   margin: 0 auto;
 }
 
-.ImageDrop {
+.ImageDrop,
+.ImageUploading {
+  position: relative;
   cursor: pointer;
   display: inline-block;
   vertical-align: top;
   /* width: 200px; height: 200px; border-width: 2px; border-color: rgb(102, 102, 102); border-style: dashed; border-radius: 5px; */
+}
+.ImageUploading img {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+.ImageUploading .uploading {
+  color: #333;
+  position: absolute;
+  /* left: 0; */
+  /* left: 100px; */
+  top: 200px;
+  /* height: 100%; */
+  z-index: 999;
+  width: 100%;
+  /* background: rgba(255, 255, 255, 0.8); */
+  /* background: rgba(0, 0, 0, 0.1); */
+  font-size: 30px;
+  text-transform: uppercase;
+  /* padding-top: 200px; */
+  /* padding: 100px 40px; */
+  text-align: center;
+  /* vertical-align: middle; */
+  /* background: red; */
+
 }
 
 .Thumbnails .Cup {
@@ -68,4 +98,11 @@ body {
 }
 .Thumbnails canvas {
   display: inline-block;
+}
+.react-spinner {
+  margin: 100px;
+  z-index: 999;
+}
+.react-spinner_bar {
+  background-color: #333 !important;
 }
