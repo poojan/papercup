@@ -34,6 +34,15 @@ export default class Cups extends Component {
     foundCup.pause();
   }
 
+  @action onSelectClick = () => {
+    const { uiStore } = this.props;
+    uiStore.activeScreen = 'IMAGE_DROP';
+  }
+  @action onEditClick = () => {
+    const { uiStore } = this.props;
+    uiStore.activeScreen = 'IMAGE_CROP';
+  }
+
   render() {
     const { uiStore, cupStore } = this.props;
     const scale = 1;
