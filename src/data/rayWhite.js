@@ -31,7 +31,7 @@ export default {
     lookAtX: 40,
     lookAtY: 0,
     lookAtZ: 0,
-    intensity: 0,
+    intensity: 0.3,
   },
 
   camera: {
