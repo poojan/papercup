@@ -3,6 +3,8 @@ import { observer, inject } from 'mobx-react';
 import { action } from 'mobx';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 @inject('uiStore')
 @observer
@@ -29,6 +31,10 @@ export default class ImageCrop extends Component {
     uiStore.activeScreen = 'IMAGE_DROP';
   }
 
+  @action onSliderChange = (val) => {
+    this.refs.cropper.scale(val);
+  }
+
   render() {
     const { uiStore } = this.props;
     console.log('uiStore.imagePath', uiStore.imagePath);
@@ -47,6 +53,14 @@ export default class ImageCrop extends Component {
           style={{
             height: '500px',
           }}
+        />
+        <Slider
+          min={0.5}
+          max={4}
+          step={0.01}
+          defaultValue={1}
+          onChange={this.onSliderChange}
+          className="Slider"
         />
         <button className="BlueButton" type="button" onClick={this.onCropClick}>
           Crop
