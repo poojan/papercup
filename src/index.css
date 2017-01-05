@@ -111,3 +111,10 @@ body {
   background-color: white;
   background-image: none !important;
 }
+
+.fa-play.reverse {
+  -webkit-transform:rotateY(180deg);
+  -moz-transform:rotateY(180deg);
+  -o-transform:rotateY(180deg);
+  -ms-transform:rotateY(180deg);
+}

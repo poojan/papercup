@@ -36,7 +36,7 @@ export default class ImageCrop extends Component {
     // if (!uiStore.imagePath) { return <div />; }
 
     return (
-      <div style={{ width: '1000px' }}>
+      <div>
         <Cropper
           className="Cropper"
           ref={'cropper'}

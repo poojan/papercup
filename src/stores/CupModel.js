@@ -265,10 +265,11 @@ class CupModel {
 
   @observable isPlaying = false;
   req;
+  @observable rotateDirection = 1;
 
   @action rotate() {
     // console.log('this.cup', this.cup.rotY);
-    this.cup.rotY += deg(20);
+    this.cup.rotY += deg(20 * this.rotateDirection);
     this.req = requestAnimationFrame(this.rotate);
   }
   @action play() {
@@ -277,6 +278,16 @@ class CupModel {
     this.isPlaying = true;
     this.req = requestAnimationFrame(this.rotate);
   }
+
+  @action playForward() {
+    this.rotateDirection = 1;
+    this.play();
+  }
+  @action playReverse() {
+    this.rotateDirection = -1;
+    this.play();
+  }
+
   @action pause() {
     window.cancelAnimationFrame(this.req);
     this.isPlaying = false;

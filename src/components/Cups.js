@@ -37,8 +37,12 @@ export default class Cups extends Component {
     return this.currentCup.isPlaying;
   }
 
-  @action play = () => {
-    this.currentCup.play();
+  @action playForward = () => {
+    this.currentCup.playForward();
+  }
+
+  @action playReverse = () => {
+    this.currentCup.playReverse();
   }
 
   @action pause = () => {
@@ -54,9 +58,10 @@ export default class Cups extends Component {
         this.currentCup.pause();
       }, 200);
     } else {
-      setTimeout(() => {
-        this.currentCup.play();
-      }, 200);
+      // Not relevant now as toggle behaviour for play/pause has been changed.
+      // setTimeout(() => {
+        // this.currentCup.playForward();
+      // }, 200);
     }
   }
 
@@ -88,9 +93,15 @@ export default class Cups extends Component {
 
           <div>
           {!this.isPlaying && (
-            <button className="WhiteButton" type="button" onClick={this.play}>
-              <i className="fa fa-play" aria-hidden="true"></i>
-            </button>
+            <div>
+              <button className="WhiteButton" type="button" onClick={this.playReverse}>
+                <i className="fa fa-play reverse" aria-hidden="true"></i>
+              </button>
+
+              <button className="WhiteButton" type="button" onClick={this.playForward}>
+                <i className="fa fa-play" aria-hidden="true"></i>
+              </button>
+            </div>
           )}
           {this.isPlaying && (
             <button className="WhiteButton" type="button" onClick={this.pause}>
