@@ -142,3 +142,7 @@ body {
 .Slider .rc-slider-handle {
   border-color: #bbb;
 }
+
+.Grid .Cup {
+  display: inline-block;
+}
