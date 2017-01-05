@@ -74,6 +74,11 @@ export default class Cups extends Component {
     uiStore.activeScreen = 'IMAGE_CROP';
   }
 
+  @action onEmailClick = () => {
+    const { uiStore } = this.props;
+    uiStore.activeScreen = 'EMAIL_MOCKUPS';
+  }
+
   render() {
     const { uiStore, cupStore } = this.props;
     const scale = 1;

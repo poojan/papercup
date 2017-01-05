@@ -5,6 +5,7 @@ import './index.css';
 import ImageDrop from './components/ImageDrop';
 import ImageUploading from './components/ImageUploading';
 import ImageCrop from './components/ImageCrop';
+import EmailMockups from './components/EmailMockups';
 import { Provider, observer } from 'mobx-react';
 
 import UiStore from './stores/UiStore';
@@ -36,6 +37,7 @@ const Router = observer(({ uiStore }) => (
     {uiStore.activeScreen === 'IMAGE_UPLOADING' && <ImageUploading />}
     {uiStore.activeScreen === 'IMAGE_CROP' && <ImageCrop />}
     {uiStore.activeScreen === 'CUPS' && <Cups />}
+    {uiStore.activeScreen === 'EMAIL_MOCKUPS' && <EmailMockups />}
   </div>
 ));
 
