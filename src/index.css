@@ -106,3 +106,8 @@ body {
 .react-spinner_bar {
   background-color: #333 !important;
 }
+
+.cropper-bg {
+  background-color: white;
+  background-image: none !important;
+}
