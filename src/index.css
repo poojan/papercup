@@ -15,6 +15,17 @@ body {
   font-family: Helvetica, "Trebuchet MS", Arial, sans-serif;
   margin: 5px;
 }
+.OrangeButton {
+  background: #eb7d3c;
+  color: white;
+  padding: 10px 40px;
+  text-transform: uppercase;
+  border: 0;
+  font-size: 15px;
+  font-weight: 100;
+  font-family: Helvetica, "Trebuchet MS", Arial, sans-serif;
+  margin: 5px;
+}
 .WhiteButton {
   color: #888;
   background: #f6f6f6;

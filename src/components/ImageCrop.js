@@ -65,7 +65,7 @@ export default class ImageCrop extends Component {
         <button className="BlueButton" type="button" onClick={this.onBackClick}>
           Select New Cup Image
         </button>
-        <button className="BlueButton" type="button" onClick={this.onCropClick}>
+        <button className="OrangeButton" type="button" onClick={this.onCropClick}>
           Crop Image
         </button>
       </div>
