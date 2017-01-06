@@ -89,7 +89,7 @@ export default class Cups extends Component {
 
           // <DatGui store={cupStore} />
     return (
-      <div className="Row" style={{ width: "1000px" }}>
+      <div className="Row">
         <div className="MainImage">
           <Cup width={width} height={height} containerId="main"
             keyId={uiStore.activeKeyId} rotate={true}
