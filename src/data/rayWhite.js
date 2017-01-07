@@ -1,4 +1,4 @@
-const bgImage = 'img/bg/Ray white 3D Mockup.jpg';
+const bgImage = 'img/bg/ray_white.jpg';
 // const cupImage = 'img/user/cuplogo.png';
 const cupImage = 'img/user/Spotify_variante_(logo).png';
 const overlayImage = null;

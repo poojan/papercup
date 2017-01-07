@@ -1,5 +1,5 @@
 // const bgImage = 'img/bg/stock-photo-paper-cup-of-coffee-on-wooden-table-closeup-465827084.jpg';
-const bgImage = 'img/bg/shutterstock_465827084.jpg';
+const bgImage = 'img/bg/wooden_table.jpg';
 const cupImage = 'img/user/cuplogo.png';
 // const cupImage = 'img/user/Spotify_variante_\(logo\).png';
 const overlayImage = null;

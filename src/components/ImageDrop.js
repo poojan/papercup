@@ -38,7 +38,7 @@ export default class ImageDrop extends Component {
           multiple={false}
           style={{}}
         >
-          <img src="img/bg/Ray white 3D Mockup.jpg" width="800" alt="cup" />
+          <img src="img/bg/ray_white.jpg" width="800" alt="cup" />
         </Dropzone>
         <button className="BlueButton" type="button" onClick={this.onOpenClick}>
           Upload Image

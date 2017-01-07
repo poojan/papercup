@@ -1,5 +1,5 @@
 // const bgImage = 'img/bg/stock-photo-prepares-espresso-147372080.jpg';
-const bgImage = 'img/bg/shutterstock_147372080.jpg';
+const bgImage = 'img/bg/espresso.jpg';
 const cupImage = 'img/user/cuplogo.png';
 // const cupImage = 'img/user/Spotify_variante_\(logo\).png';
 const overlayImage = null;
