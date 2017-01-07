@@ -7,7 +7,6 @@ class UiStore {
   @observable imagePath = '';
   @observable cropped = '';
   @observable activeScreen  = activeScreen;
-  @observable activeScreen  = 'IMAGE_DROP';
   // @observable activeScreen  = 'IMAGE_UPLOADING';
   // @observable activeScreen  = 'CUPS';
   @observable activeKeyId  = 'rayWhite';

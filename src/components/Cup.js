@@ -27,6 +27,7 @@ class Cup extends Component {
     this.cupData = cupStore.findById(keyId);
     if (!this.cupData) { return; }
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
+    this.renderer.setClearColor( 0xffffff, 1);
     this.renderer.setSize(width || this.cupData.scene.width, height || this.cupData.scene.height);
 
     this.renderer.domElement.addEventListener('mousedown', this.onClickCup, false);
