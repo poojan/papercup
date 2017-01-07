@@ -18,9 +18,7 @@ import data4 from './data/woodenTableCloseup';
 import data5 from './data/handSmartPhone';
 import data6 from './data/preparesEspresso';
 
-import CupModel from './stores/CupModel';
 import CupStore from './stores/CupStore';
-// const cupStore = new CupModel();
 
 const cupStore = new CupStore([
   data1,
@@ -44,7 +42,6 @@ const Router = observer(({ uiStore }) => (
 ReactDOM.render(
   <Provider
     cupStore={cupStore}
-    // cupStore={cupStore}
     uiStore={uiStore}
   >
     <Router uiStore={uiStore} />

@@ -12,14 +12,10 @@ export default class Cups extends Component {
   constructor(props) {
     super(props);
 
-    // this.keyId = "rayWhite";
-
     const { cupStore, uiStore } = props;
     this.onClickCup = this.onClickCup.bind(this);
     this.currentCup = cupStore.findById(uiStore.activeKeyId);
   }
-
-  // @observable isPlaying = false;
 
   @action onClickCup(keyId) {
     this.pause();
@@ -32,8 +28,6 @@ export default class Cups extends Component {
   }
 
   @computed get isPlaying() {
-    // const { cupStore, uiStore } = this.props;
-    // const currentCup = cupStore.findById(uiStore.activeKeyId);
     return this.currentCup.isPlaying;
   }
 
@@ -46,10 +40,7 @@ export default class Cups extends Component {
   }
 
   @action pause = () => {
-    // const { cupStore, uiStore } = this.props;
-    // const currentCup = cupStore.findById(uiStore.activeKeyId);
     this.currentCup.pause();
-    // this.isPlaying = false;
   }
 
   @action togglePlayPause = () => {
@@ -57,11 +48,6 @@ export default class Cups extends Component {
       setTimeout(() => {
         this.currentCup.pause();
       }, 200);
-    } else {
-      // Not relevant now as toggle behaviour for play/pause has been changed.
-      // setTimeout(() => {
-        // this.currentCup.playForward();
-      // }, 200);
     }
   }
 
@@ -87,7 +73,6 @@ export default class Cups extends Component {
 
     if (uiStore.activeScreen !== 'CUPS') { return <div />; }
 
-          // <DatGui store={cupStore} />
     return (
       <div className="Row">
         <div className="MainImage">

@@ -6,7 +6,6 @@ class CupStore {
 
   constructor(items) {
     this.items = this.resolveModels(items);
-    console.log(this.items);
   }
 
   resolveModel = item => new CupModel(item);

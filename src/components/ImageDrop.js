@@ -4,8 +4,6 @@ import request from 'superagent';
 import { observer, inject } from 'mobx-react';
 import { action } from 'mobx';
 import { BASE_URL } from '../config';
-import Spinner from 'react-spinner';
-import 'react-spinner/react-spinner.css';
 
 @inject('uiStore')
 @observer
@@ -22,8 +20,6 @@ export default class ImageDrop extends Component {
     });
 
     req.end((err, res) => {
-      // console.log('done', res);
-      // this.uploadPath = `${BASE_URL}/${res.body.path}`;
       uiStore.imagePath = `${BASE_URL}/${res.body.path}`;
       uiStore.activeScreen = 'IMAGE_CROP';
     });

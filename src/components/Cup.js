@@ -20,20 +20,13 @@ class Cup extends Component {
     super(props);
 
     this.onClickCup = this.onClickCup.bind(this);
-    console.log('CUP CONSTRUCTOR');
   }
 
   componentDidMount() {
-    console.log('CUP DID_MOUNT');
-    // console.log('POOJAN: Cup componentDidMount');
     const { cupStore, uiStore, width, height, keyId, containerId } = this.props;
     this.cupData = cupStore.findById(keyId);
-    console.log('cupData', keyId, this.cupData);
     if (!this.cupData) { return; }
-    // cupData.setData(data);
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    // this.renderer.setSize(window.innerWidth, window.innerHeight);
-    // const height = cupData.scene.width * window.innerHeight/window.innerWidth;
     this.renderer.setSize(width || this.cupData.scene.width, height || this.cupData.scene.height);
 
     this.renderer.domElement.addEventListener('mousedown', this.onClickCup, false);
@@ -41,14 +34,9 @@ class Cup extends Component {
     document.getElementById(containerId).appendChild(this.renderer.domElement);
 
     if (!uiStore.devMode && !uiStore.cropped) { return; }
-    // console.log('POOJAN: cropped');
     this.cupData.load()
       .then(() => this.cupData.loadCupTexture(uiStore.cropped))
-    // this
-      // .load()
-      // .then(cupData.loadCupTexture)
       .then(() => {
-        // console.log('POOJAN: loaded');
         this.renderImage(this.renderer, this.cupData);
       });
   }
@@ -58,28 +46,18 @@ class Cup extends Component {
   }
 
   componentWillReact() {
-    // console.log('POOJAN: Cup componentWillReact');
     const { uiStore, cupStore, keyId } = this.props;
     this.cupData = cupStore.findById(keyId);
-    // console.log('willReact', this.cupData.cup.rotY);
 
     if (!this.renderer) { return; }
-    // this.renderImage(this.renderer, this.cupData);
 
-    // console.log('POOJAN: componentWillReact');
     if (!uiStore.devMode && !uiStore.cropped) {
       return;
     }
 
-    // if (this.cupData.isPlaying) {
-      // return;
-    // }
-    // console.log('POOJAN: cropped');
     this.cupData
       .load()
-      // .then(() => cupData.loadCupTexture(uiStore.cropped))
       .then(() => {
-        // console.log('POOJAN: componentWillReact loaded');
         this.renderImage(this.renderer, this.cupData);
       });
   }
@@ -103,20 +81,15 @@ class Cup extends Component {
   renderImage(renderer, cupData) {
     const { width, height } = this.props;
     const isPlaying = cupData.isPlaying;
-    // const isPlaying = false;
 
-    // if (!this.scene) {
     if (!isPlaying) {
       this.scene = new THREE.Scene();
     }
-    // }
 
     const sceneWidth = width || cupData.scene.width;
     const sceneHeight = height || cupData.scene.height;
 
-    // console.log(window.innerWidth, window.innerHeight);
     // Camera
-    // if (!this.camera) {
     if (!isPlaying) {
       this.camera = new THREE.PerspectiveCamera(
         cupData.camera.fov,
@@ -125,7 +98,6 @@ class Cup extends Component {
         10000
       );
     }
-    // }
 
     this.camera.position.x = cupData.camera.posX;
     this.camera.position.y = cupData.camera.posY;
@@ -136,29 +108,22 @@ class Cup extends Component {
     // camera.lookAt(scene.position);
 
     // Lights
-    // if (!this.ambientLight) {
     if (!isPlaying) {
       this.ambientLight = new THREE.AmbientLight(cupData.ambLight.color);
       this.scene.add(this.ambientLight);
     }
-    // }
 
-    // var lights = [];
     if (!this.lights) {
       this.lights = [];
     }
     // DirectionalLight( hex, intensity )
     // PointLight( color, intensity, distance, decay )
-    // if (!this.lights[0]) {
     if (!isPlaying) {
       this.lights[0] = new THREE.DirectionalLight(cupData.dirLight1.color, cupData.dirLight1.intensity);
     }
-    // }
-    // if (!this.lights[1]) {
     if (!isPlaying) {
       this.lights[1] = new THREE.DirectionalLight(cupData.dirLight2.color, cupData.dirLight2.intensity);
     }
-    // }
 
     this.lights[0].position.set(
       cupData.dirLight1.posX,
@@ -174,7 +139,6 @@ class Cup extends Component {
     this.scene.add(this.lights[0]);
     this.scene.add(this.lights[1]);
 
-    // if (!this.cupGeometry) {
     if (!isPlaying) {
       this.cupGeometry = new THREE.CylinderBufferGeometry(
         cupData.cup.radiusTop,
@@ -185,18 +149,14 @@ class Cup extends Component {
         cupData.cup.openEnded // openEnded
       );
     }
-    // }
 
-    // if (!this.bgGeometry) {
     if (!isPlaying) {
       this.bgGeometry = new THREE.PlaneBufferGeometry(
         cupData.bg.width,
         cupData.bg.height
       );
     }
-    // }
 
-    // if (!this.bgMaterial) {
     if (!isPlaying) {
       this.bgMaterial = new THREE.MeshBasicMaterial({
         color: 0xffffff,
@@ -204,15 +164,11 @@ class Cup extends Component {
         map: cupData.bgTexture,
       });
     }
-    // }
 
-    // if (!this.bgPlaneMesh) {
     if (!isPlaying) {
       this.bgPlaneMesh = new THREE.Mesh(this.bgGeometry, this.bgMaterial);
     }
-    // }
 
-    // if (!this.cupMaterial) {
     if (!isPlaying) {
       this.cupMaterial = new THREE.MeshPhongMaterial({
         color: 0xffffff,
@@ -223,9 +179,7 @@ class Cup extends Component {
         opacity: cupData.cup.opacity,
       });
     }
-    // }
 
-    // if (!this.cupBgMaterial) {
     if (!isPlaying) {
       this.cupBgMaterial = new THREE.MeshPhongMaterial({
         color: 0xffffff,
@@ -235,14 +189,11 @@ class Cup extends Component {
         opacity: cupData.cup.opacity,
       });
     }
-    // }
 
     const cupRotationOrder = 'XZY';
-    // if (!this.cupMesh) {
     if (!isPlaying) {
       this.cupMesh = new THREE.Mesh(this.cupGeometry);
     }
-    // }
     this.cupMesh.material = this.cupMaterial;
     this.cupMesh.position.x = cupData.cup.posX;
     this.cupMesh.position.y = cupData.cup.posY;
@@ -252,11 +203,9 @@ class Cup extends Component {
     this.cupMesh.rotation.z = deg(cupData.cup.rotZ);
     this.cupMesh.rotation.order = cupRotationOrder;
 
-    // if (!this.cupBgMesh) {
     if (!isPlaying) {
       this.cupBgMesh = new THREE.Mesh(this.cupGeometry);
     }
-    // }
     this.cupBgMesh.material = this.cupBgMaterial;
     this.cupBgMesh.position.x = cupData.cup.posX;
     this.cupBgMesh.position.y = cupData.cup.posY;
@@ -266,11 +215,9 @@ class Cup extends Component {
     this.cupBgMesh.rotation.z = deg(cupData.cup.rotZ);
     this.cupBgMesh.rotation.order = cupRotationOrder;
 
-    // if (!this.group) {
     if (!isPlaying) {
       this.group = new THREE.Group();
     }
-    // }
     this.group.position.x = cupData.grp.posX;
     this.group.position.y = cupData.grp.posY;
     this.group.position.z = cupData.grp.posZ;
@@ -283,17 +230,13 @@ class Cup extends Component {
     this.group.add(this.cupMesh);
 
     if (cupData.bg.overlay) {
-      // if (!this.overlayGeometry) {
-    if (!isPlaying) {
-        this.overlayGeometry = new THREE.PlaneBufferGeometry(
-          cupData.bg.width,
-          cupData.bg.height
-        );
-    }
-      // }
+      if (!isPlaying) {
+          this.overlayGeometry = new THREE.PlaneBufferGeometry(
+            cupData.bg.width,
+            cupData.bg.height
+          );
+      }
 
-      // if (!this.overlayMaterial) {
-    //
       if (!isPlaying) {
         this.overlayMaterial = new THREE.MeshBasicMaterial({
           transparent: true,
@@ -304,13 +247,10 @@ class Cup extends Component {
           // depthWrite  : false
         });
       }
-      // }
 
-      // if (!this.overlayPlaneMesh) {
       if (!isPlaying) {
         this.overlayPlaneMesh = new THREE.Mesh(this.overlayGeometry, this.overlayMaterial);
       }
-      // }
       this.overlayPlaneMesh.position.z = 0;
 
       this.group.add(this.overlayPlaneMesh);
@@ -319,39 +259,15 @@ class Cup extends Component {
     this.scene.add(this.group);
 
     renderer.render(this.scene, this.camera);
-
-    // renderer.update();
-    // this.scene.update();
-
-    // this.scene.remove(this.group);
-    // this.cupGeometry.dispose();
-    // this.bgGeometry.dispose();
-    // this.bgMaterial.dispose();
-    // this.cupMaterial.dispose();
-    // this.cupBgMaterial.dispose();
-
-    // bgPlaneMesh.dispose();
-    // cupMesh.dispose();
-    // cupBgMesh.dispose();
-    // group.dispose();
   }
 
   @action onClickCup() {
     const { onClickCup, keyId } = this.props;
-    // console.log('onClickCup', keyId);
 
-    // const anim = action(() => {
-      // cupData.cup.rotY += deg(30);
-      // requestAnimationFrame(anim);
-    // });
-    // requestAnimationFrame(anim);
     onClickCup(keyId);
   }
 
   render() {
-    // console.log('xx', this.cupData);
-    // console.log('xx', JSON.stringify(this.cupData));
-    // console.log('onClickCup', this.onClickCup);
     return (
       <div
         onClick={this.onClickCup}

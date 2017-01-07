@@ -4,14 +4,13 @@ import * as THREE from 'three';
 const loader = new THREE.TextureLoader();
 
 const loadTexture = (img) => new Promise((resolve, reject) => {
-  // console.log('loadTexture', img, typeof img);
   loader.load(
     img,
     function onLoad(texture) {
       resolve(texture);
     },
     function onProgress(xhr) {
-      console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+      // console.log((xhr.loaded / xhr.total * 100) + '% loaded');
     },
     function onError(xhr) {
       console.log('Error: ', xhr);
@@ -21,7 +20,6 @@ const loadTexture = (img) => new Promise((resolve, reject) => {
 });
 
 const processTexture = (texture, repeatU, repeatV) => {
-  // console.log('processTexture', texture);
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
   texture.repeat.set(repeatU || 1, repeatV || 1);
@@ -33,7 +31,6 @@ const bgImage = '';
 const cupImage = '';
 
 const deg = rad => rad * Math.PI / 180;
-// const rad = deg => deg * 180 / Math.PI;
 
 class CupModel {
   id;
@@ -159,19 +156,13 @@ class CupModel {
 
   constructor(data) {
     this.setData(data);
-    console.log('cons', this.id);
 
     this.rotate = this.rotate.bind(this);
   }
 
-  @action updateData(id, obsData) {
-    const foundItem = obsData.find(item => item.id === id);
-    // setData(
-  }
-
   @action setData(obsData) {
     const data = toJS(obsData);
-    console.log('setData data', data);
+
     if (data.id) {
       this.id = data.id;
     }
@@ -203,42 +194,24 @@ class CupModel {
   }
 
   @action loadCupTexture(cupImage) {
-    console.log('loadCupTexture');
     // if (this.cupTexture) { return Promise.resolve(); }
     return loadTexture(cupImage || this.cup.image)
       .then(texture => {
-        console.log('texture', texture);
         this.cupTexture = processTexture(texture);
       });
   }
 
 
   @action load() {
-    console.log('CUP load');
-    // const { cupStore, uiStore, keyId } = this.props;
-    // const this = cupStore.findById(keyId);
-    // this.load();
-    // console.log('uiStore.cropped', uiStore.cropped);
-
-    // if (this.cupTexture) { return Promise.resolve(); }
-
-    // console.log('this', keyId, this);
-
     if (this.bgTexture) {
       return Promise.resolve();
     }
 
     return Promise.all([
       loadTexture(this.bg.image),
-      // loadTexture(this.cup.image),
-      // loadTexture(uiStore.cropped),
     ])
       .then(values => {
         this.bgTexture = processTexture(values[0]);
-        // console.log('bgTexture', this.bgTexture.slice && this.bgTexture.slice(0, 200));
-        // this.cupTexture = processTexture(values[1]);
-        // this.cupTexture = this.processTexture(uiStore.cropped);
-        // console.log('cupTexture', this.cupTexture.slice && this.cupTexture.slice(0, 200));
 
         if (this.bg.overlay) {
           return loadTexture(this.bg.overlay)
@@ -268,13 +241,11 @@ class CupModel {
   @observable rotateDirection = 1;
 
   @action rotate() {
-    // console.log('this.cup', this.cup.rotY);
     this.cup.rotY += deg(20 * this.rotateDirection);
     this.req = requestAnimationFrame(this.rotate);
   }
   @action play() {
     if (this.isPlaying) { return; }
-    // this.cup.rotY += deg(1);
     this.isPlaying = true;
     this.req = requestAnimationFrame(this.rotate);
   }
