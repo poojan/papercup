@@ -79,6 +79,7 @@ class Cup extends Component {
 
 
   renderImage(renderer, cupData) {
+    if (!cupData.cupTexture) { return; }
     const { width, height } = this.props;
     const isPlaying = cupData.isPlaying;
 
