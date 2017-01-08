@@ -37,6 +37,7 @@ class CupModel {
   @observable bgTexture;
   @observable cupTexture;
   @observable overlayTexture;
+  @observable selected = false;
 
   @observable scene = {
     width: 200 * 0.7,

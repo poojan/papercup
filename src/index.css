@@ -143,6 +143,10 @@ body {
   border-color: #bbb;
 }
 
+.Grid {
+  lost-utility: clearfix;
+}
+
 .Grid .fa-check {
   color: #5ab24d;
   position: relative;
