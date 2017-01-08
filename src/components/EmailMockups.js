@@ -6,11 +6,16 @@ const sf = 1.4;
 const width = 200 * sf;
 const height = 150 * sf;
 
-@inject('cupStore')
+@inject('cupStore', 'uiStore')
 @observer
 export default class EmailMockups extends Component {
   @action onClickCup(keyId) {
     console.log('keyId', keyId);
+  }
+
+  @action onBackClick = () => {
+    const { uiStore } = this.props;
+    uiStore.activeScreen = 'CUPS';
   }
 
   render() {
@@ -31,6 +36,9 @@ export default class EmailMockups extends Component {
             <i className="fa fa-check" />
           </div>
         ))}
+        <button className="BlueButton" type="button" onClick={this.onBackClick}>
+          Back
+        </button>
       </div>
     );
   }

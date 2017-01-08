@@ -62,6 +62,7 @@ export default class Cups extends Component {
 
   @action onEmailClick = () => {
     const { uiStore } = this.props;
+    this.currentCup.pause();
     uiStore.activeScreen = 'EMAIL_MOCKUPS';
   }
 
@@ -118,6 +119,7 @@ export default class Cups extends Component {
               containerId={item.id}
               keyId={item.id}
               onClickCup={this.onClickCup}
+              onMousedown={this.onClickCup}
             />
           ))}
         </div>

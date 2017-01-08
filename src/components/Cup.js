@@ -15,11 +15,16 @@ class Cup extends Component {
   @observable cupTexture;
   @observable overlayTexture;
   @observable cupData;
+  onMousedown;
 
   constructor(props) {
     super(props);
+    const { onClickCup, onMousedown, keyId } = props;
 
-    this.onClickCup = this.onClickCup.bind(this);
+    this.onClickCup = onClickCup.bind(this, keyId);
+    if (onMousedown) {
+      this.onMousedown = onMousedown.bind(this, keyId);
+    }
   }
 
   componentDidMount() {
@@ -30,7 +35,9 @@ class Cup extends Component {
     this.renderer.setClearColor( 0xffffff, 1);
     this.renderer.setSize(width || this.cupData.scene.width, height || this.cupData.scene.height);
 
-    this.renderer.domElement.addEventListener('mousedown', this.onClickCup, false);
+    if (this.props.onMousedown) {
+      this.renderer.domElement.addEventListener('mousedown', this.onMousedown, false);
+    }
 
     document.getElementById(containerId).appendChild(this.renderer.domElement);
 
@@ -43,7 +50,9 @@ class Cup extends Component {
   }
 
   componentWillUnmount() {
-    this.renderer.domElement.removeEventListener('mousedown', this.onClickCup);
+    if (this.props.onMousedown) {
+      this.renderer.domElement.removeEventListener('mousedown', this.onMousedown);
+    }
   }
 
   componentWillReact() {
