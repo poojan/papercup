@@ -38,6 +38,7 @@ class CupModel {
   @observable cupTexture;
   @observable overlayTexture;
   @observable selected = false;
+  @observable dataURL;
 
   @observable scene = {
     width: 200 * 0.7,
@@ -199,6 +200,8 @@ class CupModel {
     return loadTexture(cupImage || this.cup.image)
       .then(texture => {
         this.cupTexture = processTexture(texture);
+        console.log('this.cupTexture', this.cupTexture);
+        console.log('texture', texture);
       });
   }
 
@@ -263,6 +266,11 @@ class CupModel {
   @action pause() {
     window.cancelAnimationFrame(this.req);
     this.isPlaying = false;
+  }
+
+  @action setDataURL(dataURL) {
+    this.dataURL = dataURL;
+    // console.log('setDataURL', dataURL);
   }
 }
 

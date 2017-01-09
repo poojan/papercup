@@ -16,12 +16,14 @@ class Cup extends Component {
   @observable overlayTexture;
   @observable cupData;
   onMousedown;
+  @observable dataURL;
 
   constructor(props) {
     super(props);
     const { onClickCup, onMousedown, keyId } = props;
 
     this.onClickCup = onClickCup.bind(this, keyId);
+    this.renderImage = this.renderImage.bind(this);
     if (onMousedown) {
       this.onMousedown = onMousedown.bind(this, keyId);
     }
@@ -31,7 +33,10 @@ class Cup extends Component {
     const { cupStore, uiStore, width, height, keyId, containerId } = this.props;
     this.cupData = cupStore.findById(keyId);
     if (!this.cupData) { return; }
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
+    this.renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      preserveDrawingBuffer: true
+    });
     this.renderer.setClearColor( 0xffffff, 1);
     this.renderer.setSize(width || this.cupData.scene.width, height || this.cupData.scene.height);
 
@@ -40,13 +45,16 @@ class Cup extends Component {
     }
 
     document.getElementById(containerId).appendChild(this.renderer.domElement);
+    if (this.props.onRenderer) {
+      this.props.onRenderer(keyId, this.renderer.domElement);
+    }
 
     if (!uiStore.devMode && !uiStore.cropped) { return; }
     this.cupData.load()
       .then(() => this.cupData.loadCupTexture(uiStore.cropped))
-      .then(() => {
+      .then(action(() => {
         this.renderImage(this.renderer, this.cupData);
-      });
+      }));
   }
 
   componentWillUnmount() {
@@ -67,9 +75,9 @@ class Cup extends Component {
 
     this.cupData
       .load()
-      .then(() => {
+      .then(action(() => {
         this.renderImage(this.renderer, this.cupData);
-      });
+      }));
   }
 
   @observable scene;
@@ -88,7 +96,7 @@ class Cup extends Component {
   @observable overlayPlaneMesh
 
 
-  renderImage(renderer, cupData) {
+  @action renderImage(renderer, cupData) {
     if (!cupData.cupTexture) { return; }
     const { width, height } = this.props;
     const isPlaying = cupData.isPlaying;
@@ -270,6 +278,10 @@ class Cup extends Component {
     this.scene.add(this.group);
 
     renderer.render(this.scene, this.camera);
+  }
+
+  toDataURL = () => {
+    return this.renderer.domElement.toDataURL();
   }
 
   @action onClickCup() {

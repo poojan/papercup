@@ -4,7 +4,7 @@ const cupImage = 'img/user/Spotify_variante_(logo).png';
 const overlayImage = null;
 
 export default {
-  id: '8oz',
+  id: 'eightoz',
 
   bg: {
     width: 638,
