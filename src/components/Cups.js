@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { observer, inject } from 'mobx-react';
 import { observable, action, computed } from 'mobx';
 import Cup from './Cup';
@@ -10,8 +9,6 @@ export default class Cups extends Component {
   @observable keyId;
   @observable currentCup;
   @observable rfs = {};
-  @observable renderers = {};
-  @observable images = {};
 
   constructor(props) {
     super(props);
@@ -19,7 +16,6 @@ export default class Cups extends Component {
     const { cupStore, uiStore } = props;
     this.onClickCup = this.onClickCup.bind(this);
     this.currentCup = cupStore.findById(uiStore.activeKeyId);
-    this.onRenderer = this.onRenderer.bind(this);
   }
 
   @action onClickCup(keyId) {
@@ -46,24 +42,7 @@ export default class Cups extends Component {
   }
 
   @action pause = () => {
-    const { uiStore } = this.props;
     this.currentCup.pause();
-    // console.log('this.rfs', this.rfs);
-    // console.log(
-      // 'this.rfs',
-      // uiStore.activeKeyId,
-      // this.rfs[uiStore.activeKeyId],
-      // ReactDOM.findDOMNode(this.rfs[uiStore.activeKeyId]),
-      // ReactDOM.findDOMNode(this.rfs[uiStore.activeKeyId]).firstElementChild,
-      // ReactDOM.findDOMNode(this.rfs[uiStore.activeKeyId]).firstElementChild.toDataURL(),
-      // document.querySelector(`#rayWhite canvas`).toDataURL()
-    // );
-    // console.log(this.renderers[uiStore.activeKeyId].domElement.toDataURL());
-    // console.log('this.renderers', this.renderers[uiStore.activeKeyId]);
-    // console.log('dataURL', this.currentCup.dataURL);
-    // console.log('rfs', this.rfs[uiStore.activeKeyId]);
-    // console.log('rfs', this.rfs[uiStore.activeKeyId].toDataURL());
-    // console.log(this.currentCup.toDataURL());
   }
 
   @action togglePlayPause = () => {
@@ -85,23 +64,12 @@ export default class Cups extends Component {
 
   @action onEmailClick = () => {
     const { uiStore, cupStore } = this.props;
-    console.log('cupStore.items', cupStore.items);
     cupStore.items.forEach(action(item => {
       const dataURL = document.querySelector(`#${item.id} canvas`).toDataURL()
       item.setDataURL(dataURL);
     }));
     this.currentCup.pause();
     uiStore.activeScreen = 'EMAIL_MOCKUPS';
-  }
-
-  @action onRenderer(keyId, renderer) {
-    this.renderers[keyId] = renderer;
-    console.log('renderer', renderer);
-  }
-
-  @action onExit = (keyId, dataURL) => {
-    this.images[keyId] = dataURL;
-    console.log(dataURL);
   }
 
   render() {
@@ -159,7 +127,6 @@ export default class Cups extends Component {
               keyId={item.id}
               onClickCup={this.onClickCup}
               onMousedown={this.onClickCup}
-              onExit={this.onExit}
               width={width} height={height}
             />
           ))}
@@ -168,4 +135,3 @@ export default class Cups extends Component {
     );
   }
 }
-              // ref={ref => this.rfs[item.id] = ref}
