@@ -281,7 +281,7 @@ class Cup extends Component {
   }
 
   toDataURL = () => {
-    return this.renderer.domElement.toDataURL();
+    return this.renderer.domElement.toDataURL('image/jpeg');
   }
 
   @action onClickCup() {

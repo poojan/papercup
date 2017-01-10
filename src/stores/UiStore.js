@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 
-const devMode = false;
+const devMode = true;
 const activeScreen = devMode ? 'CUPS' : 'IMAGE_DROP';
 
 class UiStore {

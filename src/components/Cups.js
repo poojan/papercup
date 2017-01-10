@@ -65,7 +65,8 @@ export default class Cups extends Component {
   @action onEmailClick = () => {
     const { uiStore, cupStore } = this.props;
     cupStore.items.forEach(action(item => {
-      const dataURL = document.querySelector(`#${item.id} canvas`).toDataURL()
+      // const dataURL = document.querySelector(`#${item.id} canvas`).toDataURL()
+      const dataURL = document.querySelector(`#${item.id} canvas`).toDataURL('image/jpeg');
       item.setDataURL(dataURL);
     }));
     this.currentCup.pause();
@@ -74,7 +75,7 @@ export default class Cups extends Component {
 
   render() {
     const { uiStore, cupStore } = this.props;
-    const scale = 1;
+    const scale = 0.8;
     const width = 800 * scale;
     const height = 600 * scale;
 
