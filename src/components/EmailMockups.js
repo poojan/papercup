@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { action } from 'mobx';
+import request from 'superagent';
+import { BASE_URL } from '../config';
 
 @inject('cupStore')
 @observer
@@ -43,7 +45,24 @@ export default class EmailMockups extends Component {
   }
 
   @action onSendClick = () => {
-    console.log('onSendClick');
+    const { cupStore } = this.props;
+    const files = cupStore.items
+      .filter(item => item.selected)
+      .map(item => item.dataURL);
+    // console.log('onSendClick', files);
+    this.upload(files);
+  }
+
+  @action upload = (files) => {
+    request
+      .post(`${BASE_URL}/email`)
+      .send({ files: files })
+      .end((err, res) => {
+        if (err) {
+          console.log('err', err);
+        }
+        console.log('res', res);
+      });
   }
 
   render() {

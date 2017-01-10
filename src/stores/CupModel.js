@@ -200,8 +200,6 @@ class CupModel {
     return loadTexture(cupImage || this.cup.image)
       .then(texture => {
         this.cupTexture = processTexture(texture);
-        console.log('this.cupTexture', this.cupTexture);
-        console.log('texture', texture);
       });
   }
 

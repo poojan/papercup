@@ -12,6 +12,7 @@ export default class ImageDrop extends Component {
     const { uiStore } = this.props;
     uiStore.activeScreen = 'IMAGE_UPLOADING';
     this.files = acceptedFiles;
+    // console.log('acceptedFiles', JSON.stringify(acceptedFiles, null, 2), acceptedFiles);
 
     const req = request.post(`${BASE_URL}/upload`);
 
