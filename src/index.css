@@ -194,3 +194,29 @@ body {
 /* .Grid .CupImage img::before { */
   /* content: "\f006"; */
 /* } */
+
+.Form .formInput {
+  text-align: center;
+  margin: 10px auto;
+  width: 400px;
+}
+
+.Form .formInput select {
+  box-sizing: content-box;
+  height: 37px;
+  width: 100%;
+  padding: 10px 0;
+}
+.Form .formInput option {
+  box-sizing: content-box;
+  height: 37px;
+  width: 100%;
+  /* padding: 10px 0; */
+}
+.Form .formInput input {
+  /* box-sizing: content-box; */
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  /* width: 200px; */
+}

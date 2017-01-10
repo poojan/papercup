@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import { action } from 'mobx';
+import { observable, action } from 'mobx';
 import request from 'superagent';
 import { BASE_URL } from '../config';
 
@@ -39,6 +39,9 @@ class CupImage extends Component {
 @inject('cupStore', 'uiStore')
 @observer
 export default class EmailMockups extends Component {
+  @observable interest;
+  @observable email;
+
   @action onBackClick = () => {
     const { uiStore } = this.props;
     uiStore.activeScreen = 'CUPS';
@@ -56,13 +59,26 @@ export default class EmailMockups extends Component {
   @action upload = (files) => {
     request
       .post(`${BASE_URL}/email`)
-      .send({ files: files })
+      .send({
+        files,
+        email: this.email,
+        interest: this.interest,
+      })
       .end((err, res) => {
         if (err) {
           console.log('err', err);
         }
         console.log('res', res);
       });
+  }
+
+  @action onInterestChange = event => {
+    console.log(event.target.value);
+    this.interest = event.target.value;
+  }
+
+  @action onEmailChange = event => {
+    this.email = event.target.value;
   }
 
   render() {
@@ -78,14 +94,32 @@ export default class EmailMockups extends Component {
             />
           ))}
         </div>
-        <div>
-          <button className="BlueButton" type="button" onClick={this.onBackClick}>
-            Back
-          </button>
-          <button className="OrangeButton" type="button" onClick={this.onSendClick}>
-            Please Send
-          </button>
-        </div>
+        <form className="Form">
+          <div>
+            <h4>Click on the mock-ups you'd like emailed to you:</h4>
+            <div className="formInput">
+              <select onChange={this.onInterestChange}>
+                <option value="">I am interested in custom paper cups for ...</option>
+                <option value="hospitality">Café / Hospitality</option>
+                <option value="campaign">Event / Marketing Campaign</option>
+                <option value="personal">Personal Use</option>
+              </select>
+            </div>
+            <div className="formInput">
+              <input type="text" placeholder="Enter email address"
+                onChange={this.onEmailChange}
+              />
+            </div>
+          </div>
+          <div>
+            <button className="BlueButton" type="button" onClick={this.onBackClick}>
+              Back
+            </button>
+            <button className="OrangeButton" type="button" onClick={this.onSendClick}>
+              Please Send
+            </button>
+          </div>
+        </form>
       </div>
     );
   }
