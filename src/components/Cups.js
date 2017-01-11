@@ -90,7 +90,9 @@ export default class Cups extends Component {
             keyId={uiStore.activeKeyId} rotate={true}
             onClickCup={this.togglePlayPause}
           />
-          <DatGui store={store} />
+          {/*
+            <DatGui store={store} />
+          */}
 
           <div>
           {!this.isPlaying && (
