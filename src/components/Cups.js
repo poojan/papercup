@@ -76,9 +76,9 @@ export default class Cups extends Component {
 
   render() {
     const { uiStore, cupStore } = this.props;
-    const scale = 0.8;
-    const width = 800 * scale;
-    const height = 600 * scale;
+    const scale = 1;
+    const width = 1024 * scale;
+    const height = 768 * scale;
     const store = cupStore.findById(uiStore.activeKeyId);
 
     if (uiStore.activeScreen !== 'CUPS') { return <div />; }
