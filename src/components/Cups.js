@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { observable, action, computed } from 'mobx';
 import Cup from './Cup';
+import DatGui from './DatGui';
 
 @inject('uiStore', 'cupStore')
 @observer
@@ -78,6 +79,7 @@ export default class Cups extends Component {
     const scale = 0.8;
     const width = 800 * scale;
     const height = 600 * scale;
+    const store = cupStore.findById(uiStore.activeKeyId);
 
     if (uiStore.activeScreen !== 'CUPS') { return <div />; }
 
@@ -88,6 +90,7 @@ export default class Cups extends Component {
             keyId={uiStore.activeKeyId} rotate={true}
             onClickCup={this.togglePlayPause}
           />
+          <DatGui store={store} />
 
           <div>
           {!this.isPlaying && (
