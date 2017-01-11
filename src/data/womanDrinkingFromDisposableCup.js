@@ -1,9 +1,11 @@
 // const bgImage = 'img/bg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.jpg';
 const bgImage = 'img/bg/disposable_cup.jpg';
-// const cupImage = 'img/user/cuplogo.png';
-const cupImage = 'img/user/Spotify_variante_(logo).png';
+const cupImage = 'img/user/cuplogo.png';
+// const cupImage = 'img/user/Spotify_variante_(logo).png';
+// const cupImage = 'img/user/chrysanthemum.jpg';
 // const overlayImage = 'img/fg/stock-photo-young-woman-drinking-coffee-from-disposable-cup-218754565.png';
-const overlayImage = 'img/fg/fingers3.png';
+// const overlayImage = 'img/fg/fingers3.png';
+const overlayImage = 'img/fg/disposable_cup_fg.png';
 // const overlayImage = null;
 
 const bgActualWidth = 1000;
@@ -53,15 +55,15 @@ export default {
   },
 
   cup: {
-    "radiusTop": 140.3,
-    "radiusBottom": 106.4,
-    "height": 284.90000000000003,
-    "posX": -98.5,
-    "posY": 16.7,
+    "radiusTop": 141.3,
+    "radiusBottom": 109.10000000000001,
+    "height": 288.6,
+    "posX": -101.9,
+    "posY": 19.400000000000002,
     "posZ": -5.6000000000000005,
     "rotX": 5.39,
     "rotY": -3.93,
-    "rotZ": 10.91,
+    "rotZ": 9.9,
     "opacity": 1,
     "openEnded": 1,
     image: cupImage,
