@@ -250,3 +250,9 @@ body {
 .inline-block {
   display: inline-block;
 }
+
+.Invalid {
+  color: red;
+  font-size: 11px;
+  font-style: italic;
+}

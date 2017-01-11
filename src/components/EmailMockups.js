@@ -46,6 +46,7 @@ export default class EmailMockups extends Component {
   pageStates = {
     NORMAL: 'NORMAL',
     PROCESSING: 'PROCESSING',
+    INVALID: 'INVALID',
     DONE: 'DONE',
   };
   @observable pageState = this.pageStates.NORMAL;
@@ -56,6 +57,11 @@ export default class EmailMockups extends Component {
   }
 
   @action onSendClick = () => {
+    if (!this.email || !this.interest) {
+      this.pageState = this.pageStates.INVALID;
+      return;
+    }
+
     const { cupStore } = this.props;
     const files = cupStore.items
       .filter(item => item.selected)
@@ -135,6 +141,11 @@ export default class EmailMockups extends Component {
           <div>
             <h4>Click on the mock-ups you'd like emailed to you:</h4>
             <div className="formInput">
+
+              {this.pageState === this.pageStates.INVALID && !this.interest && (
+                <div className="Invalid">Please select an option</div>
+              )}
+
               <select onChange={this.onInterestChange}>
                 <option value="">I am interested in custom paper cups for ...</option>
                 <option value="hospitality">Café / Hospitality</option>
@@ -143,6 +154,9 @@ export default class EmailMockups extends Component {
               </select>
             </div>
             <div className="formInput">
+              {this.pageState === this.pageStates.INVALID && !this.email && (
+                <div className="Invalid">Please enter email</div>
+              )}
               <input type="text" placeholder="Enter email address"
                 onChange={this.onEmailChange}
               />
