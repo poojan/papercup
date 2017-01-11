@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { observable, action } from 'mobx';
+import classNames from 'classnames';
 import request from 'superagent';
 import { BASE_URL } from '../config';
 
@@ -41,6 +42,13 @@ class CupImage extends Component {
 export default class EmailMockups extends Component {
   @observable interest;
   @observable email;
+  @observable processing = false;
+  pageStates = {
+    NORMAL: 'NORMAL',
+    PROCESSING: 'PROCESSING',
+    DONE: 'DONE',
+  };
+  @observable pageState = this.pageStates.NORMAL;
 
   @action onBackClick = () => {
     const { uiStore } = this.props;
@@ -57,6 +65,7 @@ export default class EmailMockups extends Component {
   }
 
   @action upload = (files) => {
+    this.pageState = this.pageStates.PROCESSING;
     request
       .post(`${BASE_URL}/email`)
       .send({
@@ -69,6 +78,9 @@ export default class EmailMockups extends Component {
           console.log('err', err);
         }
         console.log('res', res);
+        this.pageState = this.pageStates.DONE;
+        // setTimeout(() => {
+        // }, 1000);
       });
   }
 
@@ -86,13 +98,38 @@ export default class EmailMockups extends Component {
 
     return (
       <div>
+        {this.pageState === this.pageStates.PROCESSING && (
+          <div className="Upload">
+            <div className="processing">
+              <div className="BluePanel">
+              <p>
+                Processing ...
+              </p>
+              </div>
+            </div>
+          </div>
+        )}
+        {this.pageState === this.pageStates.DONE && (
+          <div className="Upload">
+            <div className="processing">
+              <div className="BluePanel">
+              <p>
+              Your designs are now on <br />
+              their way to you!
+              </p>
+              </div>
+            </div>
+          </div>
+        )}
         <div className="Grid">
+          <div>
           {cupStore.items.map(item => (
             <CupImage
               key={item.id}
               item={item}
             />
           ))}
+          </div>
         </div>
         <form className="Form">
           <div>

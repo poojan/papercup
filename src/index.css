@@ -56,7 +56,7 @@ body {
   vertical-align: top;
   /* width: 200px; height: 200px; border-width: 2px; border-color: rgb(102, 102, 102); border-style: dashed; border-radius: 5px; */
 }
-.ImageUploading img {
+.Upload img {
   -webkit-filter: blur(5px);
   -moz-filter: blur(5px);
   -o-filter: blur(5px);
@@ -64,7 +64,7 @@ body {
   filter: blur(5px);
 }
 
-.ImageUploading .uploading {
+.Upload .processing {
   color: #333;
   position: absolute;
   /* left: 0; */
@@ -219,4 +219,15 @@ body {
   padding: 10px;
   width: 100%;
   /* width: 200px; */
+}
+
+.BluePanel {
+  background: #5e9cd3;
+  width: 400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  /* padding-top: 60px; */
+  color: white;
+  min-height: 100px;
+  vertical-align: middle;
 }
