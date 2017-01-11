@@ -2,6 +2,7 @@
 const bgImage = 'img/bg/espresso.jpg';
 const cupImage = 'img/user/cuplogo.png';
 // const cupImage = 'img/user/Spotify_variante_\(logo\).png';
+// const cupImage = 'img/user/chrysanthemum.jpg';
 const overlayImage = null;
 
 // const bgActualWidth = 1500;
@@ -51,7 +52,7 @@ export default {
 
   cup: {
     "radiusTop": 67.7,
-    "radiusBottom": 53.800000000000004,
+    "radiusBottom": 55.8,
     "height": 131,
     "posX": -135,
     "posY": -109.30000000000001,
