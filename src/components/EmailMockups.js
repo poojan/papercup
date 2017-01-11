@@ -42,6 +42,7 @@ class CupImage extends Component {
 export default class EmailMockups extends Component {
   @observable interest;
   @observable email;
+  @observable selectedFiles = [];
   @observable processing = false;
   pageStates = {
     NORMAL: 'NORMAL',
@@ -57,14 +58,19 @@ export default class EmailMockups extends Component {
   }
 
   @action onSendClick = () => {
-    if (!this.email || !this.interest) {
+    const { cupStore } = this.props;
+
+    this.selectedFiles = cupStore.items
+      .filter(item => item.selected) || [];
+
+    if (!this.email || !this.interest || !this.selectedFiles.length) {
       this.pageState = this.pageStates.INVALID;
       return;
     }
 
-    const { cupStore } = this.props;
-    const files = cupStore.items
-      .filter(item => item.selected)
+    const files = this.selectedFiles
+      // cupStore.items
+      // .filter(item => item.selected)
       .map(item => item.dataURL);
     // console.log('onSendClick', files);
     this.upload(files);
@@ -137,6 +143,9 @@ export default class EmailMockups extends Component {
           ))}
           </div>
         </div>
+        {this.pageState === this.pageStates.INVALID && !this.selectedFiles.length && (
+          <div className="Invalid">Please select one or more images</div>
+        )}
         <form className="Form">
           <div>
             <h4>Click on the mock-ups you'd like emailed to you:</h4>
