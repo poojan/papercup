@@ -1,7 +1,8 @@
 // const bgImage = 'img/bg/stock-photo-take-away-paper-cup-with-the-hand-of-man-play-smart-phone-456359746.jpg';
 const bgImage = 'img/bg/phone.jpg';
-const cupImage = 'img/user/cuplogo.png';
+// const cupImage = 'img/user/cuplogo.png';
 // const cupImage = 'img/user/Spotify_variante_\(logo\).png';
+const cupImage = 'img/user/chrysanthemum.jpg';
 const overlayImage = null;
 const scaling = 1;
 
@@ -41,15 +42,15 @@ export default {
   },
 
   cup: {
-    "radiusTop": 221.9,
+    "radiusTop": 223.4,
     "radiusBottom": 200.9,
-    "height": 464.3,
-    "posX": 133.1,
-    "posY": -102,
+    "height": 473.3,
+    "posX": 132.9,
+    "posY": -101,
     "posZ": 0,
-    "rotX": 17.25,
+    "rotX": 17.94,
     "rotY": 0,
-    "rotZ": 1.1,
+    "rotZ": 1.45,
     "opacity": 1,
     "openEnded": 1,
     image: cupImage,
