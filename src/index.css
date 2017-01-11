@@ -231,3 +231,21 @@ body {
   min-height: 100px;
   vertical-align: middle;
 }
+
+.light {
+  color: #888;
+  vertical-align: middle;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 0 10px;
+}
+.light .line1 {
+  font-size: 9px;
+}
+.light .line2 {
+  font-size: 13px;
+}
+
+.inline-block {
+  display: inline-block;
+}

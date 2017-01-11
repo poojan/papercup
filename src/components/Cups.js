@@ -96,6 +96,11 @@ export default class Cups extends Component {
                 <i className="fa fa-play reverse" aria-hidden="true"></i>
               </button>
 
+              <div className="light inline-block">
+                <div className="line1">Rotate</div>
+                <div className="line2">Cup</div>
+              </div>
+
               <button className="WhiteButton" type="button" onClick={this.playForward}>
                 <i className="fa fa-play" aria-hidden="true"></i>
               </button>
