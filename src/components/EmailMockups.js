@@ -105,6 +105,10 @@ export default class EmailMockups extends Component {
     this.email = event.target.value;
   }
 
+  @action onDoneClick = event => {
+    this.pageState = this.pageStates.NORMAL;
+  }
+
   render() {
     const { cupStore } = this.props;
 
@@ -122,7 +126,7 @@ export default class EmailMockups extends Component {
           </div>
         )}
         {this.pageState === this.pageStates.DONE && (
-          <div className="Upload">
+          <div className="Upload" onClick={this.onDoneClick}>
             <div className="processing">
               <div className="BluePanel">
               <p>
