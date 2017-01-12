@@ -34,8 +34,8 @@ export default class ImageUploading extends Component {
 
   render() {
     return (
-      <div className="ImageUploading">
-        <div className="uploading">
+      <div className="ImageUploading Upload">
+        <div className="processing">
           Your image <br />is being <br />uploaded ...
         </div>
         <Dropzone
