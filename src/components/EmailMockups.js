@@ -21,7 +21,7 @@ class CupImage extends Component {
   }
 
   render() {
-    const { item } = this.props;
+    const { item, idx } = this.props;
     return (
       <div
         onClick={this.onClickCup.bind(this, item.id)}
@@ -32,6 +32,11 @@ class CupImage extends Component {
           src={item.dataURL}
         />
         {item.selected && <i className="fa fa-check" />}
+        {idx === 0 && (
+          <div className="instruction">
+            Click on images to be emailed.
+          </div>
+        )}
       </div>
     );
   }
@@ -130,8 +135,8 @@ export default class EmailMockups extends Component {
             <div className="processing">
               <div className="BluePanel">
               <p>
-              Your designs are now on <br />
-              their way to you!
+              Your designs are<br />
+              on their way!
               </p>
               </div>
             </div>
@@ -139,10 +144,11 @@ export default class EmailMockups extends Component {
         )}
         <div className="Grid">
           <div>
-          {cupStore.items.map(item => (
+          {cupStore.items.map((item, idx) => (
             <CupImage
               key={item.id}
               item={item}
+              idx={idx}
             />
           ))}
           </div>
@@ -150,9 +156,9 @@ export default class EmailMockups extends Component {
         {this.pageState === this.pageStates.INVALID && !this.selectedFiles.length && (
           <div className="Invalid">Please select one or more images</div>
         )}
+        <br />
         <form className="Form">
           <div>
-            <h4>Click on the mock-ups you'd like emailed to you:</h4>
             <div className="formInput">
 
               {this.pageState === this.pageStates.INVALID && !this.interest && (
