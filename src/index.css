@@ -220,21 +220,22 @@ body {
 }
 
 .Form .formInput select {
-  box-sizing: content-box;
-  height: 37px;
+  /* box-sizing: content-box; */
+  /* height: 37px; */
   width: 100%;
-  padding: 10px 0;
+  height: 40px;
+  /* padding: 10px 0; */
 }
 .Form .formInput option {
-  box-sizing: content-box;
-  height: 37px;
+  /* box-sizing: content-box; */
+  /* height: 37px; */
   width: 100%;
   /* padding: 10px 0; */
 }
 .Form .formInput input {
   /* box-sizing: content-box; */
   box-sizing: border-box;
-  padding: 10px;
+  padding: 4px;
   width: 100%;
   /* width: 200px; */
 }
