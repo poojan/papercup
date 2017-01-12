@@ -235,7 +235,7 @@ body {
 .Form .formInput input {
   /* box-sizing: content-box; */
   box-sizing: border-box;
-  padding: 4px;
+  padding: 8px 4px;
   width: 100%;
   /* width: 200px; */
 }
