@@ -117,7 +117,7 @@ export default class Cups extends Component {
             </button>
           )}
           </div>
-          <div>
+          <div className="Buttons">
             <button className="BlueButton" type="button" onClick={this.onSelectClick}>
               Select New Image
             </button>
@@ -125,7 +125,7 @@ export default class Cups extends Component {
               Edit Current Image
             </button>
             <button className="OrangeButton" type="button" onClick={this.onEmailClick}>
-              Email Me Mockups
+              Email Images
             </button>
           </div>
         </div>

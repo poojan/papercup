@@ -22,11 +22,11 @@ import CupStore from './stores/CupStore';
 
 const cupStore = new CupStore([
   data1,
-  data2,
   data3,
   // data4,
   data5,
   data6,
+  data2,
 ]);
 
 const Router = observer(({ uiStore }) => (
