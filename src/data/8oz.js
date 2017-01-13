@@ -16,6 +16,7 @@ export default {
 
   grp: {
     // rotX: 63,
+    posY: -29,
   },
 
   ambLight: {
