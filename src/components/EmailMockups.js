@@ -32,11 +32,11 @@ class CupImage extends Component {
           src={item.dataURL}
         />
         {item.selected && <i className="fa fa-check" />}
-        {idx === 0 && (
+        {/* idx === 0 && (
           <div className="instruction">
             Click on images to be emailed.
           </div>
-        )}
+        ) */}
       </div>
     );
   }
@@ -144,6 +144,11 @@ export default class EmailMockups extends Component {
         )}
         <div className="Grid">
           <div>
+          <div className="TextContainer">
+            <div className="text">
+              Click on images to be emailed
+            </div>
+          </div>
           {cupStore.items.map((item, idx) => (
             <CupImage
               key={item.id}

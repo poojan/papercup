@@ -280,3 +280,23 @@ body {
 .Buttons {
   margin-top: 27px;
 }
+
+.TextContainer {
+  lost-column: 1/3 3 0;
+  /* height: 100%; */
+  /* flex-grow: 1; */
+  /* background: red; */
+  /* display: flex; */
+  /* align-items: stretch; */
+}
+.TextContainer .text {
+  padding: 100px 90px 0 90px;
+  /* position: relative; */
+  /* background: red; */
+  /* padding: 95px; */
+  font-size: 20px;
+  /* font-weight: bold; */
+  /* font-style: italic; */
+  color: #555;
+  /* text-transform: uppercase; */
+}
