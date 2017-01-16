@@ -39,7 +39,9 @@ export default class ImageDrop extends Component {
           multiple={false}
           style={{}}
         >
-          <img src="img/bg/ray_white.jpg" width="800" alt="cup" />
+          <img src="img/bg/ray_white.jpg" width="800" alt="cup"
+            style={{ marginLeft: '24px' }}
+          />
         </Dropzone>
         <button className="BlueButton" type="button" onClick={this.onOpenClick}>
           Upload Image
