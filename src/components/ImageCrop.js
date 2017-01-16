@@ -54,6 +54,11 @@ export default class ImageCrop extends Component {
             height: '500px',
           }}
         />
+        <div className="SliderContainer">
+        <div className="sign">
+        -
+        </div>
+        <div className="mid">
         <Slider
           min={0.5}
           max={4}
@@ -62,6 +67,13 @@ export default class ImageCrop extends Component {
           onChange={this.onSliderChange}
           className="Slider"
         />
+        {/*
+        */}
+        </div>
+        <div className="sign">
+        +
+        </div>
+        </div>
         <button className="BlueButton w250" type="button" onClick={this.onBackClick}>
           {'< Select New Image'}
         </button>
