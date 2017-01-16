@@ -62,10 +62,10 @@ export default class ImageCrop extends Component {
           onChange={this.onSliderChange}
           className="Slider"
         />
-        <button className="BlueButton" type="button" onClick={this.onBackClick}>
+        <button className="BlueButton w250" type="button" onClick={this.onBackClick}>
           {'< Select New Image'}
         </button>
-        <button className="OrangeButton" type="button" onClick={this.onCropClick}>
+        <button className="OrangeButton w250" type="button" onClick={this.onCropClick}>
           {'Crop Image >'}
         </button>
       </div>

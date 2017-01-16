@@ -14,6 +14,7 @@ body {
   font-weight: 100;
   font-family: Helvetica, "Trebuchet MS", Arial, sans-serif;
   margin: 5px;
+  min-width: 200px;
 }
 .OrangeButton {
   background: #eb7d3c;
@@ -25,6 +26,7 @@ body {
   font-weight: 100;
   font-family: Helvetica, "Trebuchet MS", Arial, sans-serif;
   margin: 5px;
+  min-width: 200px;
 }
 .WhiteButton {
   color: #888;
@@ -343,4 +345,8 @@ body {
 }
 .cropper-point.point-e {
   right: -7px !important;
+}
+
+.w250 {
+  width: 250px;
 }
