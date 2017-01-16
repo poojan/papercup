@@ -146,7 +146,7 @@ export default class EmailMockups extends Component {
           <div>
           <div className="TextContainer">
             <div className="text">
-              Click on images to be emailed
+              Your paper cup design.
             </div>
           </div>
           {cupStore.items.map((item, idx) => (

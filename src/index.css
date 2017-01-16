@@ -290,13 +290,13 @@ body {
   /* align-items: stretch; */
 }
 .TextContainer .text {
-  padding: 100px 90px 0 90px;
+  padding: 100px 60px 0 60px;
   /* position: relative; */
   /* background: red; */
   /* padding: 95px; */
-  font-size: 20px;
-  /* font-weight: bold; */
+  font-size: 30px;
+  font-weight: bold;
   /* font-style: italic; */
-  color: #555;
+  color: #000;
   /* text-transform: uppercase; */
 }
