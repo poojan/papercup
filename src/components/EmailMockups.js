@@ -188,10 +188,10 @@ export default class EmailMockups extends Component {
           </div>
           <div>
             <button className="BlueButton" type="button" onClick={this.onBackClick}>
-              Back
+              {'< Back'}
             </button>
             <button className="OrangeButton" type="button" onClick={this.onSendClick}>
-              Please Send
+              Send
             </button>
           </div>
         </form>
