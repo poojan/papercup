@@ -140,12 +140,18 @@ body {
   -ms-transform:rotateY(180deg);
 }
 
+.SliderOuterContainer p {
+  margin-top: 20px;
+  margin-bottom: -10px;
+  font-size: 20px;
+}
 .SliderContainer {
   display: flex;
   /* flex: 1; */
   /* flex-direction: column; */
   width: 50%;
   margin: auto;
+  margin-bottom: 12px;
   /* background: #ccc; */
 }
 .SliderContainer .sign {
