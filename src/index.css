@@ -115,6 +115,7 @@ body {
 
 .Thumbnails {
   display: inline-block;
+  vertical-align: top;
   /* lost-column: 1/4; */
 }
 .Thumbnails canvas {

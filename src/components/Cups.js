@@ -85,38 +85,73 @@ export default class Cups extends Component {
 
     return (
       <div className="Row">
-        <div className="MainImage">
-          <Cup width={width} height={height} containerId="main"
-            keyId={uiStore.activeKeyId} rotate={true}
-            onClickCup={this.togglePlayPause}
-          />
+        <div>
+          <div className="Thumbnails">
+            {cupStore.items
+              .filter((item, i) => i % 2 === 0)
+              .map(item => (
+              <Cup
+                ref={ref => { this.rfs[item.id] = ref }}
+                key={item.id}
+                containerId={item.id}
+                keyId={item.id}
+                onClickCup={this.onClickCup}
+                onMousedown={this.onClickCup}
+                width={width} height={height}
+              />
+            ))}
+          </div>
+          <div className="MainImage">
+            <Cup width={width} height={height} containerId="main"
+              keyId={uiStore.activeKeyId} rotate={true}
+              onClickCup={this.togglePlayPause}
+            />
+          </div>
+          <div className="Thumbnails">
+            {cupStore.items
+              .filter((item, i) => i % 2 === 1)
+              .map(item => (
+              <Cup
+                ref={ref => { this.rfs[item.id] = ref }}
+                key={item.id}
+                containerId={item.id}
+                keyId={item.id}
+                onClickCup={this.onClickCup}
+                onMousedown={this.onClickCup}
+                width={width} height={height}
+              />
+            ))}
+          </div>
+        </div>
           {/*
             <DatGui store={store} />
           */}
 
           <div>
-          {!this.isPlaying && (
-            <div>
-              <button className="WhiteButton" type="button" onClick={this.playReverse}>
-                <i className="fa fa-play reverse" aria-hidden="true"></i>
-              </button>
+            {!this.isPlaying && (
+              <div>
+                <button className="WhiteButton" type="button" onClick={this.playReverse}>
+                  <i className="fa fa-play reverse" aria-hidden="true"></i>
+                </button>
 
-              <div className="light inline-block">
-                <div className="line1">Rotate</div>
-                <div className="line2">Cup</div>
+                <div className="light inline-block">
+                  <div className="line1">Rotate</div>
+                  <div className="line2">Cup</div>
+                </div>
+
+                <button className="WhiteButton" type="button" onClick={this.playForward}>
+                  <i className="fa fa-play" aria-hidden="true"></i>
+                </button>
               </div>
+            )}
 
-              <button className="WhiteButton" type="button" onClick={this.playForward}>
-                <i className="fa fa-play" aria-hidden="true"></i>
+            {this.isPlaying && (
+              <button className="WhiteButton" type="button" onClick={this.pause}>
+                <i className="fa fa-pause" aria-hidden="true"></i>
               </button>
-            </div>
-          )}
-          {this.isPlaying && (
-            <button className="WhiteButton" type="button" onClick={this.pause}>
-              <i className="fa fa-pause" aria-hidden="true"></i>
-            </button>
-          )}
+            )}
           </div>
+
           <div className="Buttons">
             {/*
             <button className="BlueButton" type="button" onClick={this.onSelectClick}>
@@ -130,20 +165,6 @@ export default class Cups extends Component {
               {'Email Images >'}
             </button>
           </div>
-        </div>
-        <div className="Thumbnails">
-          {cupStore.items.map(item => (
-            <Cup
-              ref={ref => { this.rfs[item.id] = ref }}
-              key={item.id}
-              containerId={item.id}
-              keyId={item.id}
-              onClickCup={this.onClickCup}
-              onMousedown={this.onClickCup}
-              width={width} height={height}
-            />
-          ))}
-        </div>
       </div>
     );
   }
