@@ -4,6 +4,7 @@ import { observable, action } from 'mobx';
 import classNames from 'classnames';
 import request from 'superagent';
 import { BASE_URL } from '../config';
+const isCupSelectionEnabled = false;
 
 @inject('cupStore')
 @observer
@@ -15,6 +16,7 @@ class CupImage extends Component {
   }
 
   @action onClickCup(keyId) {
+    if (!isCupSelectionEnabled) { return; }
     const { cupStore } = this.props;
     console.log('keyId', keyId);
     cupStore.toggleSelect(keyId);
@@ -65,8 +67,12 @@ export default class EmailMockups extends Component {
   @action onSendClick = () => {
     const { cupStore } = this.props;
 
-    this.selectedFiles = cupStore.items
-      .filter(item => item.selected) || [];
+    if (!isCupSelectionEnabled) {
+      this.selectedFiles = cupStore.items
+    } else {
+      this.selectedFiles = cupStore.items
+        .filter(item => item.selected) || [];
+    }
 
     if (!this.email || !this.interest || !this.selectedFiles.length) {
       this.pageState = this.pageStates.INVALID;
