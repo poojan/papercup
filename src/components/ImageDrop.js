@@ -33,6 +33,7 @@ export default class ImageDrop extends Component {
   render() {
     return (
       <div className="ImageDrop">
+        <h1>See your design on a cup in 60 seconds</h1>
         <Dropzone
           ref={(node) => { this.dropzone = node; }}
           onDrop={this.onDrop}
@@ -46,6 +47,7 @@ export default class ImageDrop extends Component {
         <button className="BlueButton" type="button" onClick={this.onOpenClick}>
           Upload Image
         </button>
+        <p><strong>NOTE:</strong> Your image should be in JPG or PNG format and under 2MB in size.</p>
       </div>
     );
   }

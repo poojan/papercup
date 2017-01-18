@@ -125,6 +125,7 @@ export default class EmailMockups extends Component {
 
     return (
       <div>
+        <h1>Get your design images emailed straight to you</h1>
         {this.pageState === this.pageStates.PROCESSING && (
           <div className="Upload">
             <div className="processing">

@@ -85,6 +85,8 @@ export default class Cups extends Component {
 
     return (
       <div className="Row">
+        <h1>See your design in 360 degrees</h1>
+        <p>Click on each of the smaller images to rotate  your design &amp; pause at your preferred position.</p>
         <div>
           <div className="Thumbnails">
             {cupStore.items

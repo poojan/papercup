@@ -43,6 +43,8 @@ export default class ImageCrop extends Component {
 
     return (
       <div>
+        <h1>Select the area you want to include</h1>
+        <p>Simply zoom your image and/or adjust the size of or move the blue rectangular template.</p>
         <Cropper
           className="Cropper"
           ref={'cropper'}
@@ -77,6 +79,7 @@ export default class ImageCrop extends Component {
         <button className="OrangeButton w250" type="button" onClick={this.onCropClick}>
           {'Crop Image >'}
         </button>
+        <p><strong>NOTE:</strong> Area within the blue rectangle not taken up by your image will appear as white on the cup.</p>
       </div>
     );
   }
