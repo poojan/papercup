@@ -41,7 +41,7 @@ body {
 }
 
 .root {
-  width: 1000px;
+  width: 1020px;
   margin: 0 auto;
   text-align: center;
 }
@@ -108,8 +108,8 @@ body {
   vertical-align: top;
 }
 .MainImage canvas {
-  width: 640px !important;
-  height: 480px !important;
+  width: 598px !important;
+  height: 448px !important;
   display: inline-block;
 }
 
@@ -206,8 +206,8 @@ body {
 }
 
 .Thumbnails canvas {
-  width: 140px !important;
-  height: 105px !important;
+  width: 200px !important;
+  height: 150px !important;
 }
 
 .Grid .CupImage {
