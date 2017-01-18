@@ -94,10 +94,6 @@ body {
 
 }
 
-.Thumbnails .Cup {
-  /* width: 100px; */
-}
-
 .Row {
 }
 
@@ -117,6 +113,7 @@ body {
   display: inline-block;
   vertical-align: top;
   /* lost-column: 1/4; */
+  padding-top: 10px;
 }
 .Thumbnails canvas {
   display: inline-block;
@@ -206,8 +203,13 @@ body {
 }
 
 .Thumbnails canvas {
-  width: 200px !important;
-  height: 150px !important;
+  width: 191px !important;
+  height: 143px !important;
+}
+
+.Thumbnails .Cup {
+  /* width: 100px; */
+  padding: 2px 0;
 }
 
 .Grid .CupImage {
