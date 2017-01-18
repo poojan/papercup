@@ -317,6 +317,14 @@ body {
   margin-top: 27px;
 }
 
+.ImageContainer {
+  lost-column: 1/3 3 0;
+}
+.ImageContainer img {
+  margin-top: 50px;
+  width: 170px;
+}
+
 .TextContainer {
   lost-column: 1/3 3 0;
   /* height: 100%; */

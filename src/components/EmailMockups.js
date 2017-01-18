@@ -151,10 +151,13 @@ export default class EmailMockups extends Component {
         )}
         <div className="Grid">
           <div>
-          <div className="TextContainer">
+          <div className="ImageContainer">
+            <img src="img/email_icon.jpg" />
+            {/*
             <div className="text">
               Your paper cup design.
             </div>
+            */}
           </div>
           {cupStore.items.map((item, idx) => (
             <CupImage
