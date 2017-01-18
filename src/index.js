@@ -11,22 +11,22 @@ import { Provider, observer } from 'mobx-react';
 import UiStore from './stores/UiStore';
 const uiStore = new UiStore();
 
-import data1 from './data/rayWhite';
-import data2 from './data/disposableCup';
-import data3 from './data/8oz';
-import data4 from './data/woodenTableCloseup';
-import data5 from './data/handSmartPhone';
-import data6 from './data/preparesEspresso';
+import data1 from './data/8oz';
+import data2 from './data/rayWhite';
+import data3 from './data/preparesEspresso';
+import data4 from './data/handSmartPhone';
+import data5 from './data/disposableCup';
+// import data6 from './data/woodenTableCloseup';
 
 import CupStore from './stores/CupStore';
 
 const cupStore = new CupStore([
   data1,
-  data3,
-  // data4,
-  data5,
-  data6,
   data2,
+  data3,
+  data4,
+  data5,
+  // data6,
 ]);
 
 const Router = observer(({ uiStore }) => (
