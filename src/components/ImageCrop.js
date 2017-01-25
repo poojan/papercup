@@ -43,7 +43,7 @@ export default class ImageCrop extends Component {
 
     return (
       <div>
-        <h1>Select the area you want to include</h1>
+        <h1>ADJUST YOUR IMAGE WITHIN THE RECTANGULAR TEMPLATE</h1>
         <p>Simply zoom your image and/or adjust the size of or move the blue rectangular template.</p>
         <Cropper
           className="Cropper"
