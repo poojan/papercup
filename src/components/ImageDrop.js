@@ -33,7 +33,7 @@ export default class ImageDrop extends Component {
   render() {
     return (
       <div className="ImageDrop">
-        <h1>See your design on a cup in 60 seconds</h1>
+        <h1>Create your own design in 60 secs</h1>
         <Dropzone
           ref={(node) => { this.dropzone = node; }}
           onDrop={this.onDrop}
