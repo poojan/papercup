@@ -10,7 +10,8 @@ class UiStore {
   @observable activeScreen  = activeScreen;
   // @observable activeScreen  = 'IMAGE_UPLOADING';
   // @observable activeScreen  = 'CUPS';
-  @observable activeKeyId  = 'rayWhite';
+  // @observable activeKeyId  = 'rayWhite';
+  @observable activeKeyId  = 'espresso';
   @observable devMode  = devMode;
 }
 
