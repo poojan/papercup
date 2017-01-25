@@ -44,7 +44,7 @@ export default class ImageCrop extends Component {
     return (
       <div>
         <h1>ADJUST YOUR IMAGE WITHIN THE RECTANGULAR TEMPLATE</h1>
-        <p>Simply zoom your image and/or adjust the size of or move the blue rectangular template.</p>
+        <p>Change the size of your image or rectangular template to suit.</p>
         <Cropper
           className="Cropper"
           ref={'cropper'}
