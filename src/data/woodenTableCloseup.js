@@ -48,7 +48,7 @@ export default {
     "posY": -37.4,
     "posZ": -7,
     "rotX": 8.87,
-    "rotY": 0,
+    // "rotY": 0,
     "rotZ": 1.43,
     "opacity": 1,
     "openEnded": 1,

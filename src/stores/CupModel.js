@@ -147,7 +147,7 @@ class CupModel {
     posY: -32,
     posZ: -2,
     rotX: 6.875,
-    rotY: 0,
+    rotY: 180,
     rotZ: 0,
     opacity: 0.4,
     openEnded: 1,
