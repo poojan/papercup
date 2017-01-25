@@ -104,8 +104,8 @@ body {
   vertical-align: top;
 }
 .MainImage canvas {
-  width: 598px !important;
-  height: 448px !important;
+  width: 600px !important;
+  height: 450px !important;
   display: inline-block;
 }
 
@@ -203,8 +203,10 @@ body {
 }
 
 .Thumbnails canvas {
-  width: 191px !important;
-  height: 143px !important;
+  /* width: 191px !important; */
+  /* height: 143px !important; */
+  width: 111px !important;
+  height: 83px !important;
 }
 
 .Thumbnails .Cup {

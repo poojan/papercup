@@ -83,15 +83,28 @@ export default class Cups extends Component {
 
     if (uiStore.activeScreen !== 'CUPS') { return <div />; }
 
+    const sortOrder = [
+      1,
+      3,
+      0,
+      2,
+      4,
+    ];
+    const sortedItems = cupStore.items.slice()
+      .map((item, i) => Object.assign({}, item, {
+        idx: sortOrder.indexOf(i),
+      }))
+      .sort((a, b) => {
+        return a.idx - b.idx;
+      });
+
     return (
       <div className="Row">
         <h1>CLICK ON EACH OF THE SMALLER IMAGES</h1>
         <p>Rotate the design on each image & pause at your preferred position.</p>
         <div>
           <div className="Thumbnails">
-            {cupStore.items
-              .filter((item, i) => i % 2 === 0)
-              .map(item => (
+            {sortedItems.map(item => (
               <Cup
                 ref={ref => { this.rfs[item.id] = ref }}
                 key={item.id}
@@ -103,26 +116,12 @@ export default class Cups extends Component {
               />
             ))}
           </div>
+
           <div className="MainImage">
             <Cup width={width} height={height} containerId="main"
               keyId={uiStore.activeKeyId} rotate={true}
               onClickCup={this.togglePlayPause}
             />
-          </div>
-          <div className="Thumbnails">
-            {cupStore.items
-              .filter((item, i) => i % 2 === 1)
-              .map(item => (
-              <Cup
-                ref={ref => { this.rfs[item.id] = ref }}
-                key={item.id}
-                containerId={item.id}
-                keyId={item.id}
-                onClickCup={this.onClickCup}
-                onMousedown={this.onClickCup}
-                width={width} height={height}
-              />
-            ))}
           </div>
         </div>
           {/*
