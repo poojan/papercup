@@ -24,8 +24,11 @@ export default class Cups extends Component {
     // this.currentCup.imgData =
     setTimeout(() => {
       const { cupStore, uiStore } = this.props;
-      this.currentCup = cupStore.findById(uiStore.activeKeyId);
+      this.currentCup = cupStore.findById(keyId);
       uiStore.activeKeyId = keyId;
+      setTimeout(() => {
+        this.currentCup.play();
+      }, 200);
       console.log(uiStore.keyId);
     }, 200);
   }
