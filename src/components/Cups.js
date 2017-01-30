@@ -29,7 +29,7 @@ export default class Cups extends Component {
       // setTimeout(() => {
         // this.currentCup.play();
       // }, 200);
-      console.log(uiStore.keyId);
+      // console.log(uiStore.keyId);
     }, 200);
   }
 
