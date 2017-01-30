@@ -5,6 +5,7 @@ import { observer, inject } from 'mobx-react';
 import { action } from 'mobx';
 import { BASE_URL } from '../config';
 import Cup from './Cup';
+import classNames from 'classnames';
 
 @inject('uiStore', 'cupStore')
 @observer
@@ -32,15 +33,33 @@ export default class ImageDrop extends Component {
   }
 
   render() {
-    const { cupStore, uiStore } = this.props;
+    const { cupStore, uiStore, uploading } = this.props;
     const keyId = 'rayWhite';
     const cupData = cupStore.findById(keyId)
     // cupData.isPlaying = true;
     console.log('cupData', cupData);
 
     return (
-      <div className="ImageDrop">
-        <h1>Create your own design in 60 secs</h1>
+      <div className={classNames({
+        'ImageDrop': true,
+        'Upload': uploading
+      })}>
+        {uploading && (
+          <div>
+            <div className="processing">
+              Your image <br />is being <br />uploaded ...
+            </div>
+            <div style={{ padding: '32px' }}></div>
+          </div>
+        )}
+
+        {!uploading && (
+          <h1>Create your own design in 60 secs</h1>
+        )}
+        {uploading && (
+          <h1>{' '}</h1>
+        )}
+
         <Dropzone
           ref={(node) => { this.dropzone = node; }}
           onDrop={this.onDrop}
@@ -62,10 +81,14 @@ export default class ImageDrop extends Component {
           </div>
 
         </Dropzone>
-        <button className="BlueButton" type="button" onClick={this.onOpenClick}>
-          Upload Image
-        </button>
-        <p><strong>NOTE:</strong> Your image should be in JPG or PNG format and under 2MB in size.</p>
+        {!uploading && (
+          <div>
+            <button className="BlueButton" type="button" onClick={this.onOpenClick}>
+              Upload Image
+            </button>
+            <p><strong>NOTE:</strong> Your image should be in JPG or PNG format and under 2MB in size.</p>
+          </div>
+        )}
       </div>
     );
   }
