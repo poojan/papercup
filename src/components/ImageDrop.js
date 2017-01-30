@@ -4,8 +4,9 @@ import request from 'superagent';
 import { observer, inject } from 'mobx-react';
 import { action } from 'mobx';
 import { BASE_URL } from '../config';
+import Cup from './Cup';
 
-@inject('uiStore')
+@inject('uiStore', 'cupStore')
 @observer
 export default class ImageDrop extends Component {
   @action onDrop = (acceptedFiles) => {
@@ -31,6 +32,12 @@ export default class ImageDrop extends Component {
   }
 
   render() {
+    const { cupStore, uiStore } = this.props;
+    const keyId = 'rayWhite';
+    const cupData = cupStore.findById(keyId)
+    // cupData.isPlaying = true;
+    console.log('cupData', cupData);
+
     return (
       <div className="ImageDrop">
         <h1>Create your own design in 60 secs</h1>
@@ -42,6 +49,11 @@ export default class ImageDrop extends Component {
         >
           <img src="img/bg/ray_white.jpg" width="800" alt="cup"
             style={{ marginLeft: '24px' }}
+          />
+          <Cup width={800} height={600} containerId="main"
+            keyId={keyId} rotate={true}
+            onClickCup={() => {}}
+            cupData={cupData}
           />
         </Dropzone>
         <button className="BlueButton" type="button" onClick={this.onOpenClick}>

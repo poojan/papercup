@@ -47,15 +47,26 @@ class Cup extends Component {
       this.props.onRenderer(keyId, this.renderer.domElement);
     }
 
-    if (!uiStore.devMode && !uiStore.cropped) { return; }
+    // if (!uiStore.devMode && !uiStore.cropped) { return; }
     this.cupData.load()
       .then(() => this.cupData.loadCupTexture(uiStore.cropped))
       .then(action(() => {
+        if (this.props.rotate) {
+          this.cupData.play();
+        }
         this.renderImage(this.renderer, this.cupData);
       }));
   }
 
+  @action play() {
+    this.cupData.play();
+  }
+  @action pause() {
+    this.cupData.pause();
+  }
+
   componentWillUnmount() {
+    this.cupData.pause();
     if (this.props.onMousedown) {
       this.renderer.domElement.removeEventListener('mousedown', this.onMousedown);
     }
@@ -67,9 +78,9 @@ class Cup extends Component {
 
     if (!this.renderer) { return; }
 
-    if (!uiStore.devMode && !uiStore.cropped) {
-      return;
-    }
+    // if (!uiStore.devMode && !uiStore.cropped) {
+      // return;
+    // }
 
     this.cupData
       .load()
