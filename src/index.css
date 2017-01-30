@@ -59,8 +59,8 @@ body {
 }
 .Upload {
   position: absolute;
-  top: 0;
-  left: 80px;
+  top: -18px;
+  left: 150px;
   right: 0;
   bottom: 0;
 }
@@ -84,7 +84,7 @@ body {
   /* height: 100%; */
   z-index: 999;
   width: 100%;
-  left: 34px;
+  left: 0px;
   /* background: rgba(255, 255, 255, 0.8); */
   /* background: rgba(0, 0, 0, 0.1); */
   font-size: 30px;

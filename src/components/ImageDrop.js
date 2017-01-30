@@ -23,8 +23,10 @@ export default class ImageDrop extends Component {
     });
 
     req.end((err, res) => {
-      uiStore.imagePath = `${BASE_URL}/${res.body.path}`;
-      uiStore.activeScreen = 'IMAGE_CROP';
+      setTimeout(action(() => {
+        uiStore.imagePath = `${BASE_URL}/${res.body.path}`;
+        uiStore.activeScreen = 'IMAGE_CROP';
+      }), 500);
     });
   }
 
