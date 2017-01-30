@@ -3,11 +3,9 @@ import * as THREE from 'three';
 import { observer, inject } from 'mobx-react';
 import { observable, action, toJS } from 'mobx';
 
-
-
 const deg = rad => rad * Math.PI / 180;
 
-@inject('uiStore', 'cupStore')
+@inject('uiStore')
 @observer
 class Cup extends Component {
   @observable renderer;
@@ -30,8 +28,8 @@ class Cup extends Component {
   }
 
   componentDidMount() {
-    const { cupStore, uiStore, width, height, keyId, containerId } = this.props;
-    this.cupData = cupStore.findById(keyId);
+    const { cupData, uiStore, width, height, keyId, containerId } = this.props;
+    this.cupData = cupData;
     if (!this.cupData) { return; }
     this.renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -64,8 +62,8 @@ class Cup extends Component {
   }
 
   componentWillReact() {
-    const { uiStore, cupStore, keyId } = this.props;
-    this.cupData = cupStore.findById(keyId);
+    const { uiStore, cupData, keyId } = this.props;
+    this.cupData = cupData;
 
     if (!this.renderer) { return; }
 

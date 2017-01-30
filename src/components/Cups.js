@@ -113,6 +113,7 @@ export default class Cups extends Component {
                 onClickCup={this.onClickCup}
                 onMousedown={this.onClickCup}
                 width={width} height={height}
+                cupData={cupStore.findById(item.id)}
               />
             ))}
           </div>
@@ -121,6 +122,7 @@ export default class Cups extends Component {
             <Cup width={width} height={height} containerId="main"
               keyId={uiStore.activeKeyId} rotate={true}
               onClickCup={this.togglePlayPause}
+              cupData={cupStore.findById(uiStore.activeKeyId)}
             />
           </div>
         </div>
