@@ -66,7 +66,7 @@ export default class ImageDrop extends Component {
             style={{ marginLeft: '24px' }}
           />
           */}
-          <div className="MainImage" style={{ marginLeft: '92px' }}>
+          <div className="MainImage">
             <Cup width={800} height={600} containerId="main"
               keyId={keyId} rotate={true}
               onClickCup={() => {}}

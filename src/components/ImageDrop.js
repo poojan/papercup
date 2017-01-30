@@ -10,6 +10,11 @@ import classNames from 'classnames';
 @inject('uiStore', 'cupStore')
 @observer
 export default class ImageDrop extends Component {
+  componentDidMount() {
+    const { uiStore } = this.props;
+    uiStore.cropped = '';
+  }
+
   @action onDrop = (acceptedFiles) => {
     const { uiStore } = this.props;
     uiStore.activeScreen = 'IMAGE_UPLOADING';
