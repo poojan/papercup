@@ -26,9 +26,9 @@ export default class Cups extends Component {
       const { cupStore, uiStore } = this.props;
       this.currentCup = cupStore.findById(keyId);
       uiStore.activeKeyId = keyId;
-      setTimeout(() => {
-        this.currentCup.play();
-      }, 200);
+      // setTimeout(() => {
+        // this.currentCup.play();
+      // }, 200);
       console.log(uiStore.keyId);
     }, 200);
   }
