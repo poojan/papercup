@@ -52,11 +52,15 @@ export default class ImageDrop extends Component {
             style={{ marginLeft: '24px' }}
           />
           */}
-          <Cup width={800} height={600} containerId="main"
-            keyId={keyId} rotate={true}
-            onClickCup={() => {}}
-            cupData={cupData}
-          />
+          <div className="MainImage" style={{ marginLeft: 22 }}>
+            <Cup width={800} height={600} containerId="main"
+              keyId={keyId} rotate={true}
+              onClickCup={() => {}}
+              cupData={cupData}
+              fov={12.7}
+            />
+          </div>
+
         </Dropzone>
         <button className="BlueButton" type="button" onClick={this.onOpenClick}>
           Upload Image

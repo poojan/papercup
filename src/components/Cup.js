@@ -120,7 +120,7 @@ class Cup extends Component {
     // Camera
     if (!isPlaying) {
       this.camera = new THREE.PerspectiveCamera(
-        cupData.camera.fov,
+        this.props.fov || cupData.camera.fov,
         sceneWidth / sceneHeight,
         0.1,
         10000
